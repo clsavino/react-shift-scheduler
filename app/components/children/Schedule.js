@@ -1,6 +1,5 @@
 var React = require("react");
 
-
 var Schedule = React.createClass({
     render: function() {
  return (
@@ -9,7 +8,6 @@ var Schedule = React.createClass({
       <h1> Schedule goes here</h1>
     </div>
 
-      
     );
   }
 });

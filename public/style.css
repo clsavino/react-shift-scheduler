@@ -1,10 +1,30 @@
 body {
 	background-color: #FEF9E7;
+	height: 600px;
 }
 
 form {
-	margin-top: 200px;
+	margin-top: 80px;
 	box-shadow: 0px 2px 10px grey;
 	padding: 30px;
 	background-color: white;
+	border-radius: 10px;
+}
+
+label {
+	font-size: 16px;
+}
+
+button {
+	margin-top: 10px;
+}
+
+#spacing {
+	margin-bottom: 35px;
+	text-align:center;
+	color:#424949
+}
+
+.nav-wrapper {
+	padding-left: 20px;
 }

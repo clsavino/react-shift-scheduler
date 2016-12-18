@@ -1,42 +1,33 @@
 var React = require("react");
 
-  class Login extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {value: ''};
-
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleChange(event) {
-      this.setState({value: event.target.value});
-    }
-
-    handleSubmit(event) {
-      alert('A name was submitted: ' + this.state.value);
-      event.preventDefault();
-    }
-
+var Login = React.createClass({
+handleUserChange: function(event) {
+   this.setState({username: event.target.value});
+},
+handlePasswordChange: function(event) {
+   this.setState({password: event.target.value});
+},
+handleLogin: function(event) {
+    console.log("Username: " + this.state.username);
+    console.log("Password: " + this.state.password);
+    event.preventDefault();
+},
     render() {
       return (
         <div className="container">
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              User Name:
-              <input type="text" className="validate" value={this.state.value} onChange={this.handleChange} />
-            </label>
-            <label>
-              Password
-              <input type="text" className="validate" value={this.state.value} onChange={this.handleChange} />
-            </label>
-            <button className="btn waves-effect waves-light" type="submit" value="Submit" name="action">Submit
+          <form onSubmit={this.handleLogin}>
+            <h4 id="spacing">Login</h4>
+            <label> User Name: </label>
+              <input type="text" className="validate" name ="username" onChange={this.handleUserChange} />
+            <label>Password: </label>
+              <input type="password" className="validate" name="password" onChange={this.handlePasswordChange} />
+            <button className="btn waves-effect waves-light btn-large" type="submit" value="Submit" name="action">Submit
             <i className="material-icons right">send</i>
-             </button>
+            </button>
           </form>
         </div>
       );
     }
-  }
+  });
 
 module.exports = Login;

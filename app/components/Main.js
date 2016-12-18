@@ -6,12 +6,11 @@ var Schedule = require("./children/Schedule")
 
 var Main = React.createClass({
     render: function() {
- return (
-
-    <div>
-         <nav>
+      return (
+        <div>
+          <nav>
             <div className="nav-wrapper teal lighten-2">
-              <a href="#!" className="brand-logo">Logo</a>
+              <a href="#!" className="brand-logo"> Scheduler</a>
               <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
               <ul className="right hide-on-med-and-down">
                 <li><a href="#">Login</a></li>
@@ -24,16 +23,13 @@ var Main = React.createClass({
             </div>
           </nav>
 
-        <div className="container">
-
+          <div className="container">
             <Login />
-
+          </div>
         </div>
-    </div>
 
-       
-    );
-  }
+      );
+    }
 });
 
 module.exports = Main;

@@ -1,4 +1,3 @@
-// Include Server Dependencies
 var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
@@ -36,7 +35,7 @@ app.get("/", function(req, res) {
   res.sendFile(__dirname + "/public/index.html");
 });
 
-
+//Port Listener
 app.listen(PORT, function() {
   console.log("App listening on PORT: " + PORT);
 });
