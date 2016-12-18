@@ -1,6 +1,5 @@
 var React = require("react");
 
-
   class Login extends React.Component {
     constructor(props) {
       super(props);
@@ -21,22 +20,23 @@ var React = require("react");
 
     render() {
       return (
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            User Name:
-            <input type="text" className="validate" value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <label>
-            Password
-            <input type="text" className="validate" value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+        <div className="container">
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              User Name:
+              <input type="text" className="validate" value={this.state.value} onChange={this.handleChange} />
+            </label>
+            <label>
+              Password
+              <input type="text" className="validate" value={this.state.value} onChange={this.handleChange} />
+            </label>
+            <button className="btn waves-effect waves-light" type="submit" value="Submit" name="action">Submit
+            <i className="material-icons right">send</i>
+             </button>
+          </form>
+        </div>
       );
     }
   }
-
-  
-
 
 module.exports = Login;

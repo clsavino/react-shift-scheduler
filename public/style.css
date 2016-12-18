@@ -1,0 +1,10 @@
+body {
+	background-color: #FEF9E7;
+}
+
+form {
+	margin-top: 200px;
+	box-shadow: 0px 2px 10px grey;
+	padding: 30px;
+	background-color: white;
+}
