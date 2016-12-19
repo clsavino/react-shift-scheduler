@@ -5,7 +5,43 @@ var EmployeeView = React.createClass({
         return (
             <div className="row">
                 <div className="col m12">
-                    <h1> EmployeeView goes here</h1>
+                    <div className="section">
+                        <h5>My schedule</h5>
+                        <table className="highlight">
+                            <thead>
+                                <tr>
+                                    <th data-field="name">Mon</th>
+                                    <th data-field="name">Tues</th>
+                                    <th data-field="name">Weds</th>
+                                    <th data-field="name">Thurs</th>
+                                    <th data-field="name">Fri</th>
+                                    <th data-field="name">Sat</th>
+                                    <th data-field="name">Sun</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>10AM-3PM</td>
+                                    <td></td>
+                                    <td>10AM-4PM</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="divider"></div>
+                    <div className="section">
+                        <h5>Section 2</h5>
+                        <p>Stuff</p>
+                    </div>
+                    <div className="divider"></div>
+                    <div className="section">
+                        <h5>Section 3</h5>
+                        <p>More stuff</p>
+                    </div>
                 </div>
             </div>
         );
