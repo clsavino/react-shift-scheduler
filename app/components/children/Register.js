@@ -1,16 +1,19 @@
 var React = require("react");
 
-class Login extends React.Component {
+class Register extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       username: "",
       password: "",
+      email:"",
+      passwordConfirmation:""
     }
+
     this.handleUserChange = this.handleUserChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
   }
-
+  
   handleUserChange(event) {
      this.setState({ [event.target.name]: event.target.value});
   }
@@ -18,14 +21,15 @@ class Login extends React.Component {
   handleLogin(event) {
       console.log("Username: " + this.state.username);
       console.log("Password: " + this.state.password);
+      console.log("Password Confirmation: " + this.state.passwordConfirmation);
       event.preventDefault();
   }
     render() {
       return (
         <div className="container">
           <form onSubmit={this.handleLogin}>
-            <h4 id="spacing">Login</h4>
-            <label> User Name: </label>
+            <h4 id="spacing">Register</h4>
+            <label> Username: </label>
               <input type="text" className="validate" 
                 value={this.state.username} 
                 name="username" 
@@ -37,6 +41,12 @@ class Login extends React.Component {
                 name="password" 
                 onChange={this.handleUserChange} />
 
+            <label>Password Confirmation: </label>
+              <input type="password" className="validate" 
+                value={this.state.passwordConfirmation} 
+                name="passwordConfirmation" 
+                onChange={this.handleUserChange} />
+
             <button className="btn waves-effect waves-light btn-large" type="submit" value="Submit" name="action">Submit
             <i className="material-icons right">send</i>
             </button>
@@ -46,4 +56,4 @@ class Login extends React.Component {
     }
   };
 
-module.exports = Login;
+module.exports = Register;

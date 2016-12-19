@@ -1,6 +1,7 @@
 var React = require("react");
 var helpers = require("./utils/helpers");
 var Login = require("./children/Login")
+var Register = require("./children/Register")
 var Schedule = require("./children/Schedule")
 
 
