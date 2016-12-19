@@ -1,5 +1,6 @@
 var React = require("react");
-var ManagerView = require("./children/ManagerView")
+var ManagerView = require("./children/ManagerView");
+var ManagerViewEmployeeAdd = require("./children/ManagerViewEmployeeAdd")
 var helpers = require("./utils/helpers");
 
 var Manager = React.createClass({
@@ -56,8 +57,11 @@ var Manager = React.createClass({
                         </ul>
                     </div>
                 </nav>
-                <div className="container">
+                {/* <div className="container">
                     <ManagerView />
+                </div> */}
+                <div className="container">
+                    <ManagerViewEmployeeAdd />
                 </div>
             </div>
         );
