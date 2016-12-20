@@ -20,6 +20,7 @@ class Register extends React.Component {
 
   handleLogin(event) {
       console.log("Username: " + this.state.username);
+      console.log("Email: " + this.state.email);
       console.log("Password: " + this.state.password);
       console.log("Password Confirmation: " + this.state.passwordConfirmation);
       event.preventDefault();
@@ -27,24 +28,35 @@ class Register extends React.Component {
     render() {
       return (
         <div className="container">
-          <form onSubmit={this.handleLogin}>
+          <form action="/" onSubmit={this.handleLogin}>
             <h4 id="spacing">Register</h4>
             <label> Username: </label>
               <input type="text" className="validate" 
                 value={this.state.username} 
                 name="username" 
+                // errorText={errors.username}
+                onChange={this.handleUserChange} />
+
+
+            <label>Email: </label>
+              <input type="text" className="validate" 
+                value={this.state.email} 
+                name="email"
+                // errorText={errors.email} 
                 onChange={this.handleUserChange} />
 
             <label>Password: </label>
               <input type="password" className="validate" 
                 value={this.state.password} 
-                name="password" 
+                name="password"
+                // errorText={errors.password} 
                 onChange={this.handleUserChange} />
 
             <label>Password Confirmation: </label>
               <input type="password" className="validate" 
                 value={this.state.passwordConfirmation} 
                 name="passwordConfirmation" 
+                // errorText={errors.passwordConfirmation} 
                 onChange={this.handleUserChange} />
 
             <button className="btn waves-effect waves-light btn-large" type="submit" value="Submit" name="action">Submit
@@ -56,4 +68,4 @@ class Register extends React.Component {
     }
   };
 
-module.exports = Register;
+  module.exports = Register;

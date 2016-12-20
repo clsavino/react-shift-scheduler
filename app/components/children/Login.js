@@ -23,7 +23,7 @@ class Login extends React.Component {
     render() {
       return (
         <div className="container">
-          <form onSubmit={this.handleLogin}>
+          <form action="#/schedule" onSubmit={this.handleLogin}>
             <h4 id="spacing">Login</h4>
             <label> User Name: </label>
               <input type="text" className="validate" 
