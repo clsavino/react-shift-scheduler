@@ -24,7 +24,8 @@
     "mongoose": "^4.7.3",
     "morgan": "^1.7.0",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "react-router": "^3.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.3.13",

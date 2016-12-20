@@ -1,8 +1,5 @@
 var React = require("react");
 var helpers = require("./utils/helpers");
-var Login = require("./children/Login")
-var Schedule = require("./children/Schedule")
-
 
 var Main = React.createClass({
     render: function() {
@@ -10,21 +7,22 @@ var Main = React.createClass({
         <div>
           <nav>
             <div className="nav-wrapper teal lighten-2">
-              <a href="#!" className="brand-logo"> Scheduler</a>
-              <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
+              <a href="#/login" className="brand-logo"> Scheduler</a>
+              <a href="#/login" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
               <ul className="right hide-on-med-and-down">
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
+                <li><a href="#/login">Login</a></li>
+                <li><a href="#/register">Register</a></li>
               </ul>
               <ul className="side-nav" id="mobile-demo">
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
+                <li><a href="#/login">Login</a></li>
+                <li><a href="#/register">Register</a></li>
               </ul>
             </div>
           </nav>
 
           <div className="container">
-            <Login />
+              {this.props.children}
+
           </div>
         </div>
 
