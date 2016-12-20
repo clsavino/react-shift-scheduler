@@ -28,7 +28,7 @@ class Register extends React.Component {
     render() {
       return (
         <div className="container">
-          <form action="/" onSubmit={this.handleLogin}>
+          <form onSubmit={this.handleLogin}>
             <h4 id="spacing">Register</h4>
             <label> Username: </label>
               <input type="text" className="validate" 
