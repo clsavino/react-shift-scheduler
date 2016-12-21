@@ -6,18 +6,18 @@ var Manager = React.createClass({
         return (
             <div>
                 <ul id="dropdown1" className="dropdown-content">
-                    <li><a href="/manager/addEmployee">Add</a></li>
-                    <li><a href="/manager/updateEmployee">Update</a></li>
-                    <li><a href="/manager/removeEmployee">Remove</a></li>
+                    <li><a href="#/manager/addEmployee">Add</a></li>
+                    <li><a href="#/manager/updateEmployee">Update</a></li>
+                    <li><a href="#/manager/removeEmployee">Remove</a></li>
                 </ul>
                 <ul id="dropdown2" className="dropdown-content">
-                    <li><a href="/manager/viewSchedules">View</a></li>
-                    <li><a href="/manager/editSchedules">Edit</a></li>
-                    <li><a href="/manager/reportsSchedules">Reports</a></li>
+                    <li><a href="#/manager/viewSchedules">View</a></li>
+                    <li><a href="#/manager/editSchedules">Edit</a></li>
+                    <li><a href="#/manager/reportsSchedules">Reports</a></li>
                 </ul>
                 <ul id="dropdown3" className="dropdown-content">
-                    <li><a href="/manager/createBilling">Create</a></li>
-                    <li><a href="/manager/viewBilling">View</a></li>
+                    <li><a href="#/manager/createBilling">Create</a></li>
+                    <li><a href="#/manager/viewBilling">View</a></li>
                 </ul>
                 <nav>
                     <div className="nav-wrapper teal lighten-2">
@@ -40,18 +40,18 @@ var Manager = React.createClass({
                                 </div>
                             </li>
                             <li><a className="subheader"><i className="material-icons">group</i>Employee Management</a></li>
-                            <li><a href="/manager/addEmployee">Add</a></li>
-                            <li><a href="/manager/updateEmployee">Update</a></li>
-                            <li><a href="/manager/removeEmployee">Remove</a></li>
+                            <li><a href="#/manager/addEmployee">Add</a></li>
+                            <li><a href="#/manager/updateEmployee">Update</a></li>
+                            <li><a href="#/manager/removeEmployee">Remove</a></li>
                             <li><div className="divider"></div></li>
                             <li><a className="subheader"><i className="material-icons">access_time</i>Schedules</a></li>
-                            <li><a href="/manager/viewSchedules">View</a></li>
-                            <li><a href="/manager/editSchedules">Edit</a></li>
-                            <li><a href="/manager/reportsSchedules">Reports</a></li>
+                            <li><a href="#/manager/viewSchedules">View</a></li>
+                            <li><a href="#/manager/editSchedules">Edit</a></li>
+                            <li><a href="#/manager/reportsSchedules">Reports</a></li>
                             <li><div className="divider"></div></li>
                             <li><a className="subheader"><i className="material-icons">monetization_on</i>Billing</a></li>
-                            <li><a href="/manager/createBilling">Create</a></li>
-                            <li><a href="/manager/viewBilling">View</a></li>
+                            <li><a href="#/manager/createBilling">Create</a></li>
+                            <li><a href="#/manager/viewBilling">View</a></li>
                         </ul>
                     </div>
                 </nav>
