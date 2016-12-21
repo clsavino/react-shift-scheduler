@@ -81,6 +81,11 @@
 
   });
 
+  app.get("/#/logout", function(req, res) {
+    req.logout();
+    res.redirect("/#/login");
+  });
+
 //Port Listener
   app.listen(PORT, function() {
     console.log("App listening on PORT: " + PORT);
