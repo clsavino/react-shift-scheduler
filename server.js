@@ -5,6 +5,7 @@
   var passport = require("passport");
   var LocalStrategy= require("passport-local");
   var passportLocalMongoose = require("passport-local-mongoose");
+  var path = require("path");
   var Promise = require("bluebird");
   var User = require("./models/user")
 
@@ -57,6 +58,11 @@
     response.sendFile(path.resolve(__dirname, "public", "index.html"))
   })
 
+//Doesn't work
+  // app.get("/manager", isLoggedIn, function(req,res) {
+  //   console.log(res);
+  // })
+
   app.post("/register", function(req, res) {
     console.log(req.body.username)
     console.log(req.body.email)
@@ -81,10 +87,17 @@
 
   });
 
-  app.get("/#/logout", function(req, res) {
+  app.get("/logout", function(req, res) {
     req.logout();
-    res.redirect("/#/login");
+    res.redirect("/");
   });
+
+  // function isLoggedIn(req,res,next){
+  //   if(req.isAuthenticated()){
+  //     return next();
+  //   }
+  //   res.redirect("/login");
+  // }
 
 //Port Listener
   app.listen(PORT, function() {
