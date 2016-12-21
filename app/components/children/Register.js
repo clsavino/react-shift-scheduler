@@ -18,17 +18,17 @@ class Register extends React.Component {
      this.setState({ [event.target.name]: event.target.value});
   }
 
-  handleLogin(event) {
+  handleLogin() {
       console.log("Username: " + this.state.username);
       console.log("Email: " + this.state.email);
       console.log("Password: " + this.state.password);
       console.log("Password Confirmation: " + this.state.passwordConfirmation);
-      event.preventDefault();
+      // event.preventDefault();
   }
     render() {
       return (
         <div className="container">
-          <form onSubmit={this.handleLogin}>
+          <form action="/register" method="POST" onSubmit={this.handleLogin}>
             <h4 id="spacing">Register</h4>
             <label> Username: </label>
               <input type="text" className="validate" 
