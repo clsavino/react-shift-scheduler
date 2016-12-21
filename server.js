@@ -4,7 +4,7 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 
 // Require Employee Schema from Database
-
+var employee = require("./models/Employee");
 
 /////////////
 
@@ -33,6 +33,27 @@ db.once("open", function() {
 
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/public/index.html");
+});
+
+//Posting new Employee to the database
+app.post("/addEmployee", function(req, res) {
+  // console.log("creating in server");
+  console.log(req.body);
+  employee.create({
+    name: req.body.fullName,
+    address: req.body.address,
+    phone: req.body.phone,
+    email: req.body.email,
+    ssn: req.body.ssn,
+    availabiity: req.body.availabiity
+  }, function(err) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send("Employee Saved!");
+    }
+  });
 });
 
 //Port Listener

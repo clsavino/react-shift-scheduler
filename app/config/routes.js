@@ -9,6 +9,7 @@ var IndexRoute = router.IndexRoute;
 var Main = require("../components/Main");
 var Login = require("../components/children/Login");
 var Register = require("../components/children/Register");
+var AddEmployee = require("../components/children/AddEmployee");
 
 module.exports = (
 
@@ -17,6 +18,7 @@ module.exports = (
 
       <Route path="login" component={Login} />
       <Route path="register" component={Register} />
+      <Route path="addingEmployees" component={AddEmployee} />
 
       <IndexRoute component={Login} />
 
