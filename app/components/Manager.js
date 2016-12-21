@@ -1,6 +1,4 @@
 var React = require("react");
-var ManagerView = require("./children/ManagerView");
-var ManagerViewEmployeeAdd = require("./children/ManagerViewEmployeeAdd")
 var helpers = require("./utils/helpers");
 
 var Manager = React.createClass({
@@ -8,18 +6,18 @@ var Manager = React.createClass({
         return (
             <div>
                 <ul id="dropdown1" className="dropdown-content">
-                    <li><a href="#!">Add</a></li>
-                    <li><a href="#!">Update</a></li>
-                    <li><a href="#!">Remove</a></li>
+                    <li><a href="/manager/addEmployee">Add</a></li>
+                    <li><a href="/manager/updateEmployee">Update</a></li>
+                    <li><a href="/manager/removeEmployee">Remove</a></li>
                 </ul>
                 <ul id="dropdown2" className="dropdown-content">
-                    <li><a href="#!">View</a></li>
-                    <li><a href="#!">Edit</a></li>
-                    <li><a href="#!">Reports</a></li>
+                    <li><a href="/manager/viewSchedules">View</a></li>
+                    <li><a href="/manager/editSchedules">Edit</a></li>
+                    <li><a href="/manager/reportsSchedules">Reports</a></li>
                 </ul>
                 <ul id="dropdown3" className="dropdown-content">
-                    <li><a href="#!">Create</a></li>
-                    <li><a href="#!">View</a></li>
+                    <li><a href="/manager/createBilling">Create</a></li>
+                    <li><a href="/manager/viewBilling">View</a></li>
                 </ul>
                 <nav>
                     <div className="nav-wrapper teal lighten-2">
@@ -36,32 +34,29 @@ var Manager = React.createClass({
                                     <div className="background">
                                         <img src="http://materializecss.com/images/office.jpg"/>
                                     </div>
-                                    <a href="#!user"><img className="circle" src="http://materializecss.com/images/yuna.jpg"/></a>
-                                    <a href="#!name"><span className="white-text name">John Doe</span></a>
-                                    <a href="#!email"><span className="white-text email">johndoe@gmail.com</span></a>
+                                    <a><img className="circle" src="http://materializecss.com/images/yuna.jpg"/></a>
+                                    <a><span className="white-text">Company Name</span></a>
+                                    <a><span className="white-text name">John Doe</span></a>
                                 </div>
                             </li>
                             <li><a className="subheader"><i className="material-icons">group</i>Employee Management</a></li>
-                            <li><a href="#!">Add</a></li>
-                            <li><a href="#!">Update</a></li>
-                            <li><a href="#!">Remove</a></li>
+                            <li><a href="/manager/addEmployee">Add</a></li>
+                            <li><a href="/manager/updateEmployee">Update</a></li>
+                            <li><a href="/manager/removeEmployee">Remove</a></li>
                             <li><div className="divider"></div></li>
                             <li><a className="subheader"><i className="material-icons">access_time</i>Schedules</a></li>
-                            <li><a href="#!">View</a></li>
-                            <li><a href="#!">Edit</a></li>
-                            <li><a href="#!">Reports</a></li>
+                            <li><a href="/manager/viewSchedules">View</a></li>
+                            <li><a href="/manager/editSchedules">Edit</a></li>
+                            <li><a href="/manager/reportsSchedules">Reports</a></li>
                             <li><div className="divider"></div></li>
                             <li><a className="subheader"><i className="material-icons">monetization_on</i>Billing</a></li>
-                            <li><a href="#!">Create</a></li>
-                            <li><a href="#!">View</a></li>
+                            <li><a href="/manager/createBilling">Create</a></li>
+                            <li><a href="/manager/viewBilling">View</a></li>
                         </ul>
                     </div>
                 </nav>
-                {/* <div className="container">
-                    <ManagerView />
-                </div> */}
                 <div className="container">
-                    <ManagerViewEmployeeAdd />
+                    {this.props.children}
                 </div>
             </div>
         );

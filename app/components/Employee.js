@@ -1,5 +1,4 @@
 var React = require("react");
-var EmployeeView = require("./children/EmployeeView")
 var helpers = require("./utils/helpers");
 
 var Employee = React.createClass({
@@ -28,9 +27,9 @@ var Employee = React.createClass({
                                     <div className="background">
                                         <img src="http://materializecss.com/images/office.jpg"/>
                                     </div>
-                                    <a href="#!user"><img className="circle" src="http://materializecss.com/images/yuna.jpg"/></a>
-                                    <a href="#!name"><span className="white-text name">John Doe</span></a>
-                                    <a href="#!email"><span className="white-text email">johndoe@gmail.com</span></a>
+                                    <a><img className="circle" src="http://materializecss.com/images/yuna.jpg"/></a>
+                                    <a><span className="white-text">Company Name</span></a>
+                                    <a><span className="white-text name">John Doe</span></a>
                                 </div>
                             </li>
                             <li><a className="subheader"><i className="material-icons">person</i>My Info</a></li>
@@ -44,7 +43,7 @@ var Employee = React.createClass({
                     </div>
                 </nav>
                 <div className="container">
-                    <EmployeeView />
+                    {this.props.children}
                 </div>
             </div>
         );
