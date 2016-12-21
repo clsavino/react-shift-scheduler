@@ -19,10 +19,6 @@ class Register extends React.Component {
   }
 
   handleLogin() {
-      console.log("Username: " + this.state.username);
-      console.log("Email: " + this.state.email);
-      console.log("Password: " + this.state.password);
-      console.log("Password Confirmation: " + this.state.passwordConfirmation);
       // event.preventDefault();
   }
     render() {
@@ -59,6 +55,15 @@ class Register extends React.Component {
                 // errorText={errors.passwordConfirmation} 
                 onChange={this.handleUserChange} />
 
+            <div className="input-field col s12">
+              <select name="userType">
+                <option defaultValue="" disabled selected>Choose your option</option>
+                <option value="employee">Employee</option>
+                <option value="manager">Manager</option>
+              </select>
+              <label>Select User Type</label>
+            </div>
+               
             <button className="btn waves-effect waves-light btn-large" type="submit" value="Submit" name="action">Submit
             <i className="material-icons right">send</i>
             </button>
