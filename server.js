@@ -5,7 +5,10 @@ var mongoose = require("mongoose");
 var passport = require("passport");
 var localStrategy= require("passport-local");
 var passportLocalMongoose = require("passport-local-mongoose");
+var Promise = require("bluebird");
 var User = require("./models/user")
+
+mongoose.Promise = Promise;
 
 //Initialize Express
 var app = express();
@@ -50,17 +53,29 @@ app.use(express.static(__dirname + "/public"))
 
 //Initialize Auth Routes
 
-app.get("/#/register", function(req, res) {
-  	console.log(req)
-	console.log(res)
-});
+// app.get("/#/register", function(req, res) {
+//   	console.log(req)
+// 	console.log(res)
+// });
 app.get("*", function(req,res) {
 	response.sendFile(path.resolve(__dirname, "public", "index.html"))
 })
 
 app.post("/register", function(req, res) {
+  console.log(req.body.username)
+  console.log(req.body.email)
+  console.log(req.body.password)
+  console.log(req.body.passwordConfirmation)
 
-  res.send("WORKS!")
+  User.register(new User({username: req.body.username, email: req.body.email}), req.body.password, function(err, user) {
+  	if(err){
+  		console.log(err);
+  		return res.render("register");
+  	}
+  	passport.authenticate("local")(req, res, function() {
+  		res.redirect("/");
+  	});
+  })
 });
 
 
