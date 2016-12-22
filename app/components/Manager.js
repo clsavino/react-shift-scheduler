@@ -19,6 +19,8 @@ var Manager = React.createClass({
                     <li><a href="#/manager/createBilling">Create</a></li>
                     <li><a href="#/manager/viewBilling">View</a></li>
                 </ul>
+                <ul><a href="/logout">Logout</a>
+                </ul>
                 <nav>
                     <div className="nav-wrapper teal lighten-2">
                         <a href="#!" className="brand-logo"> Hello [Manager]</a>
