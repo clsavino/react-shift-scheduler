@@ -12,10 +12,11 @@ var Main = React.createClass({
               <ul className="right hide-on-med-and-down">
                 <li><a href="#/login">Login</a></li>
                 <li><a href="#/register">Register</a></li>
+                <li><a href="#/logout">Logout</a></li>
               </ul>
               <ul className="side-nav" id="mobile-demo">
                 <li><a href="#/login">Login</a></li>
-                <li><a href="#/register">Register</a></li>
+                <li><a href="#/logout">Logout</a></li>
               </ul>
             </div>
           </nav>

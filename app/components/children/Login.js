@@ -15,15 +15,15 @@ class Login extends React.Component {
      this.setState({ [event.target.name]: event.target.value});
   }
 
-  handleLogin(event) {
+  handleLogin() {
       console.log("Username: " + this.state.username);
       console.log("Password: " + this.state.password);
-      event.preventDefault();
+      // event.preventDefault();
   }
     render() {
       return (
         <div className="container">
-          <form onSubmit={this.handleLogin}>
+          <form action="/login" method="POST" onSubmit={this.handleLogin}>
             <h4 id="spacing">Login</h4>
             <label> User Name: </label>
               <input type="text" className="validate"

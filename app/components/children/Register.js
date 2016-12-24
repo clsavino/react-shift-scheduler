@@ -18,17 +18,13 @@ class Register extends React.Component {
      this.setState({ [event.target.name]: event.target.value});
   }
 
-  handleLogin(event) {
-      console.log("Username: " + this.state.username);
-      console.log("Email: " + this.state.email);
-      console.log("Password: " + this.state.password);
-      console.log("Password Confirmation: " + this.state.passwordConfirmation);
-      event.preventDefault();
+  handleLogin() {
+      // event.preventDefault();
   }
     render() {
       return (
         <div className="container">
-          <form onSubmit={this.handleLogin}>
+          <form action="/register" method="POST" onSubmit={this.handleLogin}>
             <h4 id="spacing">Register</h4>
             <label> Username: </label>
               <input type="text" className="validate" 
@@ -59,6 +55,15 @@ class Register extends React.Component {
                 // errorText={errors.passwordConfirmation} 
                 onChange={this.handleUserChange} />
 
+            <div className="input-field col s12">
+              <select name="userType">
+                <option defaultValue="" disabled selected>Choose your option</option>
+                <option value="employee">Employee</option>
+                <option value="manager">Manager</option>
+              </select>
+              <label>Select User Type</label>
+            </div>
+               
             <button className="btn waves-effect waves-light btn-large" type="submit" value="Submit" name="action">Submit
             <i className="material-icons right">send</i>
             </button>
