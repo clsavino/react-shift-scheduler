@@ -10,35 +10,43 @@ var IndexRoute = router.IndexRoute;
 var Main = require("../components/Main");
 var Login = require("../components/children/Login");
 var Register = require("../components/children/Register");
-var AddEmployee = require("../components/children/AddEmployee");
-//manager components
+// manager components
+>>>>>>> styling and manager routes
 var Manager = require("../components/Manager");
 var ManagerHome = require("../components/children/ManagerHome");
-var ManagerAddEmployee = require("../components/children/ManagerAddEmployee");
-var ManagerUpdateEmployee = require("../components/children/ManagerUpdateEmployee");
-var ManagerRemoveEmployee = require("../components/children/ManagerRemoveEmployee");
+// manager - employee management components
+var ManagerEmployeeAdd = require("../components/children/ManagerEmployeeAdd");
+var ManagerEmployeeUpdate = require("../components/children/ManagerEmployeeUpdate");
+var ManagerEmployeeRemove = require("../components/children/ManagerEmployeeRemove");
+// manager - schedule components
+var ManagerSchedulesView = require("../components/children/ManagerSchedulesView");
+var ManagerSchedulesEdit = require("../components/children/ManagerSchedulesEdit");
+var ManagerSchedulesReport = require("../components/children/ManagerSchedulesReport");
+// manager - billing components
+var ManagerBillingCreate = require("../components/children/ManagerBillingCreate");
+var ManagerBillingView = require("../components/children/ManagerBillingView");
 // employee components
 var Employee = require("../components/Employee");
 var EmployeeHome = require("../components/children/EmployeeHome");
+// employee - info components
+// employee - schedule components
 
 module.exports = (
   <Router history={hashHistory}>
     <Route path="/" component={Main}>
-
-      <Route path="login" component={Login} />
-      <Route path="register" component={Register} />
-      <Route path="addingEmployees" component={AddEmployee} />
-
-      <IndexRoute component={Login} />
-
         <Route path="login" component={Login} />
         <Route path="register" component={Register} />
         <IndexRoute component={Login} />
     </Route>
     <Route path="manager" component={Manager}>
-        <Route path="addEmployee" component={ManagerAddEmployee} />
-        <Route path="updateEmployee" component={ManagerUpdateEmployee} />
-        <Route path="removeEmployee" component={ManagerRemoveEmployee} />
+        <Route path="employeeAdd" component={ManagerEmployeeAdd} />
+        <Route path="employeeUpdate" component={ManagerEmployeeUpdate} />
+        <Route path="employeeRemove" component={ManagerEmployeeRemove} />
+        <Route path="schedulesView" component={ManagerSchedulesView} />
+        <Route path="schedulesEdit" component={ManagerSchedulesEdit} />
+        <Route path="schedulesReport" component={ManagerSchedulesReport} />
+        <Route path="billingCreate" component={ManagerBillingCreate} />
+        <Route path="billingView" component={ManagerBillingView} />
         <IndexRoute component={ManagerHome} />
     </Route>
     <Route path="employee" component={Employee}>
