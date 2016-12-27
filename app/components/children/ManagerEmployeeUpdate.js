@@ -1,6 +1,6 @@
 var React = require("react");
 
-var ManagerUpdateEmployee = React.createClass({
+var ManagerEmployeeUpdate = React.createClass({
     render: function() {
         return (
             <div className="row">
@@ -12,4 +12,4 @@ var ManagerUpdateEmployee = React.createClass({
     }
 });
 
-module.exports = ManagerUpdateEmployee;
+module.exports = ManagerEmployeeUpdate;
