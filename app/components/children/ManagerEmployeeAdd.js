@@ -1,6 +1,68 @@
 var React = require("react");
+var helpers = require("../utils/helpers");
 
 var ManagerEmployeeAdd = React.createClass({
+    getInitialState: function() {
+        return {
+            firstName: "",
+            lastName: "",
+            addressOne: "",
+            addressTwo: "",
+            city: "",
+            state: "",
+            zip: "",
+            email: "",
+            phone: "",
+            phoneType: ""
+        };
+    },
+    handleFirstName: function(event) {
+        this.setState({ firstName: event.target.value });
+    },
+    handleLastName: function(event) {
+        this.setState({ lastName: event.target.value });
+    },
+    handleAddressOne: function(event) {
+        this.setState({ addressOne: event.target.value });
+    },
+    handleAddressTwo: function(event) {
+        this.setState({ addressTwo: event.target.value });
+    },
+    handleCity: function(event) {
+        this.setState({ city: event.target.value });
+    },
+    handleZip: function(event) {
+        this.setState({ zip: event.target.value });
+    },
+    handleEmail: function(event) {
+        this.setState({ email: event.target.value });
+    },
+    handlePhone: function(event) {
+        this.setState({ phone: event.target.value });
+    },
+    handlePhoneType: function(event) {
+        this.setState({ phoneType: event.target.value });
+    },
+    componentDidUpdate: function() {
+        helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
+            console.log("helpers.addEmployee Returned!")
+        }.bind(this));
+    },
+    handleForm: function(event) {
+        event.preventDefault();
+        this.setState({
+            firstName: "",
+            lastName: "",
+            addressOne: "",
+            addressTwo: "",
+            city: "",
+            state: "",
+            zip: "",
+            email: "",
+            phone: "",
+            phoneType: ""
+        });
+    },
     render: function() {
         return (
             <div className="row">
@@ -10,35 +72,64 @@ var ManagerEmployeeAdd = React.createClass({
                             <form className="col m12">
                                 <div className="row">
                                     <div className="input-field col m6 s12">
-                                        <label>First Name</label>
-                                        <input id="firstName" type="text" className="validate"/>
+                                        <input
+                                            placeholder="First Name"
+                                            id="firstName"
+                                            type="text"
+                                            className="validate"
+                                            value={this.state.firstName}
+                                            onChange={this.handleFirstName}
+                                        />
                                     </div>
                                     <div className="input-field col m6 s12">
-                                        <label>Last Name</label>
-                                        <input id="lastName" type="text" className="validate"/>
+                                        <input
+                                            placeholder="Last Name"
+                                            id="lastName"
+                                            type="text"
+                                            className="validate"
+                                            value={this.state.lastName}
+                                            onChange={this.handleLastName}
+                                        />
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="input-field col m12 s12">
-                                        <label>Address 1</label>
-                                        <input id="addressOne" type="text" className="validate"/>
+                                        <input
+                                            placeholder="Address One"
+                                            id="addressOne"
+                                            type="text"
+                                            className="validate"
+                                            value={this.state.addressOne}
+                                            onChange={this.handleAddressOne}
+                                        />
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="input-field col m12 s12">
-                                        <label>Address 2</label>
-                                        <input id="addressTwo" type="text" className="validate"/>
+                                        <input
+                                            placeholder="Address Two"
+                                            id="addressTwo"
+                                            type="text"
+                                            className="validate"
+                                            value={this.state.addressTwo}
+                                            onChange={this.handleAddressTwo}
+                                        />
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="input-field col m6 s12">
-                                        <label>City</label>
-                                        <input id="city" type="text" className="validate"/>
+                                        <input
+                                            placeholder="City"
+                                            id="city"
+                                            type="text"
+                                            className="validate"
+                                            value={this.state.city}
+                                            onChange={this.handleCity}
+                                        />
                                     </div>
                                     <div className="input-field col m3 s6">
-                                        <label>State</label>
                                         <select>
-                                            {/* <option value="" disabled selected></option> */}
+                                            <option value="" disabled>State</option>
                                             <option value="AL">AL</option>
                                             <option value="AK">AK</option>
                                             <option value="AZ">AZ</option>
@@ -92,28 +183,52 @@ var ManagerEmployeeAdd = React.createClass({
                                         </select>
                                     </div>
                                     <div className="input-field col m3 s6">
-                                        <label>Zip</label>
-                                        <input id="zip" type="number" className="validate"/>
+                                        <input
+                                            placeholder="Zip"
+                                            id="zip"
+                                            type="number"
+                                            className="validate"
+                                            value={this.state.zip}
+                                            onChange={this.handleZip}
+                                        />
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="input-field col m12 s12">
-                                        <label>Email</label>
-                                        <input id="email" type="email" className="validate"/>
+                                        <input
+                                            placeholder="Email"
+                                            id="email"
+                                            type="email"
+                                            className="validate"
+                                            value={this.state.email}
+                                            onChange={this.handleEmail}
+                                        />
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="input-field col m8 s8">
-                                        <label>Phone</label>
-                                        <input id="phone" type="number" className="validate"/>
+                                        <input
+                                            placeholder="Phone"
+                                            id="phone"
+                                            type="number"
+                                            className="validate"
+                                            value={this.state.phone}
+                                            onChange={this.handlePhone}
+                                        />
                                     </div>
                                     <div className="input-field col m4 s4">
-                                        <label>Type</label>
                                         <select>
                                             <option value="mobile">Mobile</option>
                                             <option value="work">Work</option>
                                             <option value="home">Home</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col s12">
+                                        <button id="addEmployee" className="btn waves-effect waves-light green accent-3" onClick={this.handleForm}>Add Employee
+                                            <i className="material-icons">person_add</i>
+                                        </button>
                                     </div>
                                 </div>
                             </form>

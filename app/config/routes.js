@@ -11,7 +11,6 @@ var Main = require("../components/Main");
 var Login = require("../components/children/Login");
 var Register = require("../components/children/Register");
 // manager components
->>>>>>> styling and manager routes
 var Manager = require("../components/Manager");
 var ManagerHome = require("../components/children/ManagerHome");
 // manager - employee management components
