@@ -20,6 +20,7 @@ var Employee = React.createClass({
                         <ul className="right hide-on-med-and-down">
                             <li><a className="dropdown-button black-text" href="#" data-activates="dropdown1" data-beloworigin="true" data-hover="true">My Info<i className="material-icons right">account_circle</i></a></li>
                             <li><a className="dropdown-button black-text" href="#" data-activates="dropdown2" data-beloworigin="true" data-hover="true">Schedule<i className="material-icons right">access_time</i></a></li>
+                            <li><a className="black-text" href="/logout">Logout<i className="material-icons right">exit_to_app</i></a></li>
                         </ul>
                         <ul id="slide-out" className="side-nav">
                             <li>
