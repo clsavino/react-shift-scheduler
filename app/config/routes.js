@@ -10,6 +10,7 @@ var IndexRoute = router.IndexRoute;
 var Main = require("../components/Main");
 var Login = require("../components/children/Login");
 var Register = require("../components/children/Register");
+var AddEmployee = require("../components/children/AddEmployee");
 //manager components
 var Manager = require("../components/Manager");
 var ManagerHome = require("../components/children/ManagerHome");
@@ -23,6 +24,13 @@ var EmployeeHome = require("../components/children/EmployeeHome");
 module.exports = (
   <Router history={hashHistory}>
     <Route path="/" component={Main}>
+
+      <Route path="login" component={Login} />
+      <Route path="register" component={Register} />
+      <Route path="addingEmployees" component={AddEmployee} />
+
+      <IndexRoute component={Login} />
+
         <Route path="login" component={Login} />
         <Route path="register" component={Register} />
         <IndexRoute component={Login} />

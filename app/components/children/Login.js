@@ -26,15 +26,15 @@ class Login extends React.Component {
           <form action="/login" method="POST" onSubmit={this.handleLogin}>
             <h4 id="spacing">Login</h4>
             <label> User Name: </label>
-              <input type="text" className="validate" 
-                value={this.state.username} 
-                name="username" 
+              <input type="text" className="validate"
+                value={this.state.username}
+                name="username"
                 onChange={this.handleUserChange} />
 
             <label>Password: </label>
-              <input type="password" className="validate" 
-                value={this.state.password} 
-                name="password" 
+              <input type="password" className="validate"
+                value={this.state.password}
+                name="password"
                 onChange={this.handleUserChange} />
 
             <button className="btn waves-effect waves-light btn-large" type="submit" value="Submit" name="action">Submit

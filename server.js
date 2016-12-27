@@ -9,6 +9,8 @@
   var Promise = require("bluebird");
   var User = require("./models/user")
 
+// Require Employee Schema from Database
+var employee = require("./models/Employee");
   mongoose.Promise = Promise;
 
 //Initialize Express
@@ -100,7 +102,29 @@
   //   res.redirect("/login");
   // }
 
+//Posting new Employee to the database
+app.post("/addEmployee", function(req, res) {
+  // console.log("creating in server");
+  console.log(req.body);
+  employee.create({
+    name: req.body.fullName,
+    address: req.body.address,
+    phone: req.body.phone,
+    email: req.body.email,
+    ssn: req.body.ssn,
+    availabiity: req.body.availabiity
+  }, function(err) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send("Employee Saved!");
+    }
+  });
+});
+
 //Port Listener
+
   app.listen(PORT, function() {
     console.log("App listening on PORT: " + PORT);
   });
