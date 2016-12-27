@@ -37,7 +37,7 @@ class Login extends React.Component {
                 name="password" 
                 onChange={this.handleUserChange} />
 
-            <button className="btn waves-effect waves-light btn-large" type="submit" value="Submit" name="action">Submit
+            <button className="btn waves-effect waves-light btn-large blue accent-3" type="submit" value="Submit" name="action">Submit
             <i className="material-icons right">send</i>
             </button>
           </form>
