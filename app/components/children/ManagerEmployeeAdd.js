@@ -135,7 +135,7 @@ var ManagerEmployeeAdd = React.createClass({
                                         />
                                     </div>
                                     <div className="input-field col m3 s6">
-                                        <select value={this.state.phoneType} onChange={this.handleState.bind(this)}>
+                                        <select value={this.state.phoneType} onChange={this.handleState}>
                                             <option value="" disabled>State</option>
                                             <option value="AL">AL</option>
                                             <option value="AK">AK</option>
@@ -224,7 +224,7 @@ var ManagerEmployeeAdd = React.createClass({
                                         />
                                     </div>
                                     <div className="input-field col m4 s4">
-                                        <select value={this.state.phoneType} onChange={this.handlePhoneType.bind(this)}>
+                                        <select value={this.state.phoneType} onChange={this.handlePhoneType}>
                                             <option value="mobile">Mobile</option>
                                             <option value="work">Work</option>
                                             <option value="home">Home</option>
