@@ -2,22 +2,34 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var EmployeeSchema = new Schema({
-  name: {
+  firstName: {
     type: String,
   },
-  address: {
+  lastName: {
     type: String,
   },
-  phone: {
+  addressOne: {
+    type: String,
+  },
+  addressTwo: {
+    type: String,
+  },
+  city: {
+    type: String,
+  },
+  state: {
+    type: String,
+  },
+  zip: {
     type: String,
   },
   email: {
     type: String,
   },
-  ssn: {
+  phone: {
     type: String,
   },
-  availabiity: {
+  phoneType: {
     type: String,
   }
 });
