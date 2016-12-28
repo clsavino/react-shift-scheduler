@@ -31,6 +31,10 @@ var ManagerEmployeeAdd = React.createClass({
     handleCity: function(event) {
         this.setState({ city: event.target.value });
     },
+    handleState: function(event) {
+        this.setState({ state: event.target.value });
+        console.log(this.state.state);
+    },
     handleZip: function(event) {
         this.setState({ zip: event.target.value });
     },
@@ -43,25 +47,28 @@ var ManagerEmployeeAdd = React.createClass({
     handlePhoneType: function(event) {
         this.setState({ phoneType: event.target.value });
     },
-    componentDidUpdate: function() {
+    // componentDidUpdate: function() {
+    //     helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
+    //         console.log("helpers.addEmployee Returned!")
+    //     }.bind(this));
+    // },
+    handleForm: function(event) {
+        event.preventDefault();
+        // this.setState({
+        //     firstName: "",
+        //     lastName: "",
+        //     addressOne: "",
+        //     addressTwo: "",
+        //     city: "",
+        //     state: "",
+        //     zip: "",
+        //     email: "",
+        //     phone: "",
+        //     phoneType: ""
+        // });
         helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
             console.log("helpers.addEmployee Returned!")
         }.bind(this));
-    },
-    handleForm: function(event) {
-        event.preventDefault();
-        this.setState({
-            firstName: "",
-            lastName: "",
-            addressOne: "",
-            addressTwo: "",
-            city: "",
-            state: "",
-            zip: "",
-            email: "",
-            phone: "",
-            phoneType: ""
-        });
     },
     render: function() {
         return (
@@ -128,7 +135,7 @@ var ManagerEmployeeAdd = React.createClass({
                                         />
                                     </div>
                                     <div className="input-field col m3 s6">
-                                        <select>
+                                        <select value={this.state.phoneType} onChange={this.handleState.bind(this)}>
                                             <option value="" disabled>State</option>
                                             <option value="AL">AL</option>
                                             <option value="AK">AK</option>
@@ -217,7 +224,7 @@ var ManagerEmployeeAdd = React.createClass({
                                         />
                                     </div>
                                     <div className="input-field col m4 s4">
-                                        <select>
+                                        <select value={this.state.phoneType} onChange={this.handlePhoneType.bind(this)}>
                                             <option value="mobile">Mobile</option>
                                             <option value="work">Work</option>
                                             <option value="home">Home</option>
