@@ -64,7 +64,7 @@ class Register extends React.Component {
               <label>Select User Type</label>
             </div>
                
-            <button className="btn waves-effect waves-light btn-large" type="submit" value="Submit" name="action">Submit
+            <button className="btn waves-effect waves-light btn-large blue accent-3" type="submit" value="Submit" name="action">Submit
             <i className="material-icons right">send</i>
             </button>
           </form>
