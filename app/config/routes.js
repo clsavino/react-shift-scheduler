@@ -17,6 +17,7 @@ var ManagerHome = require("../components/children/ManagerHome");
 var ManagerEmployeeAdd = require("../components/children/ManagerEmployeeAdd");
 var ManagerEmployeeUpdate = require("../components/children/ManagerEmployeeUpdate");
 var ManagerEmployeeRemove = require("../components/children/ManagerEmployeeRemove");
+var ManagerEmployeeAll = require("../components/children/ManagerEmployeeAll");
 // manager - schedule components
 var ManagerSchedulesView = require("../components/children/ManagerSchedulesView");
 var ManagerSchedulesEdit = require("../components/children/ManagerSchedulesEdit");
@@ -41,6 +42,7 @@ module.exports = (
         <Route path="employeeAdd" component={ManagerEmployeeAdd} />
         <Route path="employeeUpdate" component={ManagerEmployeeUpdate} />
         <Route path="employeeRemove" component={ManagerEmployeeRemove} />
+        <Route path="employeeAll" component={ManagerEmployeeAll} />
         <Route path="schedulesView" component={ManagerSchedulesView} />
         <Route path="schedulesEdit" component={ManagerSchedulesEdit} />
         <Route path="schedulesReport" component={ManagerSchedulesReport} />

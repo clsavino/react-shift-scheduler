@@ -8,13 +8,6 @@
 	margin-right: 10px;
 }
 
-form {
- 	box-shadow: 0px 2px 10px grey;
- 	padding: 30px;
- 	border-radius: 10px;
- 	margin: 20px;
-}
-
 #loginButton, #registerButton {
 	width: 90%;
 }
@@ -23,9 +16,9 @@ form {
 	margin-top: 100px;
 }
 
-#addEmployee {
+/*#addEmployee {
 	width: 100%;
-}
+}*/
 
 .input-field input[type=text]:focus, input[type=password]:focus, .input-field input[type=email]:focus, .input-field input[type=number]:focus {
 	border-bottom: 1px solid #000;
