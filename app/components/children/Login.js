@@ -22,7 +22,7 @@ class Login extends React.Component {
   }
     render() {
       return (
-        <div className="container">
+        <div className="container" id="loginForm">
           <form action="/login" method="POST" onSubmit={this.handleLogin}>
             <h4 id="spacing">Login</h4>
             <label> User Name: </label>
