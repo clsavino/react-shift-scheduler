@@ -57,7 +57,7 @@ var employee = require("./models/Employee");
 
 //Initialize Auth Routes
   app.get("*", function(req,res) {
-    response.sendFile(path.resolve(__dirname, "public", "index.html"))
+    res.sendFile(path.resolve(__dirname, "public", "index.html"))
   })
 
 //Doesn't work
