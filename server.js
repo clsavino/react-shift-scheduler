@@ -90,17 +90,17 @@ var employee = require("./models/Employee");
     res.redirect("/");
   });
 
-  // function isLoggedIn(req,res,next){
-  //   if(req.isAuthenticated()){
-  //     return next();
-  //   }
-  //   res.redirect("/login");
-  // }
+  function isLoggedIn(req,res,next){
+    if(req.isAuthenticated()){
+      return next();
+    }
+    res.redirect("/");
+  }
 
   // //Doesn't work
-  //   app.get("/manager", isLoggedIn, function(req,res) {
-  //     res.send("works");
-  //   })
+    app.get("/#/manager", isLoggedIn, function(req,res) {
+      res.send("works");
+    })
 
 //Posting new Employee to the database
 app.post("/addEmployee", function(req, res) {
