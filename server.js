@@ -102,6 +102,7 @@ var employee = require("./models/Employee");
       res.send("works");
     })
 
+
 //Posting new Employee to the database
 app.post("/addEmployee", function(req, res) {
   // console.log("creating in server");

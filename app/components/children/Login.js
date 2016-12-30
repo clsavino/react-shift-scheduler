@@ -25,17 +25,21 @@ class Login extends React.Component {
         <div className="container" id="loginForm">
           <form action="/login" method="POST" onSubmit={this.handleLogin}>
             <h4 id="spacing">Login</h4>
-            <label> User Name: </label>
-              <input type="text" className="validate" 
+            <label for="username"> User Name: </label>
+              <input type="text" 
+                className="validate" 
                 value={this.state.username} 
                 name="username" 
-                onChange={this.handleUserChange} />
+                onChange={this.handleUserChange}
+                required />
 
-            <label>Password: </label>
-              <input type="password" className="validate" 
+            <label for="password">Password: </label>
+              <input type="password" 
+                className="validate" 
                 value={this.state.password} 
                 name="password" 
-                onChange={this.handleUserChange} />
+                onChange={this.handleUserChange}
+                required  />
 
             <button className="btn waves-effect waves-light btn-large blue accent-3" type="submit" value="Submit" name="action">Submit
             <i className="material-icons right">send</i>
