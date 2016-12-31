@@ -26,34 +26,43 @@ class Register extends React.Component {
         <div className="container">
           <form action="/register" method="POST" onSubmit={this.handleLogin}>
             <h4 id="spacing">Register</h4>
-            <label> Username: </label>
+            <label for="username"> Username: </label>
               <input type="text" className="validate" 
                 value={this.state.username} 
                 name="username" 
+                id="username"
                 // errorText={errors.username}
-                onChange={this.handleUserChange} />
+                onChange={this.handleUserChange}
+                required />
 
 
             <label>Email: </label>
-              <input type="text" className="validate" 
+              <input for="email" 
+                type="email" 
+                className="validate" 
                 value={this.state.email} 
                 name="email"
                 // errorText={errors.email} 
-                onChange={this.handleUserChange} />
+                onChange={this.handleUserChange}
+                required />
 
             <label>Password: </label>
-              <input type="password" className="validate" 
+              <input for="password"
+                type="password" 
+                className="validate" 
                 value={this.state.password} 
                 name="password"
                 // errorText={errors.password} 
-                onChange={this.handleUserChange} />
+                onChange={this.handleUserChange}
+                required />
 
             <label>Password Confirmation: </label>
-              <input type="password" className="validate" 
+              <input for="passwordConfirmation" type="password" className="validate" 
                 value={this.state.passwordConfirmation} 
                 name="passwordConfirmation" 
                 // errorText={errors.passwordConfirmation} 
-                onChange={this.handleUserChange} />
+                onChange={this.handleUserChange}
+                required />
 
             <div className="input-field col s12">
               <select name="userType">
