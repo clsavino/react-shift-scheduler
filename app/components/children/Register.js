@@ -70,7 +70,7 @@ class Register extends React.Component {
                                 <div className="col s12">
                                     <input
                                         placeholder="Confirm Password"
-                                        type="email"
+                                        type="password"
                                         className="validate"
                                         value={this.state.passwordConfirmation}
                                         name="passwordConfirmation"
