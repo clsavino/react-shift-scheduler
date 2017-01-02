@@ -16,42 +16,51 @@ var ManagerEmployeeAll = React.createClass({
             phoneType: ""
         };
     },
-    handleFirstName: function(event) {
-        this.setState({ firstName: event.target.value });
+    // handleFirstName: function(event) {
+    //     this.setState({ firstName: event.target.value });
+    // },
+    // handleLastName: function(event) {
+    //     this.setState({ lastName: event.target.value });
+    // },
+    // handleAddressOne: function(event) {
+    //     this.setState({ addressOne: event.target.value });
+    // },
+    // handleAddressTwo: function(event) {
+    //     this.setState({ addressTwo: event.target.value });
+    // },
+    // handleCity: function(event) {
+    //     this.setState({ city: event.target.value });
+    // },
+    // handleState: function(event) {
+    //     this.setState({ state: event.target.value });
+    //     console.log(this.state.state);
+    // },
+    // handleZip: function(event) {
+    //     this.setState({ zip: event.target.value });
+    // },
+    // handleEmail: function(event) {
+    //     this.setState({ email: event.target.value });
+    // },
+    // handlePhone: function(event) {
+    //     this.setState({ phone: event.target.value });
+    // },
+    // handlePhoneType: function(event) {
+    //     this.setState({ phoneType: event.target.value });
+    // },
+    handleUserChange(event) {
+       this.setState({ [event.target.name]: event.target.value});
     },
-    handleLastName: function(event) {
-        this.setState({ lastName: event.target.value });
-    },
-    handleAddressOne: function(event) {
-        this.setState({ addressOne: event.target.value });
-    },
-    handleAddressTwo: function(event) {
-        this.setState({ addressTwo: event.target.value });
-    },
-    handleCity: function(event) {
-        this.setState({ city: event.target.value });
-    },
-    handleState: function(event) {
-        this.setState({ state: event.target.value });
-        console.log(this.state.state);
-    },
-    handleZip: function(event) {
-        this.setState({ zip: event.target.value });
-    },
-    handleEmail: function(event) {
-        this.setState({ email: event.target.value });
-    },
-    handlePhone: function(event) {
-        this.setState({ phone: event.target.value });
-    },
-    handlePhoneType: function(event) {
-        this.setState({ phoneType: event.target.value });
-    },
-    handleForm: function(event) {
+    handleAddForm: function(event) {
         event.preventDefault();
         helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
             console.log("helpers.addEmployee Returned!")
         }.bind(this));
+    },
+    handleUpdateForm: function(event) {
+        event.preventDefault();
+    },
+    handleRemoveForm: function(event) {
+        event.preventDefault();
     },
     render: function() {
         return (
@@ -83,61 +92,60 @@ var ManagerEmployeeAll = React.createClass({
                                 <div className="input-field col m6 s12">
                                     <input
                                         placeholder="First Name"
-                                        id="firstName"
+                                        name="firstName"
                                         type="text"
                                         className="validate"
                                         value={this.state.firstName}
-                                        onChange={this.handleFirstName}
-                                    />
+                                        onChange={this.handleUserChange}
+                                        required />
                                 </div>
                                 <div className="input-field col m6 s12">
                                     <input
                                         placeholder="Last Name"
-                                        id="lastName"
+                                        name="lastName"
                                         type="text"
                                         className="validate"
                                         value={this.state.lastName}
-                                        onChange={this.handleLastName}
-                                    />
+                                        onChange={this.handleUserChange}
+                                        required />
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="input-field col m12 s12">
                                     <input
                                         placeholder="Address One"
-                                        id="addressOne"
+                                        name="addressOne"
                                         type="text"
                                         className="validate"
                                         value={this.state.addressOne}
-                                        onChange={this.handleAddressOne}
-                                    />
+                                        onChange={this.handleUserChange}
+                                        required />
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="input-field col m12 s12">
                                     <input
                                         placeholder="Address Two"
-                                        id="addressTwo"
+                                        name="addressTwo"
                                         type="text"
                                         className="validate"
                                         value={this.state.addressTwo}
-                                        onChange={this.handleAddressTwo}
-                                    />
+                                        onChange={this.handleUserChange} />
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="input-field col m6 s12">
                                     <input
                                         placeholder="City"
-                                        id="city"
+                                        name="city"
                                         type="text"
                                         className="validate"
                                         value={this.state.city}
-                                        onChange={this.handleCity}
-                                    />
+                                        onChange={this.handleUserChange}
+                                        required />
                                 </div>
                                 <div className="input-field col m3 s6">
-                                    <select value={this.state.phoneType} onChange={this.handleState}>
+                                    <select name="state" value={this.state.phoneType} onChange={this.handleUserChange}>
                                         <option value="" disabled>State</option>
                                         <option value="AL">AL</option>
                                         <option value="AK">AK</option>
@@ -194,39 +202,39 @@ var ManagerEmployeeAll = React.createClass({
                                 <div className="input-field col m3 s6">
                                     <input
                                         placeholder="Zip"
-                                        id="zip"
+                                        name="zip"
                                         type="number"
                                         className="validate"
                                         value={this.state.zip}
-                                        onChange={this.handleZip}
-                                    />
+                                        onChange={this.handleUserChange}
+                                        required />
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="input-field col m12 s12">
                                     <input
                                         placeholder="Email"
-                                        id="email"
+                                        name="email"
                                         type="email"
                                         className="validate"
                                         value={this.state.email}
-                                        onChange={this.handleEmail}
-                                    />
+                                        onChange={this.handleUserChange}
+                                        required />
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="input-field col m8 s8">
                                     <input
                                         placeholder="Phone"
-                                        id="phone"
+                                        name="phone"
                                         type="number"
                                         className="validate"
                                         value={this.state.phone}
-                                        onChange={this.handlePhone}
-                                    />
+                                        onChange={this.handleUserChange}
+                                        required />
                                 </div>
                                 <div className="input-field col m4 s4">
-                                    <select value={this.state.phoneType} onChange={this.handlePhoneType}>
+                                    <select name="phoneType" value={this.state.phoneType} onChange={this.handleUserChange}>
                                         <option value="mobile">Mobile</option>
                                         <option value="work">Work</option>
                                         <option value="home">Home</option>
@@ -235,17 +243,17 @@ var ManagerEmployeeAll = React.createClass({
                             </div>
                             <div className="row">
                                 <div className="col s4">
-                                    <button id="addEmployee" className="btn btn-large waves-effect waves-light green accent-3" onClick={this.handleForm}>Add
+                                    <button className="btn btn-large waves-effect waves-light green accent-3" onClick={this.handleAddForm}>Add
                                         <i className="material-icons right">person_add</i>
                                     </button>
                                 </div>
                                 <div className="col s4">
-                                    <button id="addEmployee" className="btn btn-large waves-effect waves-light blue accent-3" onClick={this.handleForm}>Update
+                                    <button className="btn btn-large waves-effect waves-light blue accent-3" onClick={this.handleUpdateForm}>Update
                                         <i className="material-icons right">edit</i>
                                     </button>
                                 </div>
                                 <div className="col s4">
-                                    <button id="addEmployee" className="btn btn-large waves-effect waves-light red accent-3" onClick={this.handleForm}>Remove
+                                    <button className="btn btn-large waves-effect waves-light red accent-3" onClick={this.handleRemoveForm}>Remove
                                         <i className="material-icons right">person_outline</i>
                                     </button>
                                 </div>

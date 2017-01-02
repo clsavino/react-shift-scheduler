@@ -40,7 +40,8 @@ class Login extends React.Component {
                                         className="validate"
                                         value={this.state.username}
                                         name="username"
-                                        onChange={this.handleUserChange} />
+                                        onChange={this.handleUserChange}
+                                        required />
                                 </div>
                             </div>
                             <div className="row">
@@ -51,7 +52,8 @@ class Login extends React.Component {
                                         className="validate"
                                         value={this.state.password}
                                         name="password"
-                                        onChange={this.handleUserChange} />
+                                        onChange={this.handleUserChange}
+                                        required />
                                 </div>
                             </div>
                             <div className="row">
