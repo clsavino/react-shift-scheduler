@@ -4,6 +4,7 @@ var Route = router.Route;
 var Router = router.Router;
 
 var hashHistory = router.hashHistory;
+var browserHistory = router.browserHistory;
 var IndexRoute = router.IndexRoute;
 
 // landing components
@@ -13,17 +14,8 @@ var Register = require("../components/children/Register");
 // manager components
 var Manager = require("../components/Manager");
 var ManagerHome = require("../components/children/ManagerHome");
-// manager - employee management components
-var ManagerEmployeeAdd = require("../components/children/ManagerEmployeeAdd");
-var ManagerEmployeeUpdate = require("../components/children/ManagerEmployeeUpdate");
-var ManagerEmployeeRemove = require("../components/children/ManagerEmployeeRemove");
-// manager - schedule components
-var ManagerSchedulesView = require("../components/children/ManagerSchedulesView");
-var ManagerSchedulesEdit = require("../components/children/ManagerSchedulesEdit");
-var ManagerSchedulesReport = require("../components/children/ManagerSchedulesReport");
-// manager - billing components
-var ManagerBillingCreate = require("../components/children/ManagerBillingCreate");
-var ManagerBillingView = require("../components/children/ManagerBillingView");
+var ManagerEmployeeAll = require("../components/children/ManagerEmployeeAll");
+var ManagerSchedulesCreate = require("../components/children/ManagerSchedulesCreate");
 // employee components
 var Employee = require("../components/Employee");
 var EmployeeHome = require("../components/children/EmployeeHome");
@@ -38,14 +30,8 @@ module.exports = (
         <IndexRoute component={Login} />
     </Route>
     <Route path="manager" component={Manager}>
-        <Route path="employeeAdd" component={ManagerEmployeeAdd} />
-        <Route path="employeeUpdate" component={ManagerEmployeeUpdate} />
-        <Route path="employeeRemove" component={ManagerEmployeeRemove} />
-        <Route path="schedulesView" component={ManagerSchedulesView} />
-        <Route path="schedulesEdit" component={ManagerSchedulesEdit} />
-        <Route path="schedulesReport" component={ManagerSchedulesReport} />
-        <Route path="billingCreate" component={ManagerBillingCreate} />
-        <Route path="billingView" component={ManagerBillingView} />
+        <Route path="employeeAll" component={ManagerEmployeeAll} />
+        <Route path="schedulesCreate" component={ManagerSchedulesCreate} />
         <IndexRoute component={ManagerHome} />
     </Route>
     <Route path="employee" component={Employee}>
