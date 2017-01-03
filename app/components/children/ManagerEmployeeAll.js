@@ -14,9 +14,7 @@ var ManagerEmployeeAll = React.createClass({
             email: "",
             phone: "",
             phoneType: "",
-<<<<<<< HEAD
-            allEmployees: []
-=======
+            allEmployees: [],
             fullName:"",
             monday:"",
             tuesday: "",
@@ -25,7 +23,6 @@ var ManagerEmployeeAll = React.createClass({
             friday: "",
             saturday: "",
             sunday: ""
->>>>>>> saving my branch
         };
     },
     componentDidMount: function() {

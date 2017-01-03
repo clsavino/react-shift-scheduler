@@ -20,7 +20,10 @@ var helper = {
   },
 
   addEmpSchedule:function(fullName,monday,tuesday,wednesday,thursday,friday,saturday,sunday) {
+
     console.log('helper.addEmpSchedule Running!' + fullName + ' Monday' + monday);
+
+    console.log('helper.addEmpSchedule Running!');
 
     return axios.post('/addEmpSchedule', {
       fullName: fullName,
