@@ -28,7 +28,7 @@ class Login extends React.Component {
                     <div className="card-panel">
                         <div className="row grey lighten-5">
                             <div className="col s12 center">
-                                <h4 className="blue-text text-darken-1"><img id="logo" src="assets/images/logo.png"/><span className="hide-on-med-and-down">Schedulr</span></h4>
+                                <h4 className="blue-text text-darken-1"><img id="logo" src="/assets/images/logo.png"/><span className="hide-on-med-and-down">Schedulr</span></h4>
                             </div>
                         </div>
                         <form action="/login" method="POST" onSubmit={this.handleLogin}>
@@ -61,10 +61,10 @@ class Login extends React.Component {
                                     <button className="btn waves-effect waves-light btn-large blue accent-3 loginButtons left" type="submit" value="Submit" name="action">Login<i className="material-icons right">send</i></button>
                                 </div>
                                 <div className="col m4 s12 center">
-                                    <a className="btn waves-effect waves-light btn-large green accent-3 loginButtons center" href="#/register">Register<i className="material-icons right">person_add</i></a>
+                                    <a className="btn waves-effect waves-light btn-large green accent-3 loginButtons center" href="/register">Register<i className="material-icons right">person_add</i></a>
                                 </div>
                                 <div className="col m4 s12 right">
-                                    <a className="btn waves-effect waves-light btn-large red accent-3 loginButtons right" href="#/logout">Logut<i className="material-icons right">exit_to_app</i></a>
+                                    <a className="btn waves-effect waves-light btn-large red accent-3 loginButtons right" href="/logout">Logut<i className="material-icons right">exit_to_app</i></a>
                                 </div>
                             </div>
                         </form>

@@ -3,7 +3,6 @@ var router = require("react-router");
 var Route = router.Route;
 var Router = router.Router;
 
-var hashHistory = router.hashHistory;
 var browserHistory = router.browserHistory;
 var IndexRoute = router.IndexRoute;
 
@@ -23,19 +22,20 @@ var EmployeeHome = require("../components/children/EmployeeHome");
 // employee - schedule components
 
 module.exports = (
-  <Router history={hashHistory}>
+  <Router history={browserHistory}>
     <Route path="/" component={Main}>
         <Route path="login" component={Login} />
         <Route path="register" component={Register} />
         <IndexRoute component={Login} />
-    </Route>
-    <Route path="manager" component={Manager}>
+
+    <Route path="/manager" component={Manager}>
         <Route path="employeeAll" component={ManagerEmployeeAll} />
         <Route path="schedulesCreate" component={ManagerSchedulesCreate} />
         <IndexRoute component={ManagerHome} />
     </Route>
     <Route path="employee" component={Employee}>
         <IndexRoute component={EmployeeHome} />
+    </Route>
     </Route>
   </Router>
 );
