@@ -56,9 +56,9 @@ var employee = require("./models/Employee");
   app.use(express.static(__dirname + "/public"))
 
 //Initialize Auth Routes (MAY NOT NEED)
-  // app.get("*", function(req,res) {
-  //   res.sendFile(path.resolve(__dirname, "public", "index.html"))
-  // })
+  app.get("*", function(req,res) {
+    res.sendFile(path.resolve(__dirname, "public", "index.html"))
+  })
 
   app.post("/register", function(req, res) {
     console.log(req.body.username)
@@ -79,7 +79,7 @@ var employee = require("./models/Employee");
   });
 
   app.post("/login", passport.authenticate("local", {
-    successRedirect: "/#/manager",
+    successRedirect: "/manager",
     failureRedirect: "/"
   }), function(req, res) {
 
@@ -98,9 +98,9 @@ var employee = require("./models/Employee");
   }
 
   // //Doesn't work
-    app.get("/#/manager", isLoggedIn, function(req,res) {
-      res.send("works");
-    })
+    // app.get("/#/manager", isLoggedIn, function(req,res) {
+    //   res.send("works");
+    // })
 
 
 //Posting new Employee to the database
