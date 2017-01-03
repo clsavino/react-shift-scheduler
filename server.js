@@ -11,6 +11,7 @@
 
 // Require Employee Schema from Database
 var employee = require("./models/Employee");
+var EmployeeSchedule = require("./models/EmployeeSchedule");
   mongoose.Promise = Promise;
 
 //Initialize Express
@@ -67,6 +68,44 @@ var employee = require("./models/Employee");
       }
     });
   });
+
+//Posting Employee Schedule to the database
+app.post("/addEmpSchedule", function(req, res) {
+  console.log("creating employee Schedule in server");
+  console.log(req.body);
+  employee.create({
+    fullName: req.body.fullName,
+    monday: req.body.monday,
+    tuesday: req.body.tuesday,
+    wednesday: req.body.wednesday,
+    thursday: req.body.thursday,
+    friday: req.body.friday,
+    saturday: req.body.saturday,
+    sunday: req.body.sunday
+  }, function(err) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send("Employee Schedule Saved!");
+    }
+  });
+});
+
+app.get("/getEmpSchedules", function(req, res) {
+  console.log('in server, /getEmpSchedules');
+  EmployeeSchedule.find({})
+  .exec(function(err,docs) {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    }
+    else {
+      console.log('in /getEmpSchedules - docs', docs);
+      res.send(docs);
+    }
+  });
+});
 
   app.post("/register", function(req, res) {
     console.log(req.body.username)
@@ -126,12 +165,6 @@ var employee = require("./models/Employee");
   // console.log("creating in server");
   console.log(req.body);
   employee.create({
-    // name: req.body.fullName,
-    // address: req.body.address,
-    // phone: req.body.phone,
-    // email: req.body.email,
-    // ssn: req.body.ssn,
-    // availabiity: req.body.availabiity
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     addressOne: req.body.addressOne,
@@ -151,6 +184,8 @@ var employee = require("./models/Employee");
     }
   });
 });
+
+
 
 
 

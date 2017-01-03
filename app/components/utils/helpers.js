@@ -10,10 +10,28 @@ var helper = {
     return axios.get("/getAllEmployees");
   },
 
-  // addEmployee: function(fullName, address, phone, email, ssn, availability) {
-  //   console.log("helpers.addEmployee Running")
-  //   return axios.post("/addEmployee", { fullName: fullName, address: address, phone: phone, email: email, ssn: ssn, availability: availability });
-  // }
+  getEmpSchedules:function() {
+    console.log('helper.getEmpSchedules Running!');
+    return axios.get('/getEmpSchedules')
+    .then(function(response){
+      console.log("axios response from /getEmpSchedules",response);
+        return response;
+    })
+  },
+
+  addEmpSchedule:function(fullName,monday,tuesday,wednesday,thursday,friday,saturday,sunday) {
+    console.log('helper.addEmpSchedule Running!');
+    return axios.post('/addEmpSchedule', {
+      fullName: fullName,
+      monday: monday,
+      tuesday: tuesday,
+      wednesday: wednesday,
+      thursday: thursday,
+      friday: friday,
+      saturday: saturday,
+      sunday: sunday
+    });
+  },
 
   addEmployee: function(firstName, lastName, addressOne, addressTwo, city, state, zip, email, phone, phoneType) {
     console.log("helpers.addEmployee Running")
