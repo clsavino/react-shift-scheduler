@@ -55,6 +55,7 @@ var ManagerEmployeeAll = React.createClass({
         helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
             console.log("helpers.addEmployee Returned!")
         }.bind(this));
+        Materialize.toast('Employee Added!', 4000);
     },
     handleUpdateForm: function(event) {
         event.preventDefault();
@@ -145,7 +146,7 @@ var ManagerEmployeeAll = React.createClass({
                                         required />
                                 </div>
                                 <div className="input-field col m3 s6">
-                                    <select name="state" value={this.state.phoneType} onChange={this.handleUserChange}>
+                                    <select name="state" value={this.state.state} onChange={this.handleUserChange}>
                                         <option value="" disabled>State</option>
                                         <option value="AL">AL</option>
                                         <option value="AK">AK</option>
