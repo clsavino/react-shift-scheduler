@@ -35,9 +35,9 @@ var ManagerEmployeeAll = React.createClass({
     },
 
     componentDidUpdate: function() {
-        helpers.getAllEmployees().then(function(response) {
-              this.setState({ allEmployees: response.data });
-            }.bind(this));
+        // helpers.getAllEmployees().then(function(response) {
+        //       this.setState({ allEmployees: response.data });
+        //     }.bind(this));
     },
     // handleFirstName: function(event) {
     //     this.setState({ firstName: event.target.value });
