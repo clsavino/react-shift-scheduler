@@ -108,6 +108,7 @@ app.get("/getEmpSchedules", function(req, res) {
   });
 });
 
+
   app.post("/register", function(req, res) {
     console.log(req.body.username)
     console.log(req.body.email)
@@ -187,47 +188,6 @@ app.get("/getEmpSchedules", function(req, res) {
     }
   });
 });
-
-//Posting Employee Schedule to the database
-app.post("/addEmpSchedule", function(req, res) {
-  console.log("creating employee Schedule in server");
-  console.log(req.body);
-  employee.create({
-    fullName: req.body.fullName,
-    monday: req.body.monday,
-    tuesday: req.body.tuesday,
-    wednesday: req.body.wednesday,
-    thursday: req.body.thursday,
-    friday: req.body.friday,
-    saturday: req.body.saturday,
-    sunday: req.body.sunday
-  }, function(err) {
-    if (err) {
-      console.log(err);
-    }
-    else {
-      res.send("Employee Schedule Saved!");
-    }
-  });
-});
-
-app.get("/getEmpSchedules", function(req, res) {
-  console.log('in server, /getEmpSchedules');
-  EmployeeSchedule.find({})
-  .exec(function(err,docs) {
-    if (err) {
-      console.log(err);
-      res.send(err);
-    }
-    else {
-      console.log('in /getEmpSchedules - docs', docs);
-      res.send(docs);
-    }
-  });
-});
-
-
-
 
 
 //Port Listener
