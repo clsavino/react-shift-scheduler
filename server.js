@@ -69,6 +69,7 @@ var EmployeeSchedule = require("./models/EmployeeSchedule");
     });
   });
 
+
 //Posting Employee Schedule to the database
 app.post("/addEmpSchedule", function(req, res) {
   console.log("creating employee Schedule in server");
@@ -161,8 +162,10 @@ app.get("/getEmpSchedules", function(req, res) {
 
 
 //Posting new Employee to the database
+
   app.post("/addEmployee", function(req, res) {
   // console.log("creating in server");
+
   console.log(req.body);
   employee.create({
     firstName: req.body.firstName,
@@ -184,6 +187,8 @@ app.get("/getEmpSchedules", function(req, res) {
     }
   });
 });
+
+
 
 
 

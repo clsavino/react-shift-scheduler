@@ -6,8 +6,7 @@ var ManagerSchedulesCreate = React.createClass({
 
     getInitialState: function() {
       return {
-        firstName: "",
-        lastName:"",
+        fullName: "",
         monday:"",
         tuesday:"",
         wednesday:"",
@@ -15,7 +14,8 @@ var ManagerSchedulesCreate = React.createClass({
         friday:"",
         saturday:"",
         sunday:"",
-        empSchedules: []
+        empSchedules: [],
+        changed:[]
       };
     },
 
@@ -37,7 +37,7 @@ var ManagerSchedulesCreate = React.createClass({
 
     handleUpdateEmpSchedule: function(event) {
         event.preventDefault();
-        helper.updateEmpSchedule(this.state.firstName, this.state.lastName, this.state.monday, this.state.tuesday, this.state.wednesday, this.state.thursday, this.state.friday, this.state.saturday, this.state.sunday).then(function(response) {
+        helper.updateEmpSchedule(this.state.fullName, this.state.monday, this.state.tuesday, this.state.wednesday, this.state.thursday, this.state.friday, this.state.saturday, this.state.sunday).then(function(response) {
             console.log("helpers.updateEmpSchedule Returned!")
             console.log('helpers.updateEmpSchedule - response',response);
         }.bind(this));
@@ -60,7 +60,7 @@ var ManagerSchedulesCreate = React.createClass({
                                     <th data-field="name">Name</th>
                                     <th data-field="name">Mon</th>
                                     <th data-field="name">Tues</th>
-                                    <th data-field="name">Weds</th>
+                                    <th data-field="name">Wed</th>
                                     <th data-field="name">Thurs</th>
                                     <th data-field="name">Fri</th>
                                     <th data-field="name">Sat</th>

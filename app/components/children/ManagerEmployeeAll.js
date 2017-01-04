@@ -14,7 +14,18 @@ var ManagerEmployeeAll = React.createClass({
             email: "",
             phone: "",
             phoneType: "",
+<<<<<<< HEAD
             allEmployees: []
+=======
+            fullName:"",
+            monday:"",
+            tuesday: "",
+            wednesday: "",
+            thursday: "",
+            friday: "",
+            saturday: "",
+            sunday: ""
+>>>>>>> saving my branch
         };
     },
     componentDidMount: function() {
@@ -68,7 +79,15 @@ var ManagerEmployeeAll = React.createClass({
     handleAddForm: function(event) {
         event.preventDefault();
         helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
-            console.log("helpers.addEmployee Returned!")
+            console.log("helpers.addEmployee Returned!");
+
+            this.state.fullName = this.state.firstName + this.state.lastName;
+            console.log('fullName',this.state.fullName);
+
+            helpers.addEmpSchedule(this.fullName,this.monday,this.tuesday,this.wednesday,this.thursday,this.friday,this.saturday,this.sunday).then(function(response) {
+                console.log('helpers.addEmpSchedule returned - response',response)
+            }.bind(this));
+            Materialize.toast('Employee Added to Schedule Database!',4000);
         }.bind(this));
 
         Materialize.toast('Employee Added!', 4000);
