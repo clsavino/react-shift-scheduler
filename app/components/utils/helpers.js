@@ -6,6 +6,9 @@ var helper = {
   //   will eventually need to:
   //   return axios.get("route_name");
   // },
+  getAllEmployees: function() {
+    return axios.get("/getAllEmployees");
+  },
 
   // addEmployee: function(fullName, address, phone, email, ssn, availability) {
   //   console.log("helpers.addEmployee Running")

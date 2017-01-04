@@ -55,6 +55,19 @@ var employee = require("./models/Employee");
 
   app.use(express.static(__dirname + "/public"))
 
+  //Getting Employees from the database
+  app.get("/getAllEmployees", function(req, res) {
+    employee.find({}).exec(function(err, doc) {
+      if (err) {
+        console.log(err);
+      }
+      else {
+        res.send(doc);
+        console.log(doc);
+      }
+    });
+  });
+
 //Initialize Auth Routes (MAY NOT NEED)
   app.get("*", function(req,res) {
     res.sendFile(path.resolve(__dirname, "public", "index.html"))
@@ -133,6 +146,8 @@ app.post("/addEmployee", function(req, res) {
     }
   });
 });
+
+
 
 //Port Listener
 
