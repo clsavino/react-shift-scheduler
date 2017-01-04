@@ -14,7 +14,15 @@ var ManagerEmployeeAll = React.createClass({
             email: "",
             phone: "",
             phoneType: "",
-            allEmployees: []
+            allEmployees: [],
+            fullName:"",
+            monday:"",
+            tuesday: "",
+            wednesday: "",
+            thursday: "",
+            friday: "",
+            saturday: "",
+            sunday: ""
         };
     },
     componentDidMount: function() {
@@ -27,9 +35,9 @@ var ManagerEmployeeAll = React.createClass({
     },
 
     componentDidUpdate: function() {
-        helpers.getAllEmployees().then(function(response) {
-              this.setState({ allEmployees: response.data });
-            }.bind(this));
+        // helpers.getAllEmployees().then(function(response) {
+        //       this.setState({ allEmployees: response.data });
+        //     }.bind(this));
     },
     // handleFirstName: function(event) {
     //     this.setState({ firstName: event.target.value });
@@ -68,7 +76,15 @@ var ManagerEmployeeAll = React.createClass({
     handleAddForm: function(event) {
         event.preventDefault();
         helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
-            console.log("helpers.addEmployee Returned!")
+            console.log("helpers.addEmployee Returned!");
+
+            this.state.fullName = this.state.firstName + " " + this.state.lastName;
+            console.log('fullName',this.state.fullName);
+
+            helpers.addEmpSchedule(this.state.fullName,this.state.monday,this.state.tuesday,this.state.wednesday,this.state.thursday,this.state.friday,this.state.saturday,this.state.sunday).then(function(response) {
+                console.log('helpers.addEmpSchedule returned - response',response)
+            }.bind(this));
+            Materialize.toast('Employee Added to Schedule Database!',4000);
         }.bind(this));
 
         Materialize.toast('Employee Added!', 4000);
