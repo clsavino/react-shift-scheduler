@@ -78,10 +78,10 @@ var ManagerEmployeeAll = React.createClass({
         helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
             console.log("helpers.addEmployee Returned!");
 
-            this.state.fullName = this.state.firstName + this.state.lastName;
+            this.state.fullName = this.state.firstName + " " + this.state.lastName;
             console.log('fullName',this.state.fullName);
 
-            helpers.addEmpSchedule(this.fullName,this.monday,this.tuesday,this.wednesday,this.thursday,this.friday,this.saturday,this.sunday).then(function(response) {
+            helpers.addEmpSchedule(this.state.fullName,this.state.monday,this.state.tuesday,this.state.wednesday,this.state.thursday,this.state.friday,this.state.saturday,this.state.sunday).then(function(response) {
                 console.log('helpers.addEmpSchedule returned - response',response)
             }.bind(this));
             Materialize.toast('Employee Added to Schedule Database!',4000);

@@ -1,6 +1,5 @@
 var React = require("react");
 var helpers = require("../utils/helpers");
-var isEqual = require("lodash.isequal");
 
 var ManagerSchedulesCreate = React.createClass({
 
@@ -21,12 +20,12 @@ var ManagerSchedulesCreate = React.createClass({
 
   // The moment the page renders, get the employees schedules
   componentDidMount: function() {
-    console.log('in componentDidMount');
-    helper.getEmpSchedules().then(function(empSchedules) {
-      console.log('response from helpers.getEmpSchedules - empSchedules',empSchedules.data);
-      if (!isEqual(empSchedules,this.state.empSchedules)) {
-        this.setState({ empSchedules: empSchedules.data });
-        console.log('in componentDidMount- empSchedules.data',empSchedules.data);
+    console.log('in ManagerSchedulesCreate -componentDidMount');
+    helpers.getEmpSchedules().then(function(response) {
+      console.log('response from helpers.getEmpSchedules - response.data',response.data);
+      if (response !== this.state.empSchedules) {
+        this.setState({ empSchedules: response.data });
+        console.log('in componentDidMount- empSchedules',this.state.empSchedules);
       }
     }.bind(this));
   },
@@ -37,7 +36,6 @@ var ManagerSchedulesCreate = React.createClass({
 
     handleUpdateEmpSchedule: function(event) {
         event.preventDefault();
-
         helpers.updateEmpSchedule(this.state.fullName, this.state.monday, this.state.tuesday, this.state.wednesday, this.state.thursday, this.state.friday, this.state.saturday, this.state.sunday).then(function(response) {
 
             console.log("helpers.updateEmpSchedule Returned!")
@@ -50,7 +48,7 @@ var ManagerSchedulesCreate = React.createClass({
             <div className="container">
                 <div className="row">
                     <div className="col m12">
-                        <h3>Create schedules</h3>
+                        <h3>Schedule Editor</h3>
                     </div>
 
                     <div className="section">
@@ -71,6 +69,9 @@ var ManagerSchedulesCreate = React.createClass({
                             </thead>
 
                             <tbody>
+
+
+
                             </tbody>
                         </table>
                       </div>

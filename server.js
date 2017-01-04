@@ -11,7 +11,7 @@
 
 // Require Employee Schema from Database
 var employee = require("./models/Employee");
-var EmployeeSchedule = require("./models/EmployeeSchedule");
+var EmployeeSchedule = require("./models/employeeSchedule");
   mongoose.Promise = Promise;
 
 //Initialize Express
@@ -69,12 +69,58 @@ var EmployeeSchedule = require("./models/EmployeeSchedule");
     });
   });
 
+<<<<<<< HEAD
+=======
+//Posting new Employee to the database
+  app.post("/addEmployee", function(req, res) {
+  // console.log("creating in server");
+  console.log(req.body);
+  employee.create({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    addressOne: req.body.addressOne,
+    addressTwo: req.body.addressTwo,
+    city: req.body.city,
+    state: req.body.state,
+    zip: req.body.zip,
+    email: req.body.email,
+    phone: req.body.phone,
+    phoneType: req.body.phoneType
+  }, function(err) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send("Employee Saved!");
+    }
+  });
+});
+
+//get employee schedules from database
+  app.get("/getEmpSchedules", function(req, res) {
+    console.log('in server, /getEmpSchedules');
+    EmployeeSchedule.find({}).exec(function(err,docs) {
+      if (err) {
+        console.log(err);
+        res.send(err);
+      }
+      else {
+        console.log('in /getEmpSchedules - docs', docs);
+        res.send(docs);
+      }
+    });
+  });
+>>>>>>> get emp schedules from db working
 
 //Posting Employee Schedule to the database
 app.post("/addEmpSchedule", function(req, res) {
   console.log("creating employee Schedule in server");
   console.log(req.body);
+<<<<<<< HEAD
   employee.create({
+=======
+  EmployeeSchedule.create({
+>>>>>>> get emp schedules from db working
     fullName: req.body.fullName,
     monday: req.body.monday,
     tuesday: req.body.tuesday,
@@ -93,6 +139,7 @@ app.post("/addEmpSchedule", function(req, res) {
   });
 });
 
+<<<<<<< HEAD
 app.get("/getEmpSchedules", function(req, res) {
   console.log('in server, /getEmpSchedules');
   EmployeeSchedule.find({})
@@ -109,6 +156,8 @@ app.get("/getEmpSchedules", function(req, res) {
 });
 
 
+=======
+>>>>>>> get emp schedules from db working
   app.post("/register", function(req, res) {
     console.log(req.body.username)
     console.log(req.body.email)
@@ -162,6 +211,7 @@ app.get("/getEmpSchedules", function(req, res) {
   })
 
 
+<<<<<<< HEAD
 //Posting new Employee to the database
 
   app.post("/addEmployee", function(req, res) {
@@ -190,6 +240,8 @@ app.get("/getEmpSchedules", function(req, res) {
 });
 
 
+=======
+>>>>>>> get emp schedules from db working
 //Port Listener
 
   app.listen(PORT, function() {

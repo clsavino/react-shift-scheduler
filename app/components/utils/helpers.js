@@ -2,16 +2,12 @@ var axios = require("axios");
 
 var helper = {
 
-  // getAllEmployees: function() {
-  //   will eventually need to:
-  //   return axios.get("route_name");
-  // },
   getAllEmployees: function() {
     return axios.get("/getAllEmployees");
   },
 
   getEmpSchedules:function() {
-    console.log('helper.getEmpSchedules Running!');
+    console.log('helpers.getEmpSchedules Running!');
     return axios.get('/getEmpSchedules')
     .then(function(response){
       console.log("axios response from /getEmpSchedules",response);
@@ -20,11 +16,8 @@ var helper = {
   },
 
   addEmpSchedule:function(fullName,monday,tuesday,wednesday,thursday,friday,saturday,sunday) {
-
     console.log('helper.addEmpSchedule Running!' + fullName + ' Monday' + monday);
-
     console.log('helper.addEmpSchedule Running!');
-
     return axios.post('/addEmpSchedule', {
       fullName: fullName,
       monday: monday,
