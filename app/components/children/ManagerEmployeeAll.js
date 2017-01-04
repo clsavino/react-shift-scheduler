@@ -13,8 +13,23 @@ var ManagerEmployeeAll = React.createClass({
             zip: "",
             email: "",
             phone: "",
-            phoneType: ""
+            phoneType: "",
+            allEmployees: []
         };
+    },
+    componentDidMount: function() {
+      helpers.getAllEmployees().then(function(response) {
+        console.log(response.data);
+        if (response !== this.state.allEmployees) {
+          this.setState({ allEmployees: response.data });
+        }
+      }.bind(this));
+    },
+
+    componentDidUpdate: function() {
+        helpers.getAllEmployees().then(function(response) {
+              this.setState({ allEmployees: response.data });
+            }.bind(this));
     },
     // handleFirstName: function(event) {
     //     this.setState({ firstName: event.target.value });
@@ -55,7 +70,15 @@ var ManagerEmployeeAll = React.createClass({
         helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
             console.log("helpers.addEmployee Returned!")
         }.bind(this));
+
         Materialize.toast('Employee Added!', 4000);
+
+        var elements = document.getElementsByTagName("input");
+        for (var i=0; i < elements.length; i++) {
+          if ((elements[i].type == "text") || (elements[i].type == "number") || (elements[i].type == "email")) {
+            elements[i].value = "";
+          }
+        }
     },
     handleUpdateForm: function(event) {
         event.preventDefault();
@@ -67,14 +90,23 @@ var ManagerEmployeeAll = React.createClass({
         return (
             <div className="row">
                 <div className="col m3">
-                    <table className="highlight">
+                    <table className="highlight" id="allEmployees">
                         <thead>
                             <tr>
                                 <th data-field="name">Employees</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                          {this.state.allEmployees.map(function(ManagerEmployeeAll, i) {
+                            return (
+                                <tr key={i}>
+                                  <td>
+                                    {ManagerEmployeeAll.firstName} {ManagerEmployeeAll.lastName}
+                                  </td>
+                                </tr>
+                            );
+                          }, this)}
+                            {/* <tr>
                                 <td>Alex</td>
                             </tr>
                             <tr>
@@ -83,6 +115,11 @@ var ManagerEmployeeAll = React.createClass({
                             <tr>
                                 <td>Cathy</td>
                             </tr>
+                            <tr>
+                              <td>
+
+                              </td>
+                            </tr> */}
                         </tbody>
                     </table>
                 </div>

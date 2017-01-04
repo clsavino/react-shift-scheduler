@@ -55,6 +55,19 @@ var employee = require("./models/Employee");
 
   app.use(express.static(__dirname + "/public"))
 
+  //Getting Employees from the database
+  app.get("/getAllEmployees", function(req, res) {
+    employee.find({}).exec(function(err, doc) {
+      if (err) {
+        console.log(err);
+      }
+      else {
+        res.send(doc);
+        console.log(doc);
+      }
+    });
+  });
+
   app.post("/register", function(req, res) {
     console.log(req.body.username)
     console.log(req.body.email)
@@ -138,6 +151,8 @@ var employee = require("./models/Employee");
     }
   });
 });
+
+
 
 //Port Listener
 

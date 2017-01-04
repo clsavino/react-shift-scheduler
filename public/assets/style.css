@@ -20,6 +20,11 @@
 	margin-top: 100px;
 }
 
+#allEmployees {
+	height: 400px;
+	overflow: scroll;
+}
+
 @media screen and (min-width: 992px) {
 	.loginButtons {
 		width: 90%;
