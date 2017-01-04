@@ -68,11 +68,6 @@ var employee = require("./models/Employee");
     });
   });
 
-//Initialize Auth Routes (MAY NOT NEED)
-  app.get("*", function(req,res) {
-    res.sendFile(path.resolve(__dirname, "public", "index.html"))
-  })
-
   app.post("/register", function(req, res) {
     console.log(req.body.username)
     console.log(req.body.email)
@@ -92,15 +87,16 @@ var employee = require("./models/Employee");
   });
 
   app.post("/login", passport.authenticate("local", {
-    successRedirect: "/manager",
+    // successRedirect: "/manager",
     failureRedirect: "/"
   }), function(req, res) {
 
-  });
+    if (req.user.userType === "employee") {
+      res.redirect("/employee");
+    } else {
+      res.redirect("/manager");
+    }
 
-  app.get("/logout", function(req, res) {
-    req.logout();
-    res.redirect("/");
   });
 
   function isLoggedIn(req,res,next){
@@ -111,13 +107,22 @@ var employee = require("./models/Employee");
   }
 
   // //Doesn't work
-    // app.get("/#/manager", isLoggedIn, function(req,res) {
-    //   res.send("works");
-    // })
+    app.get("/manager", isLoggedIn, function(req,res) {
+      res.sendFile(path.resolve(__dirname, "public", "index.html"))
+    })
+
+    app.get("/logout", function(req, res) {
+      req.logout();
+      res.redirect("/");
+    });
+
+  app.get("*", function(req,res) {
+    res.sendFile(path.resolve(__dirname, "public", "index.html"))
+  })
 
 
 //Posting new Employee to the database
-app.post("/addEmployee", function(req, res) {
+  app.post("/addEmployee", function(req, res) {
   // console.log("creating in server");
   console.log(req.body);
   employee.create({
