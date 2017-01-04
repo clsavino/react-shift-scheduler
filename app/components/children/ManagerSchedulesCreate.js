@@ -69,7 +69,36 @@ var ManagerSchedulesCreate = React.createClass({
                             </thead>
 
                             <tbody>
-
+                                {this.state.empSchedules.map(function(schedules, i) {
+                                return (
+                                    <tr key={i}>
+                                      <td>
+                                        {schedules.fullName}
+                                      </td>
+                                      <td>
+                                        {schedules.monday}
+                                      </td>
+                                      <td>
+                                        {schedules.tuesday}
+                                      </td>
+                                      <td>
+                                        {schedules.wednesday}
+                                      </td>
+                                      <td>
+                                        {schedules.thursday}
+                                      </td>
+                                      <td>
+                                        {schedules.friday}
+                                      </td>
+                                      <td>
+                                        {schedules.saturday}
+                                      </td>
+                                      <td>
+                                        {schedules.sunday}
+                                      </td>
+                                    </tr>
+                                );
+                          }, this)}
 
 
                             </tbody>
