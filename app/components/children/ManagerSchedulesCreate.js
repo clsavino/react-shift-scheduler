@@ -67,35 +67,64 @@ var ManagerSchedulesCreate = React.createClass({
                                     <th data-field="name">Sun</th>
                                 </tr>
                             </thead>
-
                             <tbody>
                                 {this.state.empSchedules.map(function(schedules, i) {
                                 return (
                                     <tr key={i}>
-                                      <td>
+
+                                        <td className="fullName">
                                         {schedules.fullName}
-                                      </td>
-                                      <td>
-                                        {schedules.monday}
-                                      </td>
-                                      <td>
-                                        {schedules.tuesday}
-                                      </td>
-                                      <td>
-                                        {schedules.wednesday}
-                                      </td>
-                                      <td>
-                                        {schedules.thursday}
-                                      </td>
-                                      <td>
-                                        {schedules.friday}
-                                      </td>
-                                      <td>
-                                        {schedules.saturday}
-                                      </td>
-                                      <td>
-                                        {schedules.sunday}
-                                      </td>
+                                        </td>
+                                        <td className="schedule">
+                                            <input
+                                            type="text"
+                                            //placeholder={schedules.monday}
+                                            //value={this.state.empSchedules[i]}
+                                            //name="monday"
+                                            onChange={this.handleUserChange}/>
+                                        </td>
+                                        <td>
+                                            <input
+                                            type="text"
+                                            value={schedules.tuesday}
+                                            name="tuesday"
+                                            onChange={this.handleUserChange}/>
+                                        </td>
+                                        <td>
+                                            <input
+                                            type="text"
+                                            value={schedules.wednesday}
+                                            name="wednesday"
+                                            onChange={this.handleUserChange}/>
+                                        </td>
+                                        <td>
+                                            <input
+                                            type="text"
+                                            value={schedules.thursday}
+                                            name="thursday"
+                                            onChange={this.handleUserChange}/>
+                                        </td>
+                                        <td>
+                                            <input
+                                            type="text"
+                                            value={schedules.friday}
+                                            name="friday"
+                                            onChange={this.handleUserChange}/>
+                                        </td>
+                                        <td>
+                                            <input
+                                            type="text"
+                                            value={schedules.saturday}
+                                            name="saturday"
+                                            onChange={this.handleUserChange}/>
+                                        </td>
+                                        <td>
+                                            <input
+                                            type="text"
+                                            value={schedules.sunday}
+                                            name="sunday"
+                                            onChange={this.handleUserChange}/>
+                                        </td>
                                     </tr>
                                 );
                           }, this)}
