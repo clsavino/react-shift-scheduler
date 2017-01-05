@@ -57,7 +57,7 @@
   app.use(express.static(__dirname + "/public"))
 
 //Getting Employees from the database
-  app.get("/getAllEmployees", function(req, res) {
+  app.get("/getAllEmployees", isLoggedIn, function(req, res) {
     employee.find({}).exec(function(err, doc) {
       if (err) {
         console.log(err);
@@ -70,7 +70,7 @@
   });
 
 //Get employee schedules from database
-  app.get("/getEmpSchedules", function(req, res) {
+  app.get("/getEmpSchedules", isLoggedIn, function(req, res) {
     console.log('in server, /getEmpSchedules');
     EmployeeSchedule.find({}).exec(function(err,docs) {
       if (err) {
@@ -85,7 +85,7 @@
   });
 
 //Posting Employee Schedule to the database
-  app.post("/addEmpSchedule", function(req, res) {
+  app.post("/addEmpSchedule", isLoggedIn, function(req, res) {
     console.log("creating employee Schedule in server");
     console.log(req.body);
 
@@ -152,9 +152,22 @@
     res.redirect("/");
   }
 
+//Restricting routes
   app.get("/manager", isLoggedIn, function(req,res) {
     res.sendFile(path.resolve(__dirname, "public", "index.html"))
-  })
+  });
+
+  app.get("/manager/employeeAll", isLoggedIn, function(req,res) {
+    res.sendFile(path.resolve(__dirname, "public", "index.html"))
+  });
+
+  app.get("/manager/schedulesCreate", isLoggedIn, function(req,res) {
+    res.sendFile(path.resolve(__dirname, "public", "index.html"))
+  });
+
+  app.get("/employee", isLoggedIn, function(req,res) {
+    res.sendFile(path.resolve(__dirname, "public", "index.html"))
+  });
 
   app.get("/logout", function(req, res) {
     req.logout();
@@ -166,7 +179,7 @@
   })
 
 //Posting new Employee to the database
-  app.post("/addEmployee", function(req, res) {
+  app.post("/addEmployee", isLoggedIn, function(req, res) {
   // console.log("creating in server");
     console.log(req.body);
     employee.create({
