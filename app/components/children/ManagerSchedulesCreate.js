@@ -13,6 +13,7 @@ var ManagerSchedulesCreate = React.createClass({
         friday:"",
         saturday:"",
         sunday:"",
+        selectedEmployee:"null value",
         empSchedules: [],
         changed:[]
       };
@@ -20,7 +21,7 @@ var ManagerSchedulesCreate = React.createClass({
 
   // The moment the page renders, get the employees schedules
   componentDidMount: function() {
-    console.log('in ManagerSchedulesCreate -componentDidMount');
+
     helpers.getEmpSchedules().then(function(response) {
       console.log('response from helpers.getEmpSchedules - response.data',response.data);
       if (response !== this.state.empSchedules) {
@@ -43,99 +44,210 @@ var ManagerSchedulesCreate = React.createClass({
         }.bind(this));
     },
 
+    populateForm: function() {
+        console.log('in populateForm - this.state.selectedEmployee', this.state.selectedEmployee);
+    },
+
+    clickEmployee: function(event) {
+        console.log("clicked");
+        //this.setState({ selectedEmployee: event.target.id });
+        this.state.selectedEmployee = event.target.id;
+        this.populateForm();
+        console.log('this.state.selectedEmployee',this.state.selectedEmployee);
+    },
+
     render: function() {
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col m12">
-                        <h3>Schedule Editor</h3>
-                    </div>
 
-                    <div className="section">
-                        <h5>Week at a glance</h5>
-                        <div className="col m12">
-                        <table className="highlight">
+                <div className="row">
+
+                    <div className="col m3">
+                        <table className="highlight" id="empList">
                             <thead>
                                 <tr>
-                                    <th data-field="name">Name</th>
-                                    <th data-field="name">Mon</th>
-                                    <th data-field="name">Tues</th>
-                                    <th data-field="name">Wed</th>
-                                    <th data-field="name">Thurs</th>
-                                    <th data-field="name">Fri</th>
-                                    <th data-field="name">Sat</th>
-                                    <th data-field="name">Sun</th>
+                                    <th data-field="name">Employees</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.empSchedules.map(function(schedules, i) {
+                              {this.state.empSchedules.map(function(schedules, i) {
                                 return (
                                     <tr key={i}>
-
-                                        <td className="fullName">
+                                      <td onClick={this.clickEmployee} id={schedules._id}>
                                         {schedules.fullName}
-                                        </td>
-                                        <td className="schedule">
-                                            <input
-                                            type="text"
-                                            //placeholder={schedules.monday}
-                                            //value={this.state.empSchedules[i]}
-                                            //name="monday"
-                                            onChange={this.handleUserChange}/>
-                                        </td>
-                                        <td>
-                                            <input
-                                            type="text"
-                                            value={schedules.tuesday}
-                                            name="tuesday"
-                                            onChange={this.handleUserChange}/>
-                                        </td>
-                                        <td>
-                                            <input
-                                            type="text"
-                                            value={schedules.wednesday}
-                                            name="wednesday"
-                                            onChange={this.handleUserChange}/>
-                                        </td>
-                                        <td>
-                                            <input
-                                            type="text"
-                                            value={schedules.thursday}
-                                            name="thursday"
-                                            onChange={this.handleUserChange}/>
-                                        </td>
-                                        <td>
-                                            <input
-                                            type="text"
-                                            value={schedules.friday}
-                                            name="friday"
-                                            onChange={this.handleUserChange}/>
-                                        </td>
-                                        <td>
-                                            <input
-                                            type="text"
-                                            value={schedules.saturday}
-                                            name="saturday"
-                                            onChange={this.handleUserChange}/>
-                                        </td>
-                                        <td>
-                                            <input
-                                            type="text"
-                                            value={schedules.sunday}
-                                            name="sunday"
-                                            onChange={this.handleUserChange}/>
-                                        </td>
+                                      </td>
                                     </tr>
                                 );
-                          }, this)}
-
+                              }, this)}
 
                             </tbody>
                         </table>
-                      </div>
+                    </div>
+
+                    <div className="col m9" id="hideDiv">
+                        <div className="section">
+                            <h5>Employee Schedule</h5>
+                            <div className="col m12">
+                            <table className="highlight">
+                                <thead>
+                                    <tr>
+                                        <th data-field="name">Name</th>
+                                        <th data-field="name">Mon</th>
+                                        <th data-field="name">Tues</th>
+                                        <th data-field="name">Wed</th>
+                                        <th data-field="name">Thurs</th>
+                                        <th data-field="name">Fri</th>
+                                        <th data-field="name">Sat</th>
+                                        <th data-field="name">Sun</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.state.empSchedules.map(function(schedules, i) {
+                                        return (
+                                            <tr key={i}>
+                                                <td className="fullName">
+                                                {schedules.fullName}
+                                                </td>
+                                                <td className="schedule">
+                                                    <input
+                                                    type="text"
+                                                    value={schedules.monday}
+                                                    name="monday"
+                                                    onChange={this.handleUserChange}/>
+                                                </td>
+                                                <td>
+                                                    <input
+                                                    type="text"
+                                                    value={schedules.tuesday}
+                                                    name="tuesday"
+                                                    onChange={this.handleUserChange}/>
+                                                </td>
+                                                <td>
+                                                    <input
+                                                    type="text"
+                                                    value={schedules.wednesday}
+                                                    name="wednesday"
+                                                    onChange={this.handleUserChange}/>
+                                                </td>
+                                                <td>
+                                                    <input
+                                                    type="text"
+                                                    value={schedules.thursday}
+                                                    name="thursday"
+                                                    onChange={this.handleUserChange}/>
+                                                </td>
+                                                <td>
+                                                    <input
+                                                    type="text"
+                                                    value={schedules.friday}
+                                                    name="friday"
+                                                    onChange={this.handleUserChange}/>
+                                                </td>
+                                                <td>
+                                                    <input
+                                                    type="text"
+                                                    value={schedules.saturday}
+                                                    name="saturday"
+                                                    onChange={this.handleUserChange}/>
+                                                </td>
+                                                <td>
+                                                    <input
+                                                    type="text"
+                                                    value={schedules.sunday}
+                                                    name="sunday"
+                                                    onChange={this.handleUserChange}/>
+                                                </td>
+                                            </tr>
+                                        );
+                                    }, this)}
+                                </tbody>
+                            </table>
+                          </div>
+                        </div>
+                    </div>
+
+                    <div className="col m9" >
+                        <div className="section">
+                            <h5>Schedule Editor</h5>
+                            <div className="col m12">
+                            <table className="highlight">
+                                <thead>
+                                    <tr>
+                                        <th data-field="name">Name</th>
+                                        <th data-field="name">Mon</th>
+                                        <th data-field="name">Tues</th>
+                                        <th data-field="name">Wed</th>
+                                        <th data-field="name">Thurs</th>
+                                        <th data-field="name">Fri</th>
+                                        <th data-field="name">Sat</th>
+                                        <th data-field="name">Sun</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.state.empSchedules.map(function(schedules, i) {
+                                        return (
+                                            <tr key={i}>
+                                                <td className="fullName">
+                                                {schedules.fullName}
+                                                </td>
+                                                <td className="schedule">
+                                                    <input
+                                                    type="text"
+                                                    value={schedules.monday}
+                                                    name="monday"
+                                                    onChange={this.handleUserChange}/>
+                                                </td>
+                                                <td>
+                                                    <input
+                                                    type="text"
+                                                    value={schedules.tuesday}
+                                                    name="tuesday"
+                                                    onChange={this.handleUserChange}/>
+                                                </td>
+                                                <td>
+                                                    <input
+                                                    type="text"
+                                                    value={schedules.wednesday}
+                                                    name="wednesday"
+                                                    onChange={this.handleUserChange}/>
+                                                </td>
+                                                <td>
+                                                    <input
+                                                    type="text"
+                                                    value={schedules.thursday}
+                                                    name="thursday"
+                                                    onChange={this.handleUserChange}/>
+                                                </td>
+                                                <td>
+                                                    <input
+                                                    type="text"
+                                                    value={schedules.friday}
+                                                    name="friday"
+                                                    onChange={this.handleUserChange}/>
+                                                </td>
+                                                <td>
+                                                    <input
+                                                    type="text"
+                                                    value={schedules.saturday}
+                                                    name="saturday"
+                                                    onChange={this.handleUserChange}/>
+                                                </td>
+                                                <td>
+                                                    <input
+                                                    type="text"
+                                                    value={schedules.sunday}
+                                                    name="sunday"
+                                                    onChange={this.handleUserChange}/>
+                                                </td>
+                                            </tr>
+                                        );
+                                    }, this)}
+                                </tbody>
+                            </table>
+                          </div>
+                        </div>
                     </div>
                 </div>
-              </div>
+
         );
     }
 });

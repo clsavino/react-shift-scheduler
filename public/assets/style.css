@@ -25,6 +25,10 @@
 	overflow: scroll;
 }
 
+#hideDiv {
+	display: none;
+}
+
 @media screen and (min-width: 992px) {
 	.loginButtons {
 		width: 90%;

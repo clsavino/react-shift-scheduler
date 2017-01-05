@@ -51,10 +51,7 @@ var ManagerEmployeeAll = React.createClass({
                 console.log('helpers.addEmpSchedule returned - response',response);
                 this.setState({ firstName: "", lastName: "", addressOne: "", addressTwo: "", city: "", state: "", zip: "", email: "", phone: "", phoneType: ""});
             }.bind(this));
-<<<<<<< HEAD
-=======
 
->>>>>>> employee schedule as inputs in table
         }.bind(this));
 
         //Refreshes list of employees
