@@ -72,7 +72,11 @@ var ManagerEmployeeAll = React.createClass({
     //     this.setState({ phoneType: event.target.value });
     // },
     handleUserChange(event) {
+      console.log(event.target.name);
+      console.log(event.target.value);
+      console.log(this.state.state);
        this.setState({ [event.target.name]: event.target.value});
+
     },
     handleAddForm: function(event) {
         event.preventDefault();
@@ -218,7 +222,7 @@ var ManagerEmployeeAll = React.createClass({
                                         required />
                                 </div>
                                 <div className="input-field col m3 s6">
-                                    <select name="state" value={this.state.state} onChange={this.handleUserChange}>
+                                    <select className="browser-default" name="state" value={this.state.state} onChange={this.handleUserChange.bind(this)}>
                                         <option value="" disabled>State</option>
                                         <option value="AL">AL</option>
                                         <option value="AK">AK</option>
@@ -307,7 +311,7 @@ var ManagerEmployeeAll = React.createClass({
                                         required />
                                 </div>
                                 <div className="input-field col m4 s4">
-                                    <select name="phoneType" value={this.state.phoneType} onChange={this.handleUserChange}>
+                                    <select className="browser-default" name="phoneType" value={this.state.phoneType} onChange={this.handleUserChange.bind(this)}>
                                         <option value="mobile">Mobile</option>
                                         <option value="work">Work</option>
                                         <option value="home">Home</option>
