@@ -138,10 +138,10 @@
     failureRedirect: "/"
   }), function(req, res) {
 
-    if (req.user.userType === "employee") {
-      res.redirect("/employee");
-    } else {
+    if (req.user.userType === "manager") {
       res.redirect("/manager");
+    } else {
+      res.redirect("/employee");
     }
   });
 
@@ -175,7 +175,7 @@
   });
 
   app.get("*", function(req,res) {
-    res.sendFile(path.resolve(__dirname, "public", "index.html"))
+    res.send("Error 404, site not found");
   })
 
 //Posting new Employee to the database
