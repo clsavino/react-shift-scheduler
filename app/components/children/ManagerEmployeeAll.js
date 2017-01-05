@@ -34,43 +34,6 @@ var ManagerEmployeeAll = React.createClass({
         }
       }.bind(this));
     },
-
-    componentDidUpdate: function() {
-        // helpers.getAllEmployees().then(function(response) {
-        //       this.setState({ allEmployees: response.data });
-        //     }.bind(this));
-    },
-    // handleFirstName: function(event) {
-    //     this.setState({ firstName: event.target.value });
-    // },
-    // handleLastName: function(event) {
-    //     this.setState({ lastName: event.target.value });
-    // },
-    // handleAddressOne: function(event) {
-    //     this.setState({ addressOne: event.target.value });
-    // },
-    // handleAddressTwo: function(event) {
-    //     this.setState({ addressTwo: event.target.value });
-    // },
-    // handleCity: function(event) {
-    //     this.setState({ city: event.target.value });
-    // },
-    // handleState: function(event) {
-    //     this.setState({ state: event.target.value });
-    //     console.log(this.state.state);
-    // },
-    // handleZip: function(event) {
-    //     this.setState({ zip: event.target.value });
-    // },
-    // handleEmail: function(event) {
-    //     this.setState({ email: event.target.value });
-    // },
-    // handlePhone: function(event) {
-    //     this.setState({ phone: event.target.value });
-    // },
-    // handlePhoneType: function(event) {
-    //     this.setState({ phoneType: event.target.value });
-    // },
     handleUserChange(event) {
        this.setState({ [event.target.name]: event.target.value});
     },
@@ -85,10 +48,9 @@ var ManagerEmployeeAll = React.createClass({
             console.log('fullName',this.state.fullName);
 
             helpers.addEmpSchedule(this.state.fullName,this.state.monday,this.state.tuesday,this.state.wednesday,this.state.thursday,this.state.friday,this.state.saturday,this.state.sunday).then(function(response) {
-                console.log('helpers.addEmpSchedule returned - response',response)
+                console.log('helpers.addEmpSchedule returned - response',response);
+                this.setState({ firstName: "", lastName: "", addressOne: "", addressTwo: "", city: "", state: "", zip: "", email: "", phone: "", phoneType: ""});
             }.bind(this));
-            //Materialize Toast
-            Materialize.toast('Employee Added to Schedule Database!',4000);
         }.bind(this));
 
         //Refreshes list of employees
@@ -104,15 +66,29 @@ var ManagerEmployeeAll = React.createClass({
         for (var i=0; i < elements.length; i++) {
           if ((elements[i].type == "text") || (elements[i].type == "number") || (elements[i].type == "email")) {
             elements[i].value = "";
+            elements[i].classList.remove("valid");
           }
         }
+        this.componentDidMount();
     },
     handleUpdateForm: function(event) {
-        event.preventDefault();
-    },
-    handleRemoveForm: function(event) {
-        event.preventDefault();
-    },
+       event.preventDefault();
+
+       helpers.getEmployee()
+
+
+       helpers.updateEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
+           console.log("helpers.updated")
+       }.bind(this));
+       Materialize.toast("Employee updated", 3000);
+   },
+   handleRemoveForm: function(event) {
+       event.preventDefault();
+       helpers.removeEmployee().then(function(response) {
+           console.log("helpers.removed")
+       }.bind(this));
+       Materialize.toast("Employee removed", 3000);
+   },
     populateForm: function() {
         console.log(this.state.selectedEmployee);
     },
@@ -218,7 +194,7 @@ var ManagerEmployeeAll = React.createClass({
                                         required />
                                 </div>
                                 <div className="input-field col m3 s6">
-                                    <select name="state" value={this.state.state} onChange={this.handleUserChange}>
+                                    <select className="browser-default" name="state" value={this.state.state} onChange={this.handleUserChange}>
                                         <option value="" disabled>State</option>
                                         <option value="AL">AL</option>
                                         <option value="AK">AK</option>
@@ -307,7 +283,7 @@ var ManagerEmployeeAll = React.createClass({
                                         required />
                                 </div>
                                 <div className="input-field col m4 s4">
-                                    <select name="phoneType" value={this.state.phoneType} onChange={this.handleUserChange}>
+                                    <select className="browser-default" name="phoneType" value={this.state.phoneType} onChange={this.handleUserChange}>
                                         <option value="mobile">Mobile</option>
                                         <option value="work">Work</option>
                                         <option value="home">Home</option>

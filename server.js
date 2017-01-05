@@ -117,11 +117,11 @@
     console.log(req.body.userType)
 
     User.register(new User({
-      username: req.body.username, 
-      email: req.body.email, 
+      username: req.body.username,
+      email: req.body.email,
       userType: req.body.userType
-    }), 
-    
+    }),
+
     req.body.password, function(err, user) {
       if(err){
         console.log(err);
@@ -202,6 +202,40 @@
       }
     });
   });
+
+  //Updating existing employee
+app.put("/updateEmployee/:id", function(req, res) {
+   employee.findOneAndUpdate({ "_id": req.params.id }, {
+       firstName: req.body.firstName,
+       lastName: req.body.lastName,
+       addressOne: req.body.addressOne,
+       addressTwo: req.body.addressTwo,
+       city: req.body.city,
+       state: req.body.state,
+       zip: req.body.zip,
+       email: req.body.email,
+       phone: req.body.phone,
+       phoneType: req.body.phoneType
+   }, function(err) {
+       if (err) {
+           console.log(err);
+       } else {
+           res.send("Employee updated");
+       }
+   });
+});
+
+// "Remove" existing employee
+app.put("/removeEmployee/:id", function(req, res) {
+   employee.findOneAndUpdate({ "_id": req.params.id }, { "active": 0 })
+   .exec(function(err, doc) {
+       if (err) {
+           console.log(err);
+       } else {
+           res.send(doc);
+       }
+   })
+});
 
 //Port Listener
   app.listen(PORT, function() {

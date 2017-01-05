@@ -43,13 +43,25 @@ var helper = {
         email: email,
         phone: phone,
         phoneType: phoneType });
-  }
+  },
 
-  // ,
-  //
-  // deleteEmployee: function(title) {
-  //   return axios.post("route_name/delete", { ssn: ssn });
-  // }
+  updateEmployee: function(firstName, lastName, addressOne, addressTwo, city, state, zip, email, phone, phoneType) {
+       return axios.put("/updateEmployee/:id", {
+           firstName: firstName,
+           lastName: lastName,
+           addressOne: addressOne,
+           addressTwo: addressTwo,
+           city: city,
+           state: state,
+           zip: zip,
+           email: email,
+           phone: phone,
+           phoneType: phoneType
+       });
+   },
+   removeEmployee: function() {
+       return axios.put("/removeEmployee/:id", {});
+   }
 };
 
 module.exports = helper;
