@@ -22,7 +22,8 @@ var ManagerEmployeeAll = React.createClass({
             thursday: "",
             friday: "",
             saturday: "",
-            sunday: ""
+            sunday: "",
+            selectedEmployee: ""
         };
     },
     componentDidMount: function() {
@@ -75,6 +76,8 @@ var ManagerEmployeeAll = React.createClass({
     },
     handleAddForm: function(event) {
         event.preventDefault();
+
+        //Adds entered employee into databases
         helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
             console.log("helpers.addEmployee Returned!");
 
@@ -84,11 +87,19 @@ var ManagerEmployeeAll = React.createClass({
             helpers.addEmpSchedule(this.state.fullName,this.state.monday,this.state.tuesday,this.state.wednesday,this.state.thursday,this.state.friday,this.state.saturday,this.state.sunday).then(function(response) {
                 console.log('helpers.addEmpSchedule returned - response',response)
             }.bind(this));
+            //Materialize Toast
             Materialize.toast('Employee Added to Schedule Database!',4000);
         }.bind(this));
 
+        //Refreshes list of employees
+        helpers.getAllEmployees().then(function(response) {
+              this.setState({ allEmployees: response.data });
+            }.bind(this));
+
+        //Materialize Toast
         Materialize.toast('Employee Added!', 4000);
 
+        //Clears out form
         var elements = document.getElementsByTagName("input");
         for (var i=0; i < elements.length; i++) {
           if ((elements[i].type == "text") || (elements[i].type == "number") || (elements[i].type == "email")) {
@@ -101,6 +112,14 @@ var ManagerEmployeeAll = React.createClass({
     },
     handleRemoveForm: function(event) {
         event.preventDefault();
+    },
+    populateForm: function() {
+        console.log(this.state.selectedEmployee);
+    },
+    clickEmployee: function(event) {
+        console.log("clicked");
+        this.setState({selectedEmployee: event.target.id});
+        this.populateForm();
     },
     render: function() {
         return (
@@ -116,7 +135,7 @@ var ManagerEmployeeAll = React.createClass({
                           {this.state.allEmployees.map(function(ManagerEmployeeAll, i) {
                             return (
                                 <tr key={i}>
-                                  <td>
+                                  <td onClick={this.clickEmployee} id={ManagerEmployeeAll.firstName}>
                                     {ManagerEmployeeAll.firstName} {ManagerEmployeeAll.lastName}
                                   </td>
                                 </tr>
