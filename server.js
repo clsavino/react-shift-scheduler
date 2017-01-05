@@ -203,7 +203,7 @@
     });
   });
 
-  /Updating existing employee
+  //Updating existing employee
 app.put("/updateEmployee/:id", function(req, res) {
    employee.findOneAndUpdate({ "_id": req.params.id }, {
        firstName: req.body.firstName,
