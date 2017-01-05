@@ -116,7 +116,13 @@
     console.log(req.body.passwordConfirmation)
     console.log(req.body.userType)
 
-    User.register(new User({username: req.body.username, email: req.body.email, userType: req.body.userType}), req.body.password, function(err, user) {
+    User.register(new User({
+      username: req.body.username, 
+      email: req.body.email, 
+      userType: req.body.userType
+    }), 
+    
+    req.body.password, function(err, user) {
       if(err){
         console.log(err);
         return res.render("register");
