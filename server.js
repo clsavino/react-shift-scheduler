@@ -152,7 +152,7 @@
       if (req.user.userType === "manager") {
           res.sendFile(path.resolve(__dirname, "public", "index.html"))
       } else {
-          res.send("Access Not Authorized");
+           res.sendFile(path.resolve(__dirname, "public", "notauth.html"))
       }
   });
 
@@ -166,7 +166,7 @@
       if (req.user.userType === "manager") {
           res.sendFile(path.resolve(__dirname, "public", "index.html"))
       } else {
-          res.send("Access Not Authorized");
+          res.sendFile(path.resolve(__dirname, "public", "notauth.html"))
       }
   });
 
@@ -174,7 +174,7 @@
        if (req.user.userType === "manager") {
           res.sendFile(path.resolve(__dirname, "public", "index.html"))
       } else {
-          res.send("Access Not Authorized");
+          res.sendFile(path.resolve(__dirname, "public", "notauth.html"))
       }
   });
 
