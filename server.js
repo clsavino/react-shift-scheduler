@@ -64,23 +64,21 @@
       }
       else {
         res.send(doc);
-        console.log(doc);
       }
     });
   });
 
-  app.get("/getEmployee/:id", isLoggedIn, function(req, res) {
-      console.log(req.params.id);
-    employee.find({ "_id": req.params.id }).exec(function(err, doc) {
-      if (err) {
-        console.log(err);
-      }
-      else {
-        res.send(doc);
-        console.log(doc);
-      }
-    });
-  });
+  // app.get("/getEmployee/:id", isLoggedIn, function(req, res) {
+  //     console.log(req.params.id);
+  //   employee.find({ "_id": req.params.id }).exec(function(err, doc) {
+  //     if (err) {
+  //       console.log(err);
+  //     }
+  //     else {
+  //       res.send(doc);
+  //     }
+  //   });
+  // });
 
 //Get employee schedules from database
   app.get("/getEmpSchedules", isLoggedIn, function(req, res) {
@@ -210,8 +208,6 @@
 
 //Posting new Employee to the database
   app.post("/addEmployee", isLoggedIn, function(req, res) {
-  // console.log("creating in server");
-    console.log(req.body);
     employee.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
