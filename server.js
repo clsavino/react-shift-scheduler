@@ -110,11 +110,6 @@
 
 //Auth Routes
   app.post("/register", function(req, res) {
-    console.log(req.body.username)
-    console.log(req.body.email)
-    console.log(req.body.password)
-    console.log(req.body.passwordConfirmation)
-    console.log(req.body.userType)
 
     User.register(new User({
       username: req.body.username,
@@ -154,19 +149,33 @@
 
 //Restricting routes
   app.get("/manager", isLoggedIn, function(req,res) {
-    res.sendFile(path.resolve(__dirname, "public", "index.html"))
-  });
-
-  app.get("/manager/employeeAll", isLoggedIn, function(req,res) {
-    res.sendFile(path.resolve(__dirname, "public", "index.html"))
-  });
-
-  app.get("/manager/schedulesCreate", isLoggedIn, function(req,res) {
-    res.sendFile(path.resolve(__dirname, "public", "index.html"))
+      if (req.user.userType === "manager") {
+          res.sendFile(path.resolve(__dirname, "public", "index.html"))
+      } else {
+           res.sendFile(path.resolve(__dirname, "public", "notauth.html"))
+      }
   });
 
   app.get("/employee", isLoggedIn, function(req,res) {
-    res.sendFile(path.resolve(__dirname, "public", "index.html"))
+      if (req.user.userType === "employee") {
+        res.sendFile(path.resolve(__dirname, "public", "index.html"))
+      }
+  });
+
+  app.get("/manager/employeeAll", isLoggedIn, function(req,res) {
+      if (req.user.userType === "manager") {
+          res.sendFile(path.resolve(__dirname, "public", "index.html"))
+      } else {
+          res.sendFile(path.resolve(__dirname, "public", "notauth.html"))
+      }
+  });
+
+  app.get("/manager/schedulesCreate", isLoggedIn, function(req,res) {
+       if (req.user.userType === "manager") {
+          res.sendFile(path.resolve(__dirname, "public", "index.html"))
+      } else {
+          res.sendFile(path.resolve(__dirname, "public", "notauth.html"))
+      }
   });
 
   app.get("/logout", function(req, res) {
@@ -175,7 +184,7 @@
   });
 
   app.get("*", function(req,res) {
-    res.send("Error 404, site not found");
+    res.sendFile(path.resolve(__dirname, "public", "404.html"))
   })
 
 //Posting new Employee to the database
