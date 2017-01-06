@@ -16,7 +16,7 @@ class Login extends React.Component {
   }
 
   handleLogin() {
-      // event.preventDefault();
+      // just in case we need it
   }
     render() {
       return (
