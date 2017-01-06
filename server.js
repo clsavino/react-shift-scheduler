@@ -58,7 +58,7 @@
 
 //Getting Employees from the database
   app.get("/getAllEmployees", isLoggedIn, function(req, res) {
-    employee.find({}).exec(function(err, doc) {
+    employee.find({ "active": 1 }).exec(function(err, doc) {
       if (err) {
         console.log(err);
       }
