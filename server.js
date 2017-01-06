@@ -69,6 +69,19 @@
     });
   });
 
+  app.get("/getEmployee/:id", isLoggedIn, function(req, res) {
+      console.log(req.params.id);
+    employee.find({ "_id": req.params.id }).exec(function(err, doc) {
+      if (err) {
+        console.log(err);
+      }
+      else {
+        res.send(doc);
+        console.log(doc);
+      }
+    });
+  });
+
 //Get employee schedules from database
   app.get("/getEmpSchedules", isLoggedIn, function(req, res) {
     console.log('in server, /getEmpSchedules');
@@ -153,6 +166,14 @@
   }
 
 //Restricting routes
+  app.get("/login", function(req,res) {
+    res.sendFile(path.resolve(__dirname, "public", "index.html"))
+  });
+
+  app.get("/register", function(req,res) {
+    res.sendFile(path.resolve(__dirname, "public", "index.html"))
+  });
+
   app.get("/manager", isLoggedIn, function(req,res) {
     res.sendFile(path.resolve(__dirname, "public", "index.html"))
   });
