@@ -5,10 +5,6 @@ var helper = {
   getAllEmployees: function() {
     return axios.get("/getAllEmployees");
   },
-  getEmployee: function(id) {
-      console.log(id);
-    return axios.get("/getEmployee/" + id);
-  },
 
   getEmpSchedules:function() {
     console.log('helpers.getEmpSchedules Running!');
@@ -35,7 +31,6 @@ var helper = {
   },
 
   addEmployee: function(firstName, lastName, addressOne, addressTwo, city, state, zip, email, phone, phoneType) {
-    console.log("helpers.addEmployee Running")
     return axios.post("/addEmployee", {
         firstName: firstName,
         lastName: lastName,

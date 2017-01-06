@@ -68,18 +68,6 @@
     });
   });
 
-  // app.get("/getEmployee/:id", isLoggedIn, function(req, res) {
-  //     console.log(req.params.id);
-  //   employee.find({ "_id": req.params.id }).exec(function(err, doc) {
-  //     if (err) {
-  //       console.log(err);
-  //     }
-  //     else {
-  //       res.send(doc);
-  //     }
-  //   });
-  // });
-
 //Get employee schedules from database
   app.get("/getEmpSchedules", isLoggedIn, function(req, res) {
     console.log('in server, /getEmpSchedules');
