@@ -30,6 +30,12 @@ var helper = {
     });
   },
 
+  updateEmpSchedule: function(fullName,monday,tuesday,wednesday,thursday,friday,saturday,sunday) {
+    console.log( fullName,monday,tuesday,wednesday,thursday,friday,saturday,sunday);
+    return
+
+  },
+
   addEmployee: function(firstName, lastName, addressOne, addressTwo, city, state, zip, email, phone, phoneType) {
     console.log("helpers.addEmployee Running")
     return axios.post("/addEmployee", {

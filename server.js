@@ -212,6 +212,7 @@
     });
   });
 
+<<<<<<< HEAD
   //Updating existing employee
 app.put("/updateEmployee/:id", function(req, res) {
    employee.findOneAndUpdate({ "_id": req.params.id }, {
@@ -225,15 +226,33 @@ app.put("/updateEmployee/:id", function(req, res) {
        email: req.body.email,
        phone: req.body.phone,
        phoneType: req.body.phoneType
+=======
+  //Updating existing employee schedule
+app.put("/updateEmployee/:id", function(req, res) {
+   EmployeeSchedule.findOneAndUpdate({ "_id": req.params.id }, {
+       fullName: req.body.fullName,
+       monday: req.body.monday,
+       tuesday: req.body.tuesday,
+       wednesday: req.body.wednesday,
+       thursday: req.body.thursday,
+       friday: req.body.friday,
+       saturday: req.body.saturday,
+       sunday: req.body.sunday
+>>>>>>> update emp schedule
    }, function(err) {
        if (err) {
            console.log(err);
        } else {
+<<<<<<< HEAD
            res.send("Employee updated");
+=======
+           res.send("Employee schedule updated");
+>>>>>>> update emp schedule
        }
    });
 });
 
+<<<<<<< HEAD
 // "Remove" existing employee
 app.put("/removeEmployee/:id", function(req, res) {
    employee.findOneAndUpdate({ "_id": req.params.id }, { "active": 0 })
@@ -246,6 +265,8 @@ app.put("/removeEmployee/:id", function(req, res) {
    })
 });
 
+=======
+>>>>>>> update emp schedule
 //Port Listener
   app.listen(PORT, function() {
     console.log("App listening on PORT: " + PORT);
