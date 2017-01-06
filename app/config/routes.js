@@ -27,15 +27,14 @@ module.exports = (
         <Route path="login" component={Login} />
         <Route path="register" component={Register} />
         <IndexRoute component={Login} />
-
-    <Route path="/manager" component={Manager}>
-        <Route path="employeeAll" component={ManagerEmployeeAll} />
-        <Route path="schedulesCreate" component={ManagerSchedulesCreate} />
-        <IndexRoute component={ManagerHome} />
-    </Route>
-    <Route path="employee" component={Employee}>
-        <IndexRoute component={EmployeeHome} />
-    </Route>
+        <Route path="manager" component={Manager}>
+            <Route path="employeeAll" component={ManagerEmployeeAll} />
+            <Route path="schedulesCreate" component={ManagerSchedulesCreate} />
+            <IndexRoute component={ManagerHome} />
+        </Route>
+        <Route path="employee" component={Employee}>
+            <IndexRoute component={EmployeeHome} />
+        </Route>
     </Route>
   </Router>
 );

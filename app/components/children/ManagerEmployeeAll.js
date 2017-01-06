@@ -15,7 +15,6 @@ var ManagerEmployeeAll = React.createClass({
             phone: "",
             phoneType: "",
             allEmployees: [],
-            fullName:"",
             monday:"",
             tuesday: "",
             wednesday: "",
@@ -27,12 +26,12 @@ var ManagerEmployeeAll = React.createClass({
         };
     },
     componentDidMount: function() {
-      helpers.getAllEmployees().then(function(response) {
-        console.log(response.data);
-        if (response !== this.state.allEmployees) {
-          this.setState({ allEmployees: response.data });
-        }
-      }.bind(this));
+        helpers.getAllEmployees().then(function(response) {
+            if (response !== this.state.allEmployees) {
+                this.setState({ allEmployees: response.data });
+                this.activeButtons();
+            }
+        }.bind(this));
     },
     handleUserChange(event) {
        this.setState({ [event.target.name]: event.target.value});
@@ -40,62 +39,87 @@ var ManagerEmployeeAll = React.createClass({
     handleAddForm: function(event) {
         event.preventDefault();
 
-        //Adds entered employee into databases
+        //Adds entered employee into database
         helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
-            console.log("helpers.addEmployee Returned!");
 
-            this.state.fullName = this.state.firstName + " " + this.state.lastName;
-            console.log('fullName',this.state.fullName);
-
-            helpers.addEmpSchedule(this.state.fullName,this.state.monday,this.state.tuesday,this.state.wednesday,this.state.thursday,this.state.friday,this.state.saturday,this.state.sunday).then(function(response) {
-                console.log('helpers.addEmpSchedule returned - response',response);
-                this.setState({ firstName: "", lastName: "", addressOne: "", addressTwo: "", city: "", state: "", zip: "", email: "", phone: "", phoneType: ""});
+            // build full name
+            var fullName = this.state.firstName + " " + this.state.lastName;
+            helpers.addEmpSchedule(fullName, this.state.monday, this.state.tuesday, this.state.wednesday, this.state.thursday, this.state.friday, this.state.saturday, this.state.sunday).then(function(response) {
+                this.clearStates();
             }.bind(this));
         }.bind(this));
-
-        //Refreshes list of employees
-        helpers.getAllEmployees().then(function(response) {
-              this.setState({ allEmployees: response.data });
-            }.bind(this));
-
-        //Materialize Toast
-        Materialize.toast('Employee Added!', 4000);
-
-        //Clears out form
-        var elements = document.getElementsByTagName("input");
-        for (var i=0; i < elements.length; i++) {
-          if ((elements[i].type == "text") || (elements[i].type == "number") || (elements[i].type == "email")) {
-            elements[i].value = "";
-            elements[i].classList.remove("valid");
-          }
-        }
+        Materialize.toast('Employee added', 3000);
+        this.clearForm();
         this.componentDidMount();
     },
     handleUpdateForm: function(event) {
-       event.preventDefault();
-
-       helpers.getEmployee()
-
-
-       helpers.updateEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
-           console.log("helpers.updated")
-       }.bind(this));
-       Materialize.toast("Employee updated", 3000);
+        event.preventDefault();
+        helpers.updateEmployee(this.state.selectedEmployee, this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
+            this.clearStates();
+        }.bind(this));
+        Materialize.toast("Employee updated", 3000);
+        this.clearForm();
+        this.componentDidMount();
    },
-   handleRemoveForm: function(event) {
-       event.preventDefault();
-       helpers.removeEmployee().then(function(response) {
-           console.log("helpers.removed")
-       }.bind(this));
-       Materialize.toast("Employee removed", 3000);
-   },
-    populateForm: function() {
-        console.log(this.state.selectedEmployee);
+    handleRemoveForm: function(event) {
+        event.preventDefault();
+        helpers.removeEmployee(this.state.selectedEmployee).then(function(response) {
+            this.clearStates();
+        }.bind(this));
+        Materialize.toast("Employee removed", 3000);
+        this.clearForm();
+        this.componentDidMount();
     },
     clickEmployee: function(event) {
-        console.log("clicked");
         this.setState({selectedEmployee: event.target.id});
-        this.populateForm();
+
+        for (var i = 0; i < this.state.allEmployees.length; i++) {
+            if (this.state.allEmployees[i]._id == this.state.selectedEmployee) {
+                this.setState({
+                    firstName: this.state.allEmployees[i].firstName,
+                    lastName: this.state.allEmployees[i].lastName,
+                    addressOne: this.state.allEmployees[i].addressOne,
+                    addressTwo: this.state.allEmployees[i].addressTwo,
+                    city: this.state.allEmployees[i].city,
+                    state: this.state.allEmployees[i].state,
+                    zip: this.state.allEmployees[i].zip,
+                    email: this.state.allEmployees[i].email,
+                    phone: this.state.allEmployees[i].phone,
+                    phoneType: this.state.allEmployees[i].phoneType
+                });
+                this.activeButtons();
+            }
+        }
+    },
+    newEmployee: function() {
+        this.clearForm();
+        this.clearStates();
+        this.activeButtons();
+    },
+    clearForm: function() {
+        var elements = document.getElementsByTagName("input");
+        for (var i=0; i < elements.length; i++) {
+            if ((elements[i].type == "text") || (elements[i].type == "number") || (elements[i].type == "email")) {
+                elements[i].value = "";
+                elements[i].classList.remove("valid");
+            }
+        };
+        this.componentDidMount();
+    },
+    clearStates: function() {
+        this.setState({ firstName: "", lastName: "", addressOne: "", addressTwo: "", city: "", state: "", zip: "", email: "", phone: "", phoneType: "", selectedEmployee: ""});
+    },
+    activeButtons: function() {
+        // don't allow updating or removing on empty form
+        if (this.state.selectedEmployee == "") {
+            document.getElementById("addEmployee").className = "btn btn-large waves-effect waves-light green accent-3";
+            document.getElementById("updateEmployee").className += " disabled";
+            document.getElementById("removeEmployee").className += " disabled";
+        } else {
+            document.getElementById("addEmployee").className += " disabled";
+            document.getElementById("updateEmployee").className = "btn btn-large waves-effect waves-light blue accent-3";
+            document.getElementById("removeEmployee").className = "btn btn-large waves-effect waves-light red accent-3";
+        }
     },
     render: function() {
         return (
@@ -108,29 +132,20 @@ var ManagerEmployeeAll = React.createClass({
                             </tr>
                         </thead>
                         <tbody>
-                          {this.state.allEmployees.map(function(ManagerEmployeeAll, i) {
-                            return (
-                                <tr key={i}>
-                                  <td onClick={this.clickEmployee} id={ManagerEmployeeAll.firstName}>
-                                    {ManagerEmployeeAll.firstName} {ManagerEmployeeAll.lastName}
-                                  </td>
-                                </tr>
-                            );
-                          }, this)}
-                            {/* <tr>
-                                <td>Alex</td>
-                            </tr>
                             <tr>
-                                <td>Brian</td>
+                                <td onClick={this.newEmployee}>
+                                    <strong>New Employee<i className="material-icons right">add</i></strong>
+                                </td>
                             </tr>
-                            <tr>
-                                <td>Cathy</td>
-                            </tr>
-                            <tr>
-                              <td>
-
-                              </td>
-                            </tr> */}
+                            {this.state.allEmployees.map(function(ManagerEmployeeAll, i) {
+                                return (
+                                    <tr key={i}>
+                                        <td onClick={this.clickEmployee} id={this.state.allEmployees[i]._id}>
+                                            {ManagerEmployeeAll.firstName} {ManagerEmployeeAll.lastName}
+                                        </td>
+                                    </tr>
+                                );
+                            }, this)}
                         </tbody>
                     </table>
                 </div>
@@ -284,6 +299,7 @@ var ManagerEmployeeAll = React.createClass({
                                 </div>
                                 <div className="input-field col m4 s4">
                                     <select className="browser-default" name="phoneType" value={this.state.phoneType} onChange={this.handleUserChange}>
+                                        <option value="" disabled>Phone Type</option>
                                         <option value="mobile">Mobile</option>
                                         <option value="work">Work</option>
                                         <option value="home">Home</option>
@@ -292,17 +308,17 @@ var ManagerEmployeeAll = React.createClass({
                             </div>
                             <div className="row">
                                 <div className="col s4">
-                                    <button className="btn btn-large waves-effect waves-light green accent-3" onClick={this.handleAddForm}>Add
+                                    <button id="addEmployee" className="btn btn-large waves-effect waves-light green accent-3" onClick={this.handleAddForm}>Add
                                         <i className="material-icons right">person_add</i>
                                     </button>
                                 </div>
                                 <div className="col s4">
-                                    <button className="btn btn-large waves-effect waves-light blue accent-3" onClick={this.handleUpdateForm}>Update
+                                    <button id="updateEmployee" className="btn btn-large waves-effect waves-light blue accent-3" onClick={this.handleUpdateForm}>Update
                                         <i className="material-icons right">edit</i>
                                     </button>
                                 </div>
                                 <div className="col s4">
-                                    <button className="btn btn-large waves-effect waves-light red accent-3" onClick={this.handleRemoveForm}>Remove
+                                    <button id="removeEmployee" className="btn btn-large waves-effect waves-light red accent-3" onClick={this.handleRemoveForm}>Remove
                                         <i className="material-icons right">person_outline</i>
                                     </button>
                                 </div>
