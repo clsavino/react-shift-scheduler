@@ -39,8 +39,9 @@
   app.use(bodyParser.text());
   app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
-//Public files
-  app.use(express.static("./public"));
+ 
+
+
 
 //DB
   mongoose.connect("mongodb://localhost/scheduler");
@@ -53,8 +54,6 @@
   db.once("open", function() {
     console.log("Mongoose connection successful.");
   });
-
-  app.use(express.static(__dirname + "/public"))
 
 //Getting Employees from the database
   app.get("/getAllEmployees", isLoggedIn, function(req, res) {
@@ -143,24 +142,46 @@
     })
   });
 
+
+
+
   app.post("/login", passport.authenticate("local", {
     // successRedirect: "/manager",
     failureRedirect: "/"
   }), function(req, res) {
-
-    if (req.user.userType === "manager") {
-      res.redirect("/manager");
-    } else {
-      res.redirect("/employee");
-    }
+      reRoute(req,res);
   });
 
-  function isLoggedIn(req,res,next){
+    function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){
       return next();
     }
     res.redirect("/");
   }
+
+  function reRoute(req,res){
+     if (req.user.userType === "manager") {
+      res.redirect("/manager");
+    } else {
+      res.redirect("/employee");
+    }
+  }
+
+  function autoRedirect(req,res,next){
+    if(req.isAuthenticated()){
+      reRoute(req,res);
+    } else {
+      res.sendFile(path.resolve(__dirname, "public", "index.html"));
+    }
+  }
+
+  app.get("/", autoRedirect, function(req, res){
+     res.sendFile(path.resolve(__dirname, "public", "index.html"));
+
+  });
+
+//Public files
+  app.use(express.static(__dirname + "/public"))
 
 //Restricting routes
   app.get("/login", function(req,res) {
