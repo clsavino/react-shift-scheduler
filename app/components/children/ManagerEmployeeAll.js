@@ -27,11 +27,11 @@ var ManagerEmployeeAll = React.createClass({
         };
     },
     componentDidMount: function() {
-      helpers.getAllEmployees().then(function(response) {
-        if (response !== this.state.allEmployees) {
-          this.setState({ allEmployees: response.data });
-        }
-      }.bind(this));
+        helpers.getAllEmployees().then(function(response) {
+            if (response !== this.state.allEmployees) {
+                this.setState({ allEmployees: response.data });
+            }
+        }.bind(this));
     },
     handleUserChange(event) {
        this.setState({ [event.target.name]: event.target.value});
@@ -41,67 +41,80 @@ var ManagerEmployeeAll = React.createClass({
 
         //Adds entered employee into databases
         helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
-            // build full name
-            // this.state.fullName = this.state.firstName + " " + this.state.lastName;
 
+            // build full name
             var fullName = this.state.firstName + " " + this.state.lastName;
             helpers.addEmpSchedule(fullName, this.state.monday, this.state.tuesday, this.state.wednesday, this.state.thursday, this.state.friday, this.state.saturday, this.state.sunday).then(function(response) {
-                console.log('helpers.addEmpSchedule returned - response',response);
+                // clear states after use
+                // this.setState({ firstName: "", lastName: "", addressOne: "", addressTwo: "", city: "", state: "", zip: "", email: "", phone: "", phoneType: ""});
+                this.clearStates();
 
-                // clear states
-                this.setState({ firstName: "", lastName: "", addressOne: "", addressTwo: "", city: "", state: "", zip: "", email: "", phone: "", phoneType: ""});
             }.bind(this));
         }.bind(this));
 
         //Materialize Toast
         Materialize.toast('Employee added', 3000);
 
-        //Clears out form
-        var elements = document.getElementsByTagName("input");
-        for (var i=0; i < elements.length; i++) {
-          if ((elements[i].type == "text") || (elements[i].type == "number") || (elements[i].type == "email")) {
-            elements[i].value = "";
-            elements[i].classList.remove("valid");
-          }
-        }
+        // //Clears out form
+        // var elements = document.getElementsByTagName("input");
+        // for (var i=0; i < elements.length; i++) {
+        //   if ((elements[i].type == "text") || (elements[i].type == "number") || (elements[i].type == "email")) {
+        //     elements[i].value = "";
+        //     elements[i].classList.remove("valid");
+        //   }
+        // }
         this.componentDidMount();
     },
     handleUpdateForm: function(event) {
-       event.preventDefault();
-       helpers.updateEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
-           console.log("helpers.updated")
-       }.bind(this));
-       Materialize.toast("Employee updated", 3000);
-   },
-   handleRemoveForm: function(event) {
-       event.preventDefault();
-       helpers.removeEmployee().then(function(response) {
-           console.log("helpers.removed")
-       }.bind(this));
-       Materialize.toast("Employee removed", 3000);
-   },
-    populateForm: function() {
-        // console.log(this.state.selectedEmployee);
-        helpers.getEmployee(this.state.selectedEmployee).then(function(response) {
-            // this.setState({
-            //     firstName: response.data[0].firstName,
-            //     lastName: response.data[0].lastName,
-            //     addressOne: response.data[0].addressOne,
-            //     addressTwo: response.data[0].addressTwo,
-            //     city: response.data[0].city,
-            //     state: response.data[0].state,
-            //     zip: response.data[0].zip,
-            //     email: response.data[0].email,
-            //     phone: response.data[0].phone,
-            //     phoneType: response.data[0].phoneType
-            // });
-            // document.getElementById("firstName").value(this.state.firstName);
+        event.preventDefault();
+        helpers.updateEmployee(this.state.selectedEmployee, this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
+            // console.log("helpers.updated")
+            // this.clearForm();
+            this.clearStates();
         }.bind(this));
+        Materialize.toast("Employee updated", 3000);
+        this.clearForm();
+        this.componentDidMount();
+   },
+    handleRemoveForm: function(event) {
+        event.preventDefault();
+        helpers.removeEmployee(this.state.selectedEmployee).then(function(response) {
+            //    console.log("helpers.removed")
+            this.clearStates();
+        }.bind(this));
+        Materialize.toast("Employee removed", 3000);
+        this.clearForm();
+        this.componentDidMount();
     },
     clickEmployee: function(event) {
-        console.log("clicked");
         this.setState({selectedEmployee: event.target.id});
-        this.populateForm();
+        helpers.getEmployee(this.state.selectedEmployee).then(function(response) {
+            this.setState({
+                firstName: response.data[0].firstName,
+                lastName: response.data[0].lastName,
+                addressOne: response.data[0].addressOne,
+                addressTwo: response.data[0].addressTwo,
+                city: response.data[0].city,
+                state: response.data[0].state,
+                zip: response.data[0].zip,
+                email: response.data[0].email,
+                phone: response.data[0].phone,
+                phoneType: response.data[0].phoneType
+            });
+        }.bind(this));
+    },
+    clearForm: function() {
+        var elements = document.getElementsByTagName("input");
+        for (var i=0; i < elements.length; i++) {
+            if ((elements[i].type == "text") || (elements[i].type == "number") || (elements[i].type == "email")) {
+                elements[i].value = "";
+                elements[i].classList.remove("valid");
+            }
+        };
+        this.componentDidMount();
+    },
+    clearStates: function() {
+        this.setState({ firstName: "", lastName: "", addressOne: "", addressTwo: "", city: "", state: "", zip: "", email: "", phone: "", phoneType: ""});
     },
     render: function() {
         return (
@@ -114,15 +127,15 @@ var ManagerEmployeeAll = React.createClass({
                             </tr>
                         </thead>
                         <tbody>
-                          {this.state.allEmployees.map(function(ManagerEmployeeAll, i) {
-                            return (
-                                <tr key={i}>
-                                  <td onClick={this.clickEmployee} id={this.state.allEmployees[i]._id}>
-                                    {ManagerEmployeeAll.firstName} {ManagerEmployeeAll.lastName}
-                                  </td>
-                                </tr>
-                            );
-                          }, this)}
+                            {this.state.allEmployees.map(function(ManagerEmployeeAll, i) {
+                                return (
+                                    <tr key={i}>
+                                        <td onClick={this.clickEmployee} id={this.state.allEmployees[i]._id}>
+                                            {ManagerEmployeeAll.firstName} {ManagerEmployeeAll.lastName}
+                                        </td>
+                                    </tr>
+                                );
+                            }, this)}
                         </tbody>
                     </table>
                 </div>
@@ -133,7 +146,7 @@ var ManagerEmployeeAll = React.createClass({
                                 <div className="input-field col m6 s12">
                                     <input
                                         placeholder="First Name"
-                                        id="firstName"
+                                        name="firstName"
                                         type="text"
                                         className="validate"
                                         value={this.state.firstName}
@@ -284,7 +297,7 @@ var ManagerEmployeeAll = React.createClass({
                             </div>
                             <div className="row">
                                 <div className="col s4">
-                                    <button className="btn btn-large waves-effect waves-light green accent-3" onClick={this.handleAddForm}>Add
+                                    <button id="addUser" className="btn btn-large waves-effect waves-light green accent-3" onClick={this.handleAddForm}>Add
                                         <i className="material-icons right">person_add</i>
                                     </button>
                                 </div>
