@@ -5,6 +5,10 @@ var helper = {
   getAllEmployees: function() {
     return axios.get("/getAllEmployees");
   },
+  getEmployee: function(id) {
+      console.log(id);
+    return axios.get("/getEmployee/" + id);
+  },
 
   getEmpSchedules:function() {
     console.log('helpers.getEmpSchedules Running!');
