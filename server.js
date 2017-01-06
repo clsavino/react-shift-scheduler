@@ -184,7 +184,7 @@
   });
 
   app.get("*", function(req,res) {
-    res.send("Error 404, site not found");
+    res.sendFile(path.resolve(__dirname, "public", "404.html"))
   })
 
 //Posting new Employee to the database
