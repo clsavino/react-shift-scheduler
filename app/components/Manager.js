@@ -20,7 +20,7 @@ var Manager = React.createClass({
                                     <div className="background">
                                         <img src="http://materializecss.com/images/office.jpg"/>
                                     </div>
-                                    <a><img className="circle" src="assets/images/logo.png"/></a>
+                                    <a><img className="circle" src="/assets/images/logo.png"/></a>
                                     <a><span className="white-text">Company Name</span></a>
                                     <a><span className="white-text name">John Doe</span></a>
                                 </div>
