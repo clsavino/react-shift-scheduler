@@ -20,19 +20,26 @@ var ManagerSchedulesCreate = React.createClass({
     },
 
   // The moment the page renders, get the employees schedules
-  componentDidMount: function() {
+    componentDidMount: function() {
 
-    helpers.getEmpSchedules().then(function(response) {
-      console.log('response from helpers.getEmpSchedules - response.data',response.data);
-      if (response !== this.state.empSchedules) {
-        this.setState({ empSchedules: response.data });
-        console.log('in componentDidMount- empSchedules',this.state.empSchedules);
-      }
-    }.bind(this));
-  },
+        helpers.getEmpSchedules().then(function(response) {
+          console.log('response from helpers.getEmpSchedules - response.data',response.data);
+          if (response !== this.state.empSchedules) {
+            this.setState({ empSchedules: response.data });
+            console.log('in componentDidMount- empSchedules',this.state.empSchedules);
+          }
+        }.bind(this));
+    },
 
-    handleUserChange(event) {
-       this.setState({ [event.target.name]: event.target.value});
+    handleUserChange: function(index, event) {
+        let updatedEmpSchedules = this.state.empSchedules.map((empSchedule, i) => {
+            if(index === i){
+                empSchedule[event.target.name] = event.target.value;
+            }
+            return empSchedule;
+        });
+
+       this.setState({ empSchedules: updatedEmpSchedules});
     },
 
     handleUpdateEmpSchedule: function(event) {
@@ -194,7 +201,7 @@ var ManagerSchedulesCreate = React.createClass({
                                                     type="text"
                                                     value={schedules.monday}
                                                     name="monday"
-                                                    onChange={this.handleUserChange}/>
+                                                    onChange={this.handleUserChange.bind(this, i)}/>
                                                 </td>
                                                 <td>
                                                     <input
