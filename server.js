@@ -58,13 +58,12 @@
 
 //Getting Employees from the database
   app.get("/getAllEmployees", isLoggedIn, function(req, res) {
-    employee.find({}).exec(function(err, doc) {
+    employee.find({ "active": 1 }).exec(function(err, doc) {
       if (err) {
         console.log(err);
       }
       else {
         res.send(doc);
-        console.log(doc);
       }
     });
   });
@@ -170,6 +169,14 @@
   }
 
 //Restricting routes
+  app.get("/login", function(req,res) {
+    res.sendFile(path.resolve(__dirname, "public", "index.html"))
+  });
+
+  app.get("/register", function(req,res) {
+    res.sendFile(path.resolve(__dirname, "public", "index.html"))
+  });
+
   app.get("/manager", isLoggedIn, function(req,res) {
       if (req.user.userType === "manager") {
           res.sendFile(path.resolve(__dirname, "public", "index.html"))
@@ -211,8 +218,6 @@
 
 //Posting new Employee to the database
   app.post("/addEmployee", isLoggedIn, function(req, res) {
-  // console.log("creating in server");
-    console.log(req.body);
     employee.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
