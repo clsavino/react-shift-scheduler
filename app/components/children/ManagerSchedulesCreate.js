@@ -18,14 +18,10 @@ var ManagerSchedulesCreate = React.createClass({
       };
     },
 
-  // The moment the page renders, get the employees schedules
     componentDidMount: function() {
-
         helpers.getEmpSchedules().then(function(response) {
-          console.log('response from helpers.getEmpSchedules - response.data',response.data);
           if (response !== this.state.empSchedules) {
             this.setState({ empSchedules: response.data });
-            console.log('in componentDidMount- empSchedules',this.state.empSchedules);
           }
         }.bind(this));
     },
@@ -36,25 +32,14 @@ var ManagerSchedulesCreate = React.createClass({
                 empSchedule[event.target.name] = event.target.value;
                 this.state.selectedEmployee = empSchedule;
             }
-            console.log('handleUserChange empSchedule',empSchedule);
-            console.log('\n this.state.selectedEmployee',this.state.selectedEmployee);
-            console.log('\n this.state.selectedEmployee._id',this.state.selectedEmployee._id);
             return empSchedule;
         });
         this.setState({ empSchedules: updatedEmpSchedules});
-        console.log('handleUserChange - empSchedules', this.state.empSchedules);
-        //his.state.monday = event.target.value;
-        //console.log('handleUserChange - event.target.value', event.target.value);
-
-
     },
 
     handleUpdateEmpSchedule: function(event) {
         event.preventDefault();
         helpers.updateEmpSchedule(this.state.selectedEmployee).then(function(response) {
-
-            console.log("helpers.updateEmpSchedule Returned!")
-            console.log('helpers.updateEmpSchedule - response',response);
         }.bind(this));
     },
 

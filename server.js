@@ -70,14 +70,12 @@
 
 //Get employee schedules from database
   app.get("/getEmpSchedules", isLoggedIn, function(req, res) {
-    console.log('in server, /getEmpSchedules');
     EmployeeSchedule.find({}).exec(function(err,docs) {
       if (err) {
         console.log(err);
         res.send(err);
       }
       else {
-        console.log('in /getEmpSchedules - docs', docs);
         res.send(docs);
       }
     });
@@ -85,9 +83,6 @@
 
 //Posting Employee Schedule to the database
   app.post("/addEmpSchedule", isLoggedIn, function(req, res) {
-    console.log("creating employee Schedule in server");
-    console.log(req.body);
-
     EmployeeSchedule.create({
       fullName: req.body.fullName,
       monday: req.body.monday,
@@ -110,7 +105,6 @@
   //Updating existing employee schedule
   app.put("/updateSchedule/:id", function(req, res) {
     var newSchedule = req.body.employeeSchedule;
-    console.log('/updateSchedule req.body', newSchedule);
     EmployeeSchedule.findOneAndUpdate({ "_id": req.params.id }, {
         fullName: newSchedule.fullName,
         monday: newSchedule.monday,
@@ -241,38 +235,50 @@
 
 
   //Updating existing employee
-app.put("/updateEmployee/:id", function(req, res) {
-   employee.findOneAndUpdate({ "_id": req.params.id }, {
-       firstName: req.body.firstName,
-       lastName: req.body.lastName,
-       addressOne: req.body.addressOne,
-       addressTwo: req.body.addressTwo,
-       city: req.body.city,
-       state: req.body.state,
-       zip: req.body.zip,
-       email: req.body.email,
-       phone: req.body.phone,
-       phoneType: req.body.phoneType
-   }, function(err) {
-       if (err) {
-           console.log(err);
-       } else {
-           res.send("Employee updated");
-       }
-   });
-});
+  app.put("/updateEmployee/:id", function(req, res) {
+     employee.findOneAndUpdate({ "_id": req.params.id }, {
+         firstName: req.body.firstName,
+         lastName: req.body.lastName,
+         addressOne: req.body.addressOne,
+         addressTwo: req.body.addressTwo,
+         city: req.body.city,
+         state: req.body.state,
+         zip: req.body.zip,
+         email: req.body.email,
+         phone: req.body.phone,
+         phoneType: req.body.phoneType
+     }, function(err) {
+         if (err) {
+             console.log(err);
+         } else {
+             res.send("Employee updated");
+         }
+     });
+  });
 
-// "Remove" existing employee
-app.put("/removeEmployee/:id", function(req, res) {
-   employee.findOneAndUpdate({ "_id": req.params.id }, { "active": 0 })
-   .exec(function(err, doc) {
-       if (err) {
-           console.log(err);
-       } else {
-           res.send(doc);
-       }
-   })
-});
+  // "Remove" existing employee
+  app.put("/removeEmployee/:id", function(req, res) {
+     employee.findOneAndUpdate({ "_id": req.params.id }, { "active": 0 })
+     .exec(function(err, doc) {
+         if (err) {
+             console.log(err);
+         } else {
+             res.send(doc);
+         }
+     })
+  });
+
+  // "Remove" existing employee schedule
+  app.put("/removeEmpSchedule/:id", function(req, res) {
+     EmployeeSchedule.findOneAndUpdate({ "_id": req.params.id }, { "active": 0 })
+     .exec(function(err, doc) {
+         if (err) {
+             console.log(err);
+         } else {
+             res.send(doc);
+         }
+     })
+  });
 
 
 //Port Listener
