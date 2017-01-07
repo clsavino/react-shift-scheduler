@@ -16,7 +16,6 @@ var helper = {
   },
 
   addEmpSchedule:function(fullName,monday,tuesday,wednesday,thursday,friday,saturday,sunday) {
-    console.log('helper.addEmpSchedule Running!' + fullName + ' Monday' + monday);
     console.log('helper.addEmpSchedule Running!');
     return axios.post('/addEmpSchedule', {
       fullName: fullName,
@@ -30,11 +29,30 @@ var helper = {
     });
   },
 
-  updateEmpSchedule: function(fullName,monday,tuesday,wednesday,thursday,friday,saturday,sunday) {
-    console.log( fullName,monday,tuesday,wednesday,thursday,friday,saturday,sunday);
-    return
+  // updateEmpSchedule: function(empSchedule) {
+  //   console.log( 'helpers.updateEmpSchedule running!');
+  //   console.log('empschedule._id',empSchedule._id)
+  //   return axios.post('/updateSchedule/', {
+  //     fullName: fullName,
+  //     monday: monday,
+  //     tuesday: tuesday,
+  //     wednesday: wednesday,
+  //     thursday: thursday,
+  //     friday: friday,
+  //     saturday: saturday,
+  //     sunday: sunday
+  //   });
+  // },
 
+  updateEmpSchedule: function(empSchedule) {
+    console.log( 'helpers.updateEmpSchedule running!');
+    console.log('empSchedule',empSchedule);
+    console.log('empSchedule._id',empSchedule._id);
+    return axios.put('/updateSchedule/' + empSchedule._id, {
+      employeeSchedule: empSchedule
+    });
   },
+
 
   addEmployee: function(firstName, lastName, addressOne, addressTwo, city, state, zip, email, phone, phoneType) {
     console.log("helpers.addEmployee Running")

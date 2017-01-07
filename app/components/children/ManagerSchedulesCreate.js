@@ -13,9 +13,8 @@ var ManagerSchedulesCreate = React.createClass({
         friday:"",
         saturday:"",
         sunday:"",
-        selectedEmployee:"null value",
+        selectedEmployee:"",
         empSchedules: [],
-        changed:[]
       };
     },
 
@@ -35,24 +34,27 @@ var ManagerSchedulesCreate = React.createClass({
         let updatedEmpSchedules = this.state.empSchedules.map((empSchedule, i) => {
             if(index === i){
                 empSchedule[event.target.name] = event.target.value;
+                this.state.selectedEmployee = empSchedule;
             }
+            console.log('handleUserChange empSchedule',empSchedule);
+            console.log('\n this.state.selectedEmployee',this.state.selectedEmployee);
+            console.log('\n this.state.selectedEmployee._id',this.state.selectedEmployee._id);
             return empSchedule;
         });
         this.setState({ empSchedules: updatedEmpSchedules});
         console.log('handleUserChange - empSchedules', this.state.empSchedules);
         //his.state.monday = event.target.value;
-        console.log('handleUserChange - event.target.value', event.target.value);
-        //this is always one step behind in value ???
-        this.setState({ [event.target.name]: event.target.value});
+        //console.log('handleUserChange - event.target.value', event.target.value);
+
 
     },
 
     handleUpdateEmpSchedule: function(event) {
         event.preventDefault();
-        helpers.updateEmpSchedule(this.state.fullName, this.state.monday, this.state.tuesday, this.state.wednesday, this.state.thursday, this.state.friday, this.state.saturday, this.state.sunday).then(function() {
+        helpers.updateEmpSchedule(this.state.selectedEmployee).then(function(response) {
 
             console.log("helpers.updateEmpSchedule Returned!")
-            //console.log('helpers.updateEmpSchedule - response',response);
+            console.log('helpers.updateEmpSchedule - response',response);
         }.bind(this));
     },
 
