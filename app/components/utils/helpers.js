@@ -5,6 +5,10 @@ var helper = {
   getAllEmployees: function() {
     return axios.get("/getAllEmployees");
   },
+  getEmployee: function(id) {
+      console.log(id);
+    return axios.get("/getEmployee/" + id);
+  },
 
   getEmpSchedules:function() {
     console.log('helpers.getEmpSchedules Running!');
@@ -31,7 +35,6 @@ var helper = {
   },
 
   addEmployee: function(firstName, lastName, addressOne, addressTwo, city, state, zip, email, phone, phoneType) {
-    console.log("helpers.addEmployee Running")
     return axios.post("/addEmployee", {
         firstName: firstName,
         lastName: lastName,
@@ -45,8 +48,8 @@ var helper = {
         phoneType: phoneType });
   },
 
-  updateEmployee: function(firstName, lastName, addressOne, addressTwo, city, state, zip, email, phone, phoneType) {
-       return axios.put("/updateEmployee/:id", {
+  updateEmployee: function(id, firstName, lastName, addressOne, addressTwo, city, state, zip, email, phone, phoneType) {
+       return axios.put("/updateEmployee/" + id, {
            firstName: firstName,
            lastName: lastName,
            addressOne: addressOne,
@@ -59,8 +62,8 @@ var helper = {
            phoneType: phoneType
        });
    },
-   removeEmployee: function() {
-       return axios.put("/removeEmployee/:id", {});
+   removeEmployee: function(id) {
+       return axios.put("/removeEmployee/" + id);
    }
 };
 
