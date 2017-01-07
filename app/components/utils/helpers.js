@@ -86,7 +86,7 @@ var helper = {
 
   removeEmployee: function(id) {
        return axios.put("/removeEmployee/" + id);
-  }
+  },
 
   removeEmpSchedule: function() {
        return axios.put("/removeEmpSchedule/:id", {});
