@@ -55,14 +55,11 @@ class Login extends React.Component {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col m4 s12 left">
+                                <div className="col m6 s12 left">
                                     <button className="btn waves-effect waves-light btn-large blue accent-3 loginButtons left" type="submit" value="Submit" name="action">Login<i className="material-icons right">send</i></button>
                                 </div>
-                                <div className="col m4 s12 center">
+                                <div className="col m6 s12 right">
                                     <a className="btn waves-effect waves-light btn-large green accent-3 loginButtons center" href="/register">Register<i className="material-icons right">person_add</i></a>
-                                </div>
-                                <div className="col m4 s12 right">
-                                    <a className="btn waves-effect waves-light btn-large red accent-3 loginButtons right" href="/logout">Logut<i className="material-icons right">exit_to_app</i></a>
                                 </div>
                             </div>
                         </form>
