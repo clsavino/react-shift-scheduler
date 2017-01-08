@@ -64,28 +64,35 @@
       },
 
       function(accessToken, refreshToken, profile, done) {
-        User.findOne({ "username" : profile.displayName }, function (err, user) {
-          console.log("current user already stored = " + user)
-          if(user === null) {
+        User.findOne({ "username" : profile.displayName, "email" :profile.emails[0].value }, function (err, user) {
+          console.log("Current user already stored = " + user)
+          if(err) 
+            return done(err);
+
+          if(user) {
+
+            return done(null, user);
+          } else {
 
             var newUser = new User();
 
             newUser.username = profile.displayName;
+            newUser.email = profile.emails[0].value
+            newUser.userType = "employee";
+            console.log("Storing new user to DB")
             console.log(newUser.username)
+            console.log(newUser.email)
+            console.log(newUser.userType)
 
             newUser.save(function(err) {
               if (err)
                  throw err;
               return done(null, newUser);
             });
-          } else {
-            console.log("find way to allow in")
-          }
+          } 
         });
       }
     ));
-
-
 
 //LOCAL AUTH
 
