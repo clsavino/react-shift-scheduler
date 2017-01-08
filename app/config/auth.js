@@ -1,12 +1,7 @@
 
 module.exports = {
 
-    'googleAuth' : {
-        'clientID'      : 'secretclientID',
-        'clientSecret'  : 'clientsecret',
-        'callbackURL'   : 'http://localhost:8080/auth/google/callback'
-    }
-
+"test"
     // 'linkedInAuth' : {
     //     'consumerKey'       : 'consumerkey',
     //     'consumerSecret'    : 'clientsecret',

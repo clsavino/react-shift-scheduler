@@ -10,6 +10,23 @@
 
 .loginButtons {
 	width: 90%;
+	border-radius: 5px;
+}
+
+#spaceSocial {
+	margin-bottom: 20px;
+}
+
+#google {
+	background-color: #ea4335;
+}
+
+#linkedin {
+	background-color: #006599;
+}
+
+#twitter {
+	background-color: #1da1f2;
 }
 
 #registerButton {

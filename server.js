@@ -4,9 +4,12 @@
   var passport = require("passport");
   var LocalStrategy= require("passport-local");
   var passportLocalMongoose = require("passport-local-mongoose");
+  var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
   var path = require("path");
   var db = require("./db/db.js")
   var User = require("./models/user")
+  var configAuth = require('./app/config/auth');
+
 
 // Require Employee Schema from Database
   var employee = require("./models/Employee");
@@ -37,6 +40,54 @@
   app.use(bodyParser.text());
   app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
+//GOOGLE AUTH
+
+  app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+// GET /auth/google/callback
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request.  If authentication fails, the user will be redirected back to the
+//   login page.  Otherwise, the primary route function function will be called,
+//   which, in this example, will redirect the user to the home page.
+  app.get('/auth/google/callback', 
+    passport.authenticate('google', { 
+      failureRedirect: '/' 
+    }),
+    function(req, res) {
+      res.redirect('/employee');
+    });
+
+    passport.use(new GoogleStrategy({
+        clientID: configAuth.googleAuth.clientID,
+        clientSecret: configAuth.googleAuth.clientSecret,
+        callbackURL: configAuth.googleAuth.callbackURL,
+      },
+
+      function(accessToken, refreshToken, profile, done) {
+        User.findOne({ "username" : profile.displayName }, function (err, user) {
+          console.log("current user already stored = " + user)
+          if(user === null) {
+
+            var newUser = new User();
+
+            newUser.username = profile.displayName;
+            console.log(newUser.username)
+
+            newUser.save(function(err) {
+              if (err)
+                 throw err;
+              return done(null, newUser);
+            });
+          } else {
+            console.log("find way to allow in")
+          }
+        });
+      }
+    ));
+
+
+
+//LOCAL AUTH
 
 //Auth Routes
   app.post("/register", function(req, res) {
