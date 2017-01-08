@@ -1,7 +1,7 @@
 
 module.exports = {
 
-"test"
+       
     // 'linkedInAuth' : {
     //     'consumerKey'       : 'consumerkey',
     //     'consumerSecret'    : 'clientsecret',
