@@ -34,14 +34,12 @@
   passport.serializeUser(function(user,done) {
     done(null, user.id); 
   });
-    // User.serializeUser());
+
   passport.deserializeUser(function(id,done) {
     User.findById(id, function (err,user) {
       done(err,user);
     });
   });
-
-    // User.deserializeUser());
 
 //Body-Parser
   app.use(logger("dev"));
@@ -56,7 +54,7 @@
 
   });
 
-//Public files
+//Public files <this needs to stay right below app.get("/")!!!!
   app.use(express.static(__dirname + "/public"))
 
 //GOOGLE AUTH
@@ -70,25 +68,20 @@
       res.redirect('/employee');
     });
 
-    passport.use(new GoogleStrategy({
-        clientID: configAuth.googleAuth.clientID,
-        clientSecret: configAuth.googleAuth.clientSecret,
-        callbackURL: configAuth.googleAuth.callbackURL,
-      },
-
-      function(accessToken, refreshToken, profile, done) {
-        User.findOne({ "username" : profile.displayName, "email" :profile.emails[0].value }, function (err, user) {
-          console.log("Current user already stored = " + user)
-          if(err) 
-            return done(err);
-
-          if(user) {
-
-            return done(null, user);
-          } else {
-
+  passport.use(new GoogleStrategy({
+    clientID: configAuth.googleAuth.clientID,
+    clientSecret: configAuth.googleAuth.clientSecret,
+    callbackURL: configAuth.googleAuth.callbackURL,
+  },
+    function(accessToken, refreshToken, profile, done) {
+      User.findOne({ "username" : profile.displayName, "email" :profile.emails[0].value }, function (err, user) {
+        console.log("Current user already stored = " + user)
+        if(err) 
+          return done(err);
+        if(user) {
+          return done(null, user);
+        } else {
             var newUser = new User();
-
             newUser.username = profile.displayName;
             newUser.email = profile.emails[0].value
             newUser.userType = "employee";
@@ -102,47 +95,40 @@
                  throw err;
               return done(null, newUser);
             });
-          } 
-        });
-      }
-    ));
+        } 
+      });
+    }
+  ));
 
 
 //LINKED IN AUTH
 
+  app.get('/auth/linkedin', passport.authenticate('linkedin', {
+     failureRedirect: '/',
+     scope: ['r_emailaddress', 'r_basicprofile']
+  }));
 
-app.get('/auth/linkedin', passport.authenticate('linkedin', {
-   failureRedirect: '/',
-   scope: ['r_emailaddress', 'r_basicprofile']
-}));
+  app.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
+    successRedirect: '/employee',
+    failureRedirect: '/'
+  }));
 
-
-app.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
-  successRedirect: '/employee',
-  failureRedirect: '/'
-}));
-
-passport.use(new LinkedInStrategy({
-  clientID: configAuth.linkedInAuth.clientID,
-  clientSecret: configAuth.linkedInAuth.clientSecret,
-  callbackURL: configAuth.linkedInAuth.callbackURL,
-  state: true
-}, function(accessToken, refreshToken, profile, done) {
-  // console.log(profile)
- 
-
- User.findOne({ "username": profile.firstName, "email": profile.emailAddress }, function (err, user) {
-          console.log("Current user already stored = " + user)
-          if(err) 
-            return done(err);
-
-          if(user) {
-
-            return done(null, user);
-          } else {
-
+  passport.use(new LinkedInStrategy({
+    clientID: configAuth.linkedInAuth.clientID,
+    clientSecret: configAuth.linkedInAuth.clientSecret,
+    callbackURL: configAuth.linkedInAuth.callbackURL,
+    state: true
+  }, 
+    function(accessToken, refreshToken, profile, done) {
+    // console.log(profile)
+      User.findOne({ "username": profile.firstName, "email": profile.emailAddress }, function (err, user) {
+        console.log("Current user already stored = " + user)
+        if(err) 
+          return done(err);
+        if(user) {
+          return done(null, user);
+        } else {
             var newUser = new User();
-
             newUser.username = profile.firstName;
             newUser.email = profile.emailAddress;
             newUser.userType = "employee";
@@ -153,17 +139,16 @@ passport.use(new LinkedInStrategy({
 
             newUser.save(function(err) {
               if (err)
-                 throw err;
+                throw err;
               return done(null, newUser);
             });
-          } 
-        });
+        } 
+      });
 
-}));
+  }));
+
 
 //LOCAL AUTH
-
-//Auth Routes
   app.post("/register", function(req, res) {
 
     User.register(new User({
@@ -212,7 +197,6 @@ passport.use(new LinkedInStrategy({
       res.sendFile(path.resolve(__dirname, "public", "index.html"));
     }
   }
-
 
 //Restricting routes
   app.get("/login", function(req,res) {
