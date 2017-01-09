@@ -215,6 +215,15 @@
       }
   });
 
+  app.get("/manager/*", isLoggedIn, function(req,res) {
+      if (req.user.userType === "manager") {
+          res.sendFile(path.resolve(__dirname, "public", "index.html"))
+      } else {
+          res.sendFile(path.resolve(__dirname, "public", "notauth.html"))
+      }
+  });
+
+
   app.get("/employee", isLoggedIn, function(req,res) {
       if (req.user.userType === "employee") {
         res.sendFile(path.resolve(__dirname, "public", "index.html"))
@@ -223,19 +232,11 @@
       }
   });
 
-  app.get("/manager/employeeAll", isLoggedIn, function(req,res) {
-      if (req.user.userType === "manager") {
-          res.sendFile(path.resolve(__dirname, "public", "index.html"))
+  app.get("/employee/*", isLoggedIn, function(req,res) {
+      if (req.user.userType === "employee") {
+        res.sendFile(path.resolve(__dirname, "public", "index.html"))
       } else {
-          res.sendFile(path.resolve(__dirname, "public", "notauth.html"))
-      }
-  });
-
-  app.get("/manager/schedulesCreate", isLoggedIn, function(req,res) {
-       if (req.user.userType === "manager") {
-          res.sendFile(path.resolve(__dirname, "public", "index.html"))
-      } else {
-          res.sendFile(path.resolve(__dirname, "public", "notauth.html"))
+        res.send("Hello Manager, if you would like to access the employee page, please login as employee.")
       }
   });
 
