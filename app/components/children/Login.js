@@ -72,7 +72,7 @@ class Login extends React.Component {
                             </div>
                             <div className="row">
                                 <div className="col m6 s4">
-                                    <a id="linkedin" className="btn waves-effect waves-light btn-large loginButtons" href="/404.html"><i className="fa fa-linkedin left" aria-hidden="true"></i>LinkedIn</a>
+                                    <a id="linkedin" className="btn waves-effect waves-light btn-large loginButtons" href="/auth/linkedin"><i className="fa fa-linkedin left" aria-hidden="true"></i>LinkedIn</a>
                                 </div>
                             </div>
                             <div className="row">

@@ -4,7 +4,8 @@
   var passport = require("passport");
   var LocalStrategy= require("passport-local");
   var passportLocalMongoose = require("passport-local-mongoose");
-  var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+  var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
+  var LinkedInStrategy = require("passport-linkedin-oauth2").Strategy;
   var path = require("path");
   var db = require("./db/db.js")
   var User = require("./models/user")
@@ -30,8 +31,17 @@
   app.use(passport.initialize());
   app.use(passport.session());
   passport.use(new LocalStrategy(User.authenticate()));
-  passport.serializeUser(User.serializeUser());
-  passport.deserializeUser(User.deserializeUser());
+  passport.serializeUser(function(user,done) {
+    done(null, user.id); 
+  });
+    // User.serializeUser());
+  passport.deserializeUser(function(id,done) {
+    User.findById(id, function (err,user) {
+      done(err,user);
+    });
+  });
+
+    // User.deserializeUser());
 
 //Body-Parser
   app.use(logger("dev"));
@@ -40,15 +50,18 @@
   app.use(bodyParser.text());
   app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
-//GOOGLE AUTH
 
+  app.get("/", autoRedirect, function(req, res){
+     res.sendFile(path.resolve(__dirname, "public", "index.html"));
+
+  });
+
+//Public files
+  app.use(express.static(__dirname + "/public"))
+
+//GOOGLE AUTH
   app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-// GET /auth/google/callback
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  If authentication fails, the user will be redirected back to the
-//   login page.  Otherwise, the primary route function function will be called,
-//   which, in this example, will redirect the user to the home page.
   app.get('/auth/google/callback', 
     passport.authenticate('google', { 
       failureRedirect: '/' 
@@ -93,6 +106,60 @@
         });
       }
     ));
+
+
+//LINKED IN AUTH
+
+
+app.get('/auth/linkedin', passport.authenticate('linkedin', {
+   failureRedirect: '/',
+   scope: ['r_emailaddress', 'r_basicprofile']
+}));
+
+
+app.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
+  successRedirect: '/employee',
+  failureRedirect: '/'
+}));
+
+passport.use(new LinkedInStrategy({
+  clientID: configAuth.linkedInAuth.clientID,
+  clientSecret: configAuth.linkedInAuth.clientSecret,
+  callbackURL: configAuth.linkedInAuth.callbackURL,
+  state: true
+}, function(accessToken, refreshToken, profile, done) {
+  // console.log(profile)
+ 
+
+ User.findOne({ "username": profile.firstName, "email": profile.emailAddress }, function (err, user) {
+          console.log("Current user already stored = " + user)
+          if(err) 
+            return done(err);
+
+          if(user) {
+
+            return done(null, user);
+          } else {
+
+            var newUser = new User();
+
+            newUser.username = profile.firstName;
+            newUser.email = profile.emailAddress;
+            newUser.userType = "employee";
+            console.log("Storing new user to DB")
+            console.log(newUser.username)
+            console.log(newUser.email)
+            console.log(newUser.userType)
+
+            newUser.save(function(err) {
+              if (err)
+                 throw err;
+              return done(null, newUser);
+            });
+          } 
+        });
+
+}));
 
 //LOCAL AUTH
 
@@ -146,13 +213,6 @@
     }
   }
 
-  app.get("/", autoRedirect, function(req, res){
-     res.sendFile(path.resolve(__dirname, "public", "index.html"));
-
-  });
-
-//Public files
-  app.use(express.static(__dirname + "/public"))
 
 //Restricting routes
   app.get("/login", function(req,res) {
