@@ -28,5 +28,6 @@ var EmployeeScheduleSchema = new Schema({
   }
 });
 
+console.log("works");
 var EmployeeSchedule = mongoose.model('EmployeeSchedule', EmployeeScheduleSchema);
 module.exports = EmployeeSchedule;

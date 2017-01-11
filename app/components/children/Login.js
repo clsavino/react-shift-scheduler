@@ -62,6 +62,24 @@ class Login extends React.Component {
                                     <a className="btn waves-effect waves-light btn-large green accent-3 loginButtons center" href="/register">Register<i className="material-icons right">person_add</i></a>
                                 </div>
                             </div>
+                            <div className="row">
+                                <div className ="col m12 s12">
+                                    <h6 id="spaceSocial"> Or login with:</h6>
+                                </div>
+                                <div className="col m6 s4">
+                                    <a id="google" className="btn waves-effect waves-light btn-large loginButtons" href="/auth/google"><i className="fa fa-google left" aria-hidden="true"></i>Google</a>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col m6 s4">
+                                    <a id="linkedin" className="btn waves-effect waves-light btn-large loginButtons" href="/auth/linkedin"><i className="fa fa-linkedin left" aria-hidden="true"></i>LinkedIn</a>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col m6 s4">
+                                    <a id="twitter" className="btn waves-effect waves-light btn-large loginButtons" href="/404.html"><i className="fa fa-twitter left" aria-hidden="true"></i>Twitter</a>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
