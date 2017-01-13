@@ -5,7 +5,8 @@ var ManagerSchedulesCreate = React.createClass({
 
     getInitialState: function() {
       return {
-        fullName: "",
+        firstName:"",
+        lastName:"",
         monday:"",
         tuesday:"",
         wednesday:"",
@@ -13,7 +14,7 @@ var ManagerSchedulesCreate = React.createClass({
         friday:"",
         saturday:"",
         sunday:"",
-        selectedEmployee:"",
+        selectedEmpSchedule:"",
         empSchedules: [],
       };
     },
@@ -30,7 +31,7 @@ var ManagerSchedulesCreate = React.createClass({
         let updatedEmpSchedules = this.state.empSchedules.map((empSchedule, i) => {
             if(index === i){
                 empSchedule[event.target.name] = event.target.value;
-                this.state.selectedEmployee = empSchedule;
+                this.state.selectedEmpSchedule = empSchedule;
             }
             return empSchedule;
         });
@@ -39,7 +40,7 @@ var ManagerSchedulesCreate = React.createClass({
 
     handleUpdateEmpSchedule: function(event) {
         event.preventDefault();
-        helpers.updateEmpSchedule(this.state.selectedEmployee).then(function(response) {
+        helpers.updateEmpSchedule(this.state.selectedEmpSchedule).then(function(response) {
         }.bind(this));
     },
 
@@ -50,7 +51,7 @@ var ManagerSchedulesCreate = React.createClass({
                     <div className="col m12" >
                         <div className="section">
                             <h5>Schedule Editor</h5>
-                            <div className="col m12">
+
                             <table className="highlight">
                                 <thead>
                                     <tr>
@@ -69,7 +70,7 @@ var ManagerSchedulesCreate = React.createClass({
                                         return (
                                             <tr key={i}>
                                                 <td className="fullName">
-                                                {schedules.fullName}
+                                                {schedules.firstName} {schedules.lastName}
                                                 </td>
                                                 <td className="schedule">
                                                     <input
@@ -121,7 +122,7 @@ var ManagerSchedulesCreate = React.createClass({
                                                     onChange={this.handleUserChange.bind(this, i)}/>
                                                 </td>
                                                 <td>
-                                                    <button onClick={this.handleUpdateEmpSchedule} className="btn btn-small waves-effect waves-light green accent-3">Add<i className="material-icons right">person_add</i>></button>
+                                                    <button onClick={this.handleUpdateEmpSchedule} className="btn btn-small waves-effect waves-light green accent-3">Add</button>
                                                 </td>
                                             </tr>
                                         );
@@ -131,7 +132,6 @@ var ManagerSchedulesCreate = React.createClass({
                           </div>
                         </div>
                     </div>
-                </div>
 
         );
     }

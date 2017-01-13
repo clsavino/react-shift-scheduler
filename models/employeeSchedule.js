@@ -2,7 +2,13 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var EmployeeScheduleSchema = new Schema({
-  fullName: {
+  emp_id: {
+    type: String,
+  },
+  firstName: {
+    type: String,
+  },
+  lastName: {
     type: String,
   },
   monday: {
@@ -25,6 +31,10 @@ var EmployeeScheduleSchema = new Schema({
   },
   sunday: {
     type: String,
+  },
+  active: {
+    type: Number,
+    default: 1,
   }
 });
 

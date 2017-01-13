@@ -21,7 +21,7 @@
 
 //Get employee schedules from database
   router.get("/getEmpSchedules", function(req, res) {
-    EmployeeSchedule.find({}).exec(function(err,docs) {
+    EmployeeSchedule.find({ "active": 1 }).exec(function(err,docs) {
       if (err) {
         console.log(err);
         res.send(err);
@@ -35,7 +35,9 @@
 //Posting Employee Schedule to the database
   router.post("/addEmpSchedule", function(req, res) {
     EmployeeSchedule.create({
-      fullName: req.body.fullName,
+      emp_id: req.body.emp_id,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       monday: req.body.monday,
       tuesday: req.body.tuesday,
       wednesday: req.body.wednesday,
@@ -57,7 +59,6 @@
   router.put("/updateSchedule/:id", function(req, res) {
     var newSchedule = req.body.employeeSchedule;
     EmployeeSchedule.findOneAndUpdate({ "_id": req.params.id }, {
-        fullName: newSchedule.fullName,
         monday: newSchedule.monday,
         tuesday: newSchedule.tuesday,
         wednesday: newSchedule.wednesday,
@@ -74,7 +75,6 @@
     });
   });
 
-
 //Posting new Employee to the database
   router.post("/addEmployee", function(req, res) {
     employee.create({
@@ -88,12 +88,12 @@
       email: req.body.email,
       phone: req.body.phone,
       phoneType: req.body.phoneType
-    }, function(err) {
+    }, function(err,doc) {
       if (err) {
         console.log(err);
       }
       else {
-        res.send("Employee Saved!");
+        res.send(doc);
       }
     });
   });
@@ -121,6 +121,21 @@
      });
   });
 
+// Update employee's name in employee schedule collection
+  router.put("/updateEmpName/:emp_id", function(req, res) {
+    console.log('in controller.js req',req);
+    EmployeeSchedule.findOneAndUpdate({"emp_id":req.params.emp_id}, {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+    }, function(err) {
+       if (err) {
+           console.log(err);
+       } else {
+           res.send("Employee's name updated");
+       }
+     });
+  });
+
 // "Remove" existing employee
   router.put("/removeEmployee/:id", function(req, res) {
      employee.findOneAndUpdate({ "_id": req.params.id }, { "active": 0 })
@@ -128,14 +143,15 @@
          if (err) {
              console.log(err);
          } else {
-             res.send(doc);
+            console.log('controller /removeEmployee doc',doc);
+            res.send(doc);
          }
      })
   });
 
 // "Remove" existing employee schedule
-  router.put("/removeEmpSchedule/:id", function(req, res) {
-     EmployeeSchedule.findOneAndUpdate({ "_id": req.params.id }, { "active": 0 })
+  router.put("/removeEmpSchedule/:emp_id", function(req, res) {
+     EmployeeSchedule.findOneAndUpdate({ "emp_id": req.params.emp_id }, { "active": 0 })
      .exec(function(err, doc) {
          if (err) {
              console.log(err);
