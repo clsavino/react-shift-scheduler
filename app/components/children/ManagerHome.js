@@ -5,7 +5,8 @@ var ManagerHome = React.createClass({
 
     getInitialState: function() {
       return {
-        fullName: "",
+        firstName:"",
+        lastName:"",
         monday:"",
         tuesday:"",
         wednesday:"",
@@ -29,20 +30,20 @@ var ManagerHome = React.createClass({
       }
     }.bind(this));
   },
-
+    /*
     handleUserChange(event) {
        this.setState({ [event.target.name]: event.target.value});
     },
 
     handleUpdateEmpSchedule: function(event) {
         event.preventDefault();
-        helpers.updateEmpSchedule(this.state.fullName, this.state.monday, this.state.tuesday, this.state.wednesday, this.state.thursday, this.state.friday, this.state.saturday, this.state.sunday).then(function(response) {
+        helpers.updateEmpSchedule(this.state.firstName,this.state.lastName, this.state.monday, this.state.tuesday, this.state.wednesday, this.state.thursday, this.state.friday, this.state.saturday, this.state.sunday).then(function(response) {
 
             console.log("helpers.updateEmpSchedule Returned!")
             console.log('helpers.updateEmpSchedule - response',response);
         }.bind(this));
     },
-
+    */
     render: function() {
         return (
             <div className="row">
@@ -69,7 +70,7 @@ var ManagerHome = React.createClass({
                                     <tr key={i}>
 
                                         <td className="fullName">
-                                            {schedules.fullName}
+                                            {schedules.firstName} {schedules.lastName}
                                         </td>
                                         <td className="schedule">
                                             {schedules.monday}

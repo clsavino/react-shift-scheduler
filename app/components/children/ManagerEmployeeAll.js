@@ -22,7 +22,8 @@ var ManagerEmployeeAll = React.createClass({
             friday: "",
             saturday: "",
             sunday: "",
-            selectedEmployee: ""
+            selectedEmployee: "",
+            emp_id: ""
         };
     },
     componentDidMount: function() {
@@ -41,10 +42,9 @@ var ManagerEmployeeAll = React.createClass({
 
         //Adds entered employee into database
         helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
-
-            // build full name
-            var fullName = this.state.firstName + " " + this.state.lastName;
-            helpers.addEmpSchedule(fullName, this.state.monday, this.state.tuesday, this.state.wednesday, this.state.thursday, this.state.friday, this.state.saturday, this.state.sunday).then(function(response) {
+            console.log('handleAddForm addEmployee response',response);
+            this.state.emp_id = response.data._id;
+            helpers.addEmpSchedule(this.state.emp_id, this.state.firstName, this.state.lastName, this.state.monday, this.state.tuesday, this.state.wednesday, this.state.thursday, this.state.friday, this.state.saturday, this.state.sunday).then(function(response) {
                 this.clearStates();
             }.bind(this));
 
@@ -56,6 +56,12 @@ var ManagerEmployeeAll = React.createClass({
     handleUpdateForm: function(event) {
         event.preventDefault();
         helpers.updateEmployee(this.state.selectedEmployee, this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
+            //this.clearStates();
+        }.bind(this));
+
+        console.log('handleUpdateForm this.state.emp_id',this.state.emp_id)
+
+        helpers.updateEmpName(this.state.emp_id, this.state.firstName, this.state.lastName).then(function(response) {
             this.clearStates();
         }.bind(this));
         Materialize.toast("Employee updated", 3000);
@@ -65,6 +71,9 @@ var ManagerEmployeeAll = React.createClass({
     handleRemoveForm: function(event) {
         event.preventDefault();
         helpers.removeEmployee(this.state.selectedEmployee).then(function(response) {
+            //this.clearStates();
+        }.bind(this));
+        helpers.removeEmpSchedule(this.state.emp_id).then(function(response) {
             this.clearStates();
         }.bind(this));
         Materialize.toast("Employee removed", 3000);
@@ -72,25 +81,26 @@ var ManagerEmployeeAll = React.createClass({
         this.componentDidMount();
     },
     clickEmployee: function(event) {
-        this.setState({selectedEmployee: event.target.id});
-
-        for (var i = 0; i < this.state.allEmployees.length; i++) {
-            if (this.state.allEmployees[i]._id == this.state.selectedEmployee) {
-                this.setState({
-                    firstName: this.state.allEmployees[i].firstName,
-                    lastName: this.state.allEmployees[i].lastName,
-                    addressOne: this.state.allEmployees[i].addressOne,
-                    addressTwo: this.state.allEmployees[i].addressTwo,
-                    city: this.state.allEmployees[i].city,
-                    state: this.state.allEmployees[i].state,
-                    zip: this.state.allEmployees[i].zip,
-                    email: this.state.allEmployees[i].email,
-                    phone: this.state.allEmployees[i].phone,
-                    phoneType: this.state.allEmployees[i].phoneType
-                });
-                this.activeButtons();
+        this.setState({selectedEmployee: event.target.id}, function() {
+            for (var i = 0; i < this.state.allEmployees.length; i++) {
+                if (this.state.allEmployees[i]._id == this.state.selectedEmployee) {
+                    this.setState({
+                        firstName: this.state.allEmployees[i].firstName,
+                        lastName: this.state.allEmployees[i].lastName,
+                        addressOne: this.state.allEmployees[i].addressOne,
+                        addressTwo: this.state.allEmployees[i].addressTwo,
+                        city: this.state.allEmployees[i].city,
+                        state: this.state.allEmployees[i].state,
+                        zip: this.state.allEmployees[i].zip,
+                        email: this.state.allEmployees[i].email,
+                        phone: this.state.allEmployees[i].phone,
+                        phoneType: this.state.allEmployees[i].phoneType,
+                        emp_id: this.state.selectedEmployee
+                    });
+                    this.activeButtons();
+                }
             }
-        }
+        });
     },
     newEmployee: function() {
         this.clearForm();
