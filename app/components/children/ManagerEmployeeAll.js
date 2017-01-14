@@ -27,6 +27,9 @@ var ManagerEmployeeAll = React.createClass({
         };
     },
     componentDidMount: function() {
+        this.getEmployees();
+    },
+    getEmployees: function() {
         helpers.getAllEmployees().then(function(response) {
             if (response !== this.state.allEmployees) {
                 this.setState({ allEmployees: response.data });
@@ -51,7 +54,7 @@ var ManagerEmployeeAll = React.createClass({
         }.bind(this));
         Materialize.toast('Employee added', 3000);
         this.clearForm();
-        this.componentDidMount();
+        this.getEmployees();
     },
     handleUpdateForm: function(event) {
         event.preventDefault();
@@ -66,7 +69,7 @@ var ManagerEmployeeAll = React.createClass({
         }.bind(this));
         Materialize.toast("Employee updated", 3000);
         this.clearForm();
-        this.componentDidMount();
+        this.getEmployees();
    },
     handleRemoveForm: function(event) {
         event.preventDefault();
@@ -78,7 +81,7 @@ var ManagerEmployeeAll = React.createClass({
         }.bind(this));
         Materialize.toast("Employee removed", 3000);
         this.clearForm();
-        this.componentDidMount();
+        this.getEmployees();
     },
     clickEmployee: function(event) {
         this.setState({selectedEmployee: event.target.id}, function() {
@@ -115,7 +118,7 @@ var ManagerEmployeeAll = React.createClass({
                 elements[i].classList.remove("valid");
             }
         };
-        this.componentDidMount();
+        this.getEmployees();
     },
     clearStates: function() {
         this.setState({ firstName: "", lastName: "", addressOne: "", addressTwo: "", city: "", state: "", zip: "", email: "", phone: "", phoneType: "", selectedEmployee: ""});
