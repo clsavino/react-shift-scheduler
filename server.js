@@ -10,7 +10,6 @@
   var db = require("./db/db.js")
   var User = require("./models/user")
   var configAuth = require('./app/config/auth');
-  var axios = require("axios");
 
 // Require Employee Schema from Database
   var employee = require("./models/Employee");
@@ -101,7 +100,6 @@
   ));
 
 //LINKED IN AUTH
-
   app.get('/auth/linkedin', passport.authenticate('linkedin', {
      failureRedirect: '/',
      scope: ['r_emailaddress', 'r_basicprofile']
@@ -199,11 +197,6 @@
  app.get('/user', function(req,res){
     res.send(req.user.username)
   });
-
- app.post("user/display", function(req, res) {
-  return axios.post("/user/display", { userName:  username });
-
- })
 
 //Restricting routes
   app.get("/login", function(req,res) {
