@@ -6,23 +6,6 @@
 //Require Employee Schema from Database
   var employee = require("../models/Employee");
   var EmployeeSchedule = require("../models/employeeSchedule");
-  // var User = require("../models/user");
-
-  // router.get("/manager", function(req, res) {
-  //   // console.log("this is the user in controllers" + req.user.username)
-  //   console.log(req)
-  //   console.log(res)
-  //   // User.find({}).exec(function(err,docs) {
-  //   //   console.log(docs)
-  //   //   if (err) {
-  //   //     console.log(err);
-  //   //     res.send(err);
-  //   //   }
-  //   //   else {
-  //   //     res.send(docs);
-  //   //   }
-  //   // });
-  // });
 
 //Getting Employees from the database
   router.get("/getAllEmployees", function(req, res) {
@@ -115,7 +98,6 @@
     });
   });
 
-
 //Updating existing employee
   router.put("/updateEmployee/:id", function(req, res) {
      employee.findOneAndUpdate({ "_id": req.params.id }, {
@@ -177,6 +159,5 @@
          }
      })
   });
-
 
   module.exports = router;

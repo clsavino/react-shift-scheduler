@@ -10,7 +10,6 @@ var helper = {
     return axios.get("/user");
   },
 
-
   getEmployee: function(id) {
     console.log(id);
   return axios.get("/getEmployee/" + id);

@@ -12,7 +12,6 @@
   var configAuth = require('./app/config/auth');
   var axios = require("axios");
 
-
 // Require Employee Schema from Database
   var employee = require("./models/Employee");
   var EmployeeSchedule = require("./models/employeeSchedule");
@@ -101,7 +100,6 @@
     }
   ));
 
-
 //LINKED IN AUTH
 
   app.get('/auth/linkedin', passport.authenticate('linkedin', {
@@ -147,7 +145,6 @@
       });
 
   }));
-
 
 //LOCAL AUTH
   app.post("/register", function(req, res) {
@@ -198,10 +195,6 @@
       res.sendFile(path.resolve(__dirname, "public", "index.html"));
     }
   }
-   
-  
- //  function getCurrentUser() {
-
 
  app.get('/user', function(req,res){
     res.send(req.user.username)
@@ -211,19 +204,6 @@
   return axios.post("/user/display", { userName:  username });
 
  })
-      // console.log("This is the current user in server" +  username);
-      //   return axios.post("/user/current", { userName:  username });
-        //   .then(function(res) {
-        //     console.log(res);
-        //   })
-        //   .catch(function (error) {
-        //     console.log(error);
-        // });
-          // return axios.get('/manager')
-  
-
-    //console.log('helpers.getEmpSchedules Running!');
- 
 
 //Restricting routes
   app.get("/login", function(req,res) {
