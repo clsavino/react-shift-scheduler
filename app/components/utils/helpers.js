@@ -3,11 +3,11 @@ var axios = require("axios");
 var helper = {
 
   getAllEmployees: function() {
-  return axios.get("/getAllEmployees");
+    return axios.get("/getAllEmployees");
   },
 
- getCurrentUser: function() {
-  return axios.get("/user/current");
+  getCurrentUser: function() {
+    return axios.get("/user");
   },
 
 

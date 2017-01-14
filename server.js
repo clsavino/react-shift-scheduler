@@ -178,7 +178,6 @@
 
     function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){
-      getCurrentUser(req.user.username)
       return next();
     }
     res.redirect("/");
@@ -199,10 +198,21 @@
       res.sendFile(path.resolve(__dirname, "public", "index.html"));
     }
   }
+   
+  
+ //  function getCurrentUser() {
 
-  function getCurrentUser(username) {
-      console.log("This is the current user in server" +  username);
-        return axios.post("/user/current", { userName:  username });
+
+ app.get('/user', function(req,res){
+    res.send(req.user.username)
+  });
+
+ app.post("user/display", function(req, res) {
+  return axios.post("/user/display", { userName:  username });
+
+ })
+      // console.log("This is the current user in server" +  username);
+      //   return axios.post("/user/current", { userName:  username });
         //   .then(function(res) {
         //     console.log(res);
         //   })
@@ -210,14 +220,10 @@
         //     console.log(error);
         // });
           // return axios.get('/manager')
-  }
+  
 
     //console.log('helpers.getEmpSchedules Running!');
-  app.get('/user/current', function(req,res){
-    console.log("this is req.body" + req)
-  });
-   
-  
+ 
 
 //Restricting routes
   app.get("/login", function(req,res) {

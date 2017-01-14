@@ -9,10 +9,7 @@ var Manager = React.createClass({
         };
     },
 
-    componentDidMount: function(req,res) {
-
-              // return axios.get('/manager')
-
+    componentDidMount: function() {
        helpers.getCurrentUser().then(function(response) {
        
           console.log(response.data);
@@ -35,7 +32,7 @@ var Manager = React.createClass({
                             <li><a className="black-text" href="/manager/schedulesCreate">Schedules<i className="material-icons right">access_time</i></a></li>
                             <li><a className="black-text" href="/logout">Logout<i className="material-icons right">exit_to_app</i></a></li>
                            
-                           <li className="black-text">username {this.state.username}</li>
+                           
                         </ul>
                         <ul id="slide-out" className="side-nav">
                             <li>
