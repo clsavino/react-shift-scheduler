@@ -9,12 +9,7 @@
 }
 
 .loginButtons {
-	width: 90%;
-	border-radius: 5px;
-}
-
-#spaceSocial {
-	margin-bottom: 20px;
+	width: 100%;
 }
 
 #google {
@@ -22,28 +17,21 @@
 }
 
 #linkedin {
-	background-color: #006599;
-}
-
-#twitter {
-	background-color: #1da1f2;
-}
-
-#registerButton {
-	width: 100%;
+	background-color: #0077b5;
 }
 
 #loginForm {
-	margin-top: 100px;
+	margin-top: 80px;
 }
 
-/*#allEmployees {
-	height: 400px;
-	overflow: scroll;
-}*/
+#noAccount {
+	margin-top: 20px;
+}
 
-@media screen and (min-width: 992px) {
-	.loginButtons {
-		width: 90%;
-	}
+#newEmployee {
+	cursor: pointer;
+}
+
+#error {
+	font-size: 175px;
 }

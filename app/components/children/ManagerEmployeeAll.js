@@ -144,7 +144,7 @@ var ManagerEmployeeAll = React.createClass({
                         </thead>
                         <tbody>
                             <tr>
-                                <td onClick={this.newEmployee}>
+                                <td id="newEmployee" onClick={this.newEmployee}>
                                     <strong>New Employee<i className="material-icons right">add</i></strong>
                                 </td>
                             </tr>

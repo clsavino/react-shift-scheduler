@@ -18,8 +18,6 @@ var ManagerSchedulesCreate = require("../components/children/ManagerSchedulesCre
 // employee components
 var Employee = require("../components/Employee");
 var EmployeeHome = require("../components/children/EmployeeHome");
-// employee - info components
-// employee - schedule components
 
 module.exports = (
   <Router history={browserHistory}>
