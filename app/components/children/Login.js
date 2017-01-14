@@ -22,7 +22,7 @@ class Login extends React.Component {
       return (
         <div className="container">
             <div className="row" id="loginForm">
-                <div className="col m8 offset-m2">
+                <div className="col m6 offset-m3 s12">
                     <div className="card-panel">
                         <div className="row grey lighten-5">
                             <div className="col s12 center">
@@ -55,29 +55,33 @@ class Login extends React.Component {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col m6 s12 left">
-                                    <button className="btn waves-effect waves-light btn-large blue accent-3 loginButtons left" type="submit" value="Submit" name="action">Login<i className="material-icons right">send</i></button>
-                                </div>
-                                <div className="col m6 s12 right">
-                                    <a className="btn waves-effect waves-light btn-large green accent-3 loginButtons center" href="/register">Register<i className="material-icons right">person_add</i></a>
+                                <div className="col s12">
+                                    <button className="btn waves-effect waves-light btn-large blue accent-3 loginButtons" type="submit" value="Submit" name="action">Login<i className="material-icons right">send</i></button>
                                 </div>
                             </div>
                             <div className="row">
-                                <div className ="col m12 s12">
-                                    <h6 id="spaceSocial"> Or login with:</h6>
-                                </div>
-                                <div className="col m6 s4">
-                                    <a id="google" className="btn waves-effect waves-light btn-large loginButtons" href="/auth/google"><i className="fa fa-google left" aria-hidden="true"></i>Google</a>
+                                <div className="col s12">
+                                    <h6>Or login with</h6>
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col m6 s4">
-                                    <a id="linkedin" className="btn waves-effect waves-light btn-large loginButtons" href="/auth/linkedin"><i className="fa fa-linkedin left" aria-hidden="true"></i>LinkedIn</a>
+                                <div className="col s6">
+                                    <a id="google" className="btn waves-effect waves-light btn-large loginButtons" href="/auth/google"><i className="fa fa-google"></i></a>
+                                </div>
+                                <div className="col s6">
+                                    <a id="linkedin" className="btn waves-effect waves-light btn-large loginButtons" href="/auth/linkedin"><i className="fa fa-linkedin"></i></a>
                                 </div>
                             </div>
+                            <div className="divider"></div>
                             <div className="row">
-                                <div className="col m6 s4">
-                                    <a id="twitter" className="btn waves-effect waves-light btn-large loginButtons" href="/404.html"><i className="fa fa-twitter left" aria-hidden="true"></i>Twitter</a>
+                                <div className="col s12">
+                                    <h6 id="noAccount">Don't have an account?</h6>
+                                </div>
+
+                            </div>
+                            <div className="row">
+                                <div className="col s12">
+                                    <a className="btn waves-effect waves-light btn-large green accent-3 loginButtons" href="/register">Register<i className="material-icons right">person_add</i></a>
                                 </div>
                             </div>
                         </form>

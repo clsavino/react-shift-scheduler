@@ -25,7 +25,7 @@ class Register extends React.Component {
       return (
         <div className="container">
             <div className="row" id="loginForm">
-                <div className="col m8 offset-m2">
+                <div className="col m6 offset-m3">
                     <div className="card-panel">
                         <div className="row grey lighten-5">
                             <div className="col s12 center">
@@ -92,7 +92,7 @@ class Register extends React.Component {
                             </div>
                             <div className="row">
                                 <div className="col s12">
-                                    <button id="registerButton" className="btn waves-effect waves-light btn-large blue accent-3" type="submit" value="Submit" name="action">Login<i className="material-icons right">send</i></button>
+                                    <button className="btn waves-effect waves-light btn-large blue accent-3 loginButtons" type="submit" value="Submit" name="action">Register<i className="material-icons right">person_add</i></button>
                                 </div>
                             </div>
                         </form>
