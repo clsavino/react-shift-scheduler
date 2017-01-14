@@ -35,3 +35,8 @@
 #error {
 	font-size: 175px;
 }
+
+.circle-small {
+	height: 20px;
+	width: 20px;
+}
