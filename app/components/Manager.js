@@ -42,7 +42,7 @@ var Manager = React.createClass({
                                     </div>
                                     <a><img className="circle" src="/assets/images/logo.png"/></a>
                                     <a><span className="white-text">Company Name</span></a>
-                                    <a><span className="white-text name">John Doe</span></a>
+                                    <a><span className="white-text name">{this.state.username}</span></a>
                                 </div>
                             </li>
                             <li><a href="/manager/employeeAll" className="black-text"><i className="material-icons">group</i>Employee Management</a></li>
