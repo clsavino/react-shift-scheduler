@@ -10,6 +10,7 @@
   var db = require("./db/db.js")
   var User = require("./models/user")
   var configAuth = require('./app/config/auth');
+  var axios = require("axios");
 
 
 // Require Employee Schema from Database
@@ -177,6 +178,7 @@
 
     function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){
+      getCurrentUser(req.user.username)
       return next();
     }
     res.redirect("/");
@@ -197,6 +199,25 @@
       res.sendFile(path.resolve(__dirname, "public", "index.html"));
     }
   }
+
+  function getCurrentUser(username) {
+      console.log("This is the current user in server" +  username);
+        return axios.post("/user/current", { userName:  username });
+        //   .then(function(res) {
+        //     console.log(res);
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        // });
+          // return axios.get('/manager')
+  }
+
+    //console.log('helpers.getEmpSchedules Running!');
+  app.get('/user/current', function(req,res){
+    console.log("this is req.body" + req)
+  });
+   
+  
 
 //Restricting routes
   app.get("/login", function(req,res) {

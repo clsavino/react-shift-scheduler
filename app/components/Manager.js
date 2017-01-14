@@ -2,6 +2,27 @@ var React = require("react");
 var helpers = require("./utils/helpers");
 
 var Manager = React.createClass({
+
+    getInitialState: function() {
+        return { 
+            username: "" 
+        };
+    },
+
+    componentDidMount: function(req,res) {
+
+              // return axios.get('/manager')
+
+       helpers.getCurrentUser().then(function(response) {
+       
+          console.log(response.data);
+          if (response !== this.state.username) {
+            console.log("username", response.data);
+            this.setState({ username: response.data });
+          }
+        }.bind(this));
+    },
+
     render: function() {
         return (
             <div>
@@ -13,6 +34,8 @@ var Manager = React.createClass({
                             <li><a className="black-text" href="/manager/employeeAll">Employee Management<i className="material-icons right">group</i></a></li>
                             <li><a className="black-text" href="/manager/schedulesCreate">Schedules<i className="material-icons right">access_time</i></a></li>
                             <li><a className="black-text" href="/logout">Logout<i className="material-icons right">exit_to_app</i></a></li>
+                           
+                           <li className="black-text">username {this.state.username}</li>
                         </ul>
                         <ul id="slide-out" className="side-nav">
                             <li>
@@ -33,6 +56,8 @@ var Manager = React.createClass({
                 </nav>
                 <div className="container">
                     {this.props.children}
+                    
+                            
                 </div>
             </div>
         );
