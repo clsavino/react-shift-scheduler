@@ -3,13 +3,17 @@ var axios = require("axios");
 var helper = {
 
   getAllEmployees: function() {
-  return axios.get("/getAllEmployees");
-},
+    return axios.get("/getAllEmployees");
+  },
+
+  getCurrentUser: function() {
+    return axios.get("/user");
+  },
 
   getEmployee: function(id) {
     console.log(id);
   return axios.get("/getEmployee/" + id);
-},
+  },
 
   getEmpSchedules:function() {
     //console.log('helpers.getEmpSchedules Running!');
@@ -94,7 +98,8 @@ var helper = {
 
   removeEmpSchedule: function(emp_id) {
        return axios.put("/removeEmpSchedule/" + emp_id);
-  }
+  },
+
 };
 
 module.exports = helper;

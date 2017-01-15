@@ -1,13 +1,30 @@
 var React = require("react");
 var helpers = require("./utils/helpers");
 
+
+
 var Employee = React.createClass({
+
+    getInitialState: function() {
+        return { 
+            username: "" 
+        };
+    },
+
+    componentDidMount: function() {
+       helpers.getCurrentUser().then(function(response) {
+          if (response !== this.state.username) {
+            this.setState({ picture: response.data.picture, username: response.data.username });
+          }
+        }.bind(this));
+    },
+
     render: function() {
         return (
             <div>
                 <nav>
                     <div className="nav-wrapper grey lighten-5">
-                        <a href="/employee" className="brand-logo blue-text text-darken-1"><img id="logo" src="/assets/images/logo.png"/><span className="hide-on-med-and-down">Schedulr</span></a>
+                        <a href="/employee" className="brand-logo blue-text text-darken-1"><img id="logo" src="/assets/images/logo.png"/><span className="hide-on-med-and-down">Schedulr [{this.state.username}]</span></a>
                         <a href="/" data-activates="slide-out" className="button-collapse blue-text text-darken-1"><i className="material-icons">menu</i></a>
                         <ul className="right hide-on-med-and-down">
                             <li><a className="black-text" href="/employee">Home<i className="material-icons right">home</i></a></li>
@@ -21,9 +38,9 @@ var Employee = React.createClass({
                                     <div className="background">
                                         <img src="http://materializecss.com/images/office.jpg"/>
                                     </div>
-                                    <a><img className="circle" src="/assets/images/logo.png"/></a>
+                                    <a><img className="circle" src={this.state.picture}/></a>
                                     <a><span className="white-text">Company Name</span></a>
-                                    <a><span className="white-text name">John Doe</span></a>
+                                    <a><span className="white-text name">{this.state.username}</span></a>
                                 </div>
                             </li>
                             <li><a href="/manager" className="black-text"><i className="material-icons">home</i>Home</a></li>

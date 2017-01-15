@@ -98,7 +98,6 @@
     });
   });
 
-
 //Updating existing employee
   router.put("/updateEmployee/:id", function(req, res) {
      employee.findOneAndUpdate({ "_id": req.params.id }, {

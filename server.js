@@ -11,7 +11,6 @@
   var User = require("./models/user")
   var configAuth = require('./app/config/auth');
 
-
 // Require Employee Schema from Database
   var employee = require("./models/Employee");
   var EmployeeSchedule = require("./models/employeeSchedule");
@@ -100,9 +99,7 @@
     }
   ));
 
-
 //LINKED IN AUTH
-
   app.get('/auth/linkedin', passport.authenticate('linkedin', {
      failureRedirect: '/',
      scope: ['r_emailaddress', 'r_basicprofile']
@@ -120,8 +117,8 @@
     state: true
   }, 
     function(accessToken, refreshToken, profile, done) {
-    // console.log(profile)
-      User.findOne({ "username": profile.firstName, "email": profile.emailAddress }, function (err, user) {
+    console.log(profile.photos[0].value)
+      User.findOne({ "username": profile.name.givenName, "email": profile.emailAddress }, function (err, user) {
         console.log("Current user already stored = " + user)
         if(err) 
           return done(err);
@@ -129,13 +126,15 @@
           return done(null, user);
         } else {
             var newUser = new User();
-            newUser.username = profile.firstName;
+            newUser.username = profile.name.givenName;
             newUser.email = profile.emailAddress;
             newUser.userType = "employee";
+            newUser.picture = profile.photos[0].value;
             console.log("Storing new user to DB")
             console.log(newUser.username)
             console.log(newUser.email)
             console.log(newUser.userType)
+            console.log(newUser.picture)
 
             newUser.save(function(err) {
               if (err)
@@ -146,7 +145,6 @@
       });
 
   }));
-
 
 //LOCAL AUTH
   app.post("/register", function(req, res) {
@@ -198,6 +196,10 @@
     }
   }
 
+ app.get('/user', function(req,res){
+    res.send(req.user)
+  });
+
 //Restricting routes
   app.get("/login", function(req,res) {
     res.sendFile(path.resolve(__dirname, "public", "index.html"))
@@ -208,36 +210,35 @@
   });
 
   app.get("/manager", isLoggedIn, function(req,res) {
-      if (req.user.userType === "manager") {
-          res.sendFile(path.resolve(__dirname, "public", "index.html"))
-      } else {
-           res.sendFile(path.resolve(__dirname, "public", "notauth.html"))
-      }
+    if (req.user.userType === "manager") {
+        res.sendFile(path.resolve(__dirname, "public", "index.html"))
+    } else {
+        res.sendFile(path.resolve(__dirname, "public", "notauth.html"))
+    }
   });
 
   app.get("/manager/*", isLoggedIn, function(req,res) {
-      if (req.user.userType === "manager") {
-          res.sendFile(path.resolve(__dirname, "public", "index.html"))
-      } else {
-          res.sendFile(path.resolve(__dirname, "public", "notauth.html"))
-      }
+    if (req.user.userType === "manager") {
+        res.sendFile(path.resolve(__dirname, "public", "index.html"))
+    } else {
+        res.sendFile(path.resolve(__dirname, "public", "notauth.html"))
+    }
   });
 
-
   app.get("/employee", isLoggedIn, function(req,res) {
-      if (req.user.userType === "employee") {
-        res.sendFile(path.resolve(__dirname, "public", "index.html"))
-      } else {
-        res.send("Hello Manager, if you would like to access the employee page, please login as employee.")
-      }
+    if (req.user.userType === "employee") {
+      res.sendFile(path.resolve(__dirname, "public", "index.html"))
+    } else {
+      res.send("Hello Manager, if you would like to access the employee page, please login as employee.")
+    }
   });
 
   app.get("/employee/*", isLoggedIn, function(req,res) {
-      if (req.user.userType === "employee") {
-        res.sendFile(path.resolve(__dirname, "public", "index.html"))
-      } else {
-        res.send("Hello Manager, if you would like to access the employee page, please login as employee.")
-      }
+    if (req.user.userType === "employee") {
+      res.sendFile(path.resolve(__dirname, "public", "index.html"))
+    } else {
+      res.send("Hello Manager, if you would like to access the employee page, please login as employee.")
+    }
   });
 
   app.get("/logout", function(req, res) {
