@@ -39,16 +39,31 @@ var ManagerSchedulesCreate = React.createClass({
     },
 
     handleUpdateEmpSchedule: function(event) {
-        event.preventDefault();
+        //event.preventDefault();
         helpers.updateEmpSchedule(this.state.selectedEmpSchedule).then(function(response) {
+            var empName = this.state.selectedEmpSchedule.firstName + " " + this.state.selectedEmpSchedule.lastName + "'s ";
+            Materialize.toast(empName + "schedule updated", 3000);
+            this.clearStates();
         }.bind(this));
     },
 
-    handleClearEmpSchedule: function(event) {
+    clearStates: function(cb) {
+        this.setState({ firstName: "", lastName: "", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "", saturday: "", sunday: ""}, function() {
+            console.log("in clearStates this.state.firstName",this.state.firstName);
+        });
+    },
+
+    handleClearEmpSchedule: function(index,event) {
         event.preventDefault();
-        //set all days to "" with setState - handleUserchange???
-        helpers.updateEmpSchedule(this.state.selectedEmpSchedule).then(function(response) {
-        }.bind(this));
+        this.clearStates();
+        let updatedEmpSchedules = this.state.empSchedules.map((empSchedule, i) => {
+            if(index === i){
+                empSchedule[event.target.name] = event.target.value;
+                this.state.selectedEmpSchedule = empSchedule;
+            }
+            return empSchedule;
+        });
+        this.setState({ empSchedules: updatedEmpSchedules});
     },
 
     render: function() {
@@ -82,7 +97,7 @@ var ManagerSchedulesCreate = React.createClass({
                                                 <td className="">
                                                     <div className="input-field schedule">
                                                         <select className="browser-default" name="monday" value={schedules.monday} onChange={this.handleUserChange.bind(this, i)}>
-                                                        <option value="" disabled>Select</option>
+                                                        <option value=""></option>
                                                         <option value="8am-5pm">8am-5pm</option>
                                                         <option value="9am-6pm">9am-6pm</option>
                                                         <option value="10am-7pm">10am-7pm</option>
@@ -185,10 +200,10 @@ var ManagerSchedulesCreate = React.createClass({
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <button onClick={this.handleUpdateEmpSchedule} className="btn btn-small waves-effect waves-light green accent-3">Add</button>
+                                                    <button onClick={this.handleUpdateEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Add</button>
                                                 </td>
                                                 <td>
-                                                    <button onClick={this.handleClearEmpSchedule} className="btn btn-small waves-effect waves-light green accent-3">Clear</button>
+                                                    <button onClick={this.handleClearEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Clear</button>
                                                 </td>
                                             </tr>
                                         );
