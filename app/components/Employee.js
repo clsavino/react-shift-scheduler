@@ -30,6 +30,7 @@ var Employee = React.createClass({
                             <li><a className="black-text" href="/employee">Home<i className="material-icons right">home</i></a></li>
                             <li><a className="black-text" href="/">My Info<i className="material-icons right">account_circle</i></a></li>
                             <li><a className="black-text" href="/">Schedule<i className="material-icons right">access_time</i></a></li>
+                            <li><img id="picture" className="circle" src={this.state.picture}/></li>
                             <li><a className="black-text" href="/logout">Logout<i className="material-icons right">exit_to_app</i></a></li>
                         </ul>
                         <ul id="slide-out" className="side-nav">
