@@ -11,11 +11,8 @@ var Manager = React.createClass({
 
     componentDidMount: function() {
        helpers.getCurrentUser().then(function(response) {
-       
-          console.log(response.data);
           if (response !== this.state.username) {
-            console.log("username", response.data);
-            this.setState({ username: response.data });
+            this.setState({ username: response.data.username });
           }
         }.bind(this));
     },
