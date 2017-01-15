@@ -13,11 +13,8 @@ var Employee = React.createClass({
 
     componentDidMount: function() {
        helpers.getCurrentUser().then(function(response) {
-       
-          console.log(response.data);
           if (response !== this.state.username) {
-            console.log("username", response.data);
-            this.setState({ username: response.data });
+            this.setState({ picture: response.data.picture, username: response.data.username });
           }
         }.bind(this));
     },
@@ -41,7 +38,7 @@ var Employee = React.createClass({
                                     <div className="background">
                                         <img src="http://materializecss.com/images/office.jpg"/>
                                     </div>
-                                    <a><img className="circle" src="/assets/images/logo.png"/></a>
+                                    <a><img className="circle" src={this.state.picture}/></a>
                                     <a><span className="white-text">Company Name</span></a>
                                     <a><span className="white-text name">{this.state.username}</span></a>
                                 </div>
