@@ -3,7 +3,6 @@
   var db = require("../db/db.js");
   var path = require("path");
 
-//Require Employee Schema from Database
   var employee = require("../models/Employee");
   var EmployeeSchedule = require("../models/employeeSchedule");
 
@@ -122,7 +121,6 @@
 
 // Update employee's name in employee schedule collection
   router.put("/updateEmpName/:emp_id", function(req, res) {
-    console.log('in controller.js req',req);
     EmployeeSchedule.findOneAndUpdate({"emp_id":req.params.emp_id}, {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -142,7 +140,6 @@
          if (err) {
              console.log(err);
          } else {
-            console.log('controller /removeEmployee doc',doc);
             res.send(doc);
          }
      })

@@ -14,6 +14,7 @@ var ManagerSchedulesCreate = React.createClass({
         friday:"",
         saturday:"",
         sunday:"",
+        selectedEmpId:"",
         selectedEmpSchedule:"",
         empSchedules: [],
       };
@@ -28,10 +29,12 @@ var ManagerSchedulesCreate = React.createClass({
     },
 
     handleUserChange: function(index, event) {
-        let updatedEmpSchedules = this.state.empSchedules.map((empSchedule, i) => {
-            if(index === i){
+        let updatedEmpSchedules = this.state.empSchedules.map((empSchedule, j) => {
+            if(index === j){
+                //index is the index of the currently selected employee
                 empSchedule[event.target.name] = event.target.value;
-                this.state.selectedEmpSchedule = empSchedule;
+                this.setState({selectedEmpSchedule: empSchedule});
+                this.setState({ selectedEmpId: empSchedule._id });
             }
             return empSchedule;
         });
@@ -39,9 +42,36 @@ var ManagerSchedulesCreate = React.createClass({
     },
 
     handleUpdateEmpSchedule: function(event) {
+        if (this.state.selectedEmpSchedule !== "") {
+            helpers.updateEmpSchedule(this.state.selectedEmpSchedule).then(function(response) {
+                var empName = this.state.selectedEmpSchedule.firstName + " " + this.state.selectedEmpSchedule.lastName + "'s ";
+                Materialize.toast(empName + "schedule updated", 2000);
+                this.clearStates();
+            }.bind(this));
+        }
+    },
+
+    handleClearEmpSchedule: function(i,event) {
+        // i is the index of the currently selected employee
         event.preventDefault();
-        helpers.updateEmpSchedule(this.state.selectedEmpSchedule).then(function(response) {
-        }.bind(this));
+        let updatedEmpSchedules = this.state.empSchedules.map((empSchedule, j) => {
+            if(i === j){
+                empSchedule.monday = "";
+                empSchedule.tuesday = "";
+                empSchedule.wednesday = "";
+                empSchedule.thursday = "";
+                empSchedule.friday = "";
+                empSchedule.saturday = "";
+                empSchedule.sunday = "";
+                this.state.selectedEmpSchedule = empSchedule;
+            }
+            return empSchedule;
+        });
+        this.setState({ empSchedules: updatedEmpSchedules});
+    },
+
+    clearStates: function() {
+        this.setState({ firstName: "", lastName: "", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "", saturday: "", sunday: "", emp_id: "", selectedEmpSchedule: "", selectedEmpId: ""});
     },
 
     render: function() {
@@ -69,60 +99,119 @@ var ManagerSchedulesCreate = React.createClass({
                                     {this.state.empSchedules.map(function(schedules, i) {
                                         return (
                                             <tr key={i}>
-                                                <td className="fullName">
+                                                <td className="fullName" id={this.state.empSchedules[i]._id}>
                                                 {schedules.firstName} {schedules.lastName}
                                                 </td>
-                                                <td className="schedule">
-                                                    <input
-                                                    type="text"
-                                                    value={schedules.monday}
-                                                    name="monday"
-                                                    onChange={this.handleUserChange.bind(this, i)}/>
+                                                <td className="">
+                                                    <div className="input-field schedule">
+                                                        <select className="browser-default" name="monday" value={schedules.monday} onChange={this.handleUserChange.bind(this, i)}>
+                                                        <option value=""></option>
+                                                        <option value="8am-5pm">8am-5pm</option>
+                                                        <option value="9am-6pm">9am-6pm</option>
+                                                        <option value="10am-7pm">10am-7pm</option>
+                                                        <option value="11am-8pm">11am-8pm</option>
+                                                        <option value="12pm-9pm">12pm-9pm</option>
+                                                        <option value="1pm-10pm">1pm-10pm</option>
+                                                        <option value="2pm-11pm">2pm-11pm</option>
+                                                        <option value="3pm-12am">3pm-12am</option>
+                                                    </select>
+                                                    </div>
                                                 </td>
                                                 <td>
-                                                    <input
-                                                    type="text"
-                                                    value={schedules.tuesday}
-                                                    name="tuesday"
-                                                    onChange={this.handleUserChange.bind(this, i)}/>
+                                                    <div className="input-field schedule">
+                                                        <select className="browser-default" name="tuesday" value={schedules.tuesday} onChange={this.handleUserChange.bind(this, i)}>
+                                                        <option value=""></option>
+                                                        <option value="8am-5pm">8am-5pm</option>
+                                                        <option value="9am-6pm">9am-6pm</option>
+                                                        <option value="10am-7pm">10am-7pm</option>
+                                                        <option value="11am-8pm">11am-8pm</option>
+                                                        <option value="12pm-9pm">12pm-9pm</option>
+                                                        <option value="1pm-10pm">1pm-10pm</option>
+                                                        <option value="2pm-11pm">2pm-11pm</option>
+                                                        <option value="3pm-12am">3pm-12am</option>
+                                                    </select>
+                                                    </div>
                                                 </td>
                                                 <td>
-                                                    <input
-                                                    type="text"
-                                                    value={schedules.wednesday}
-                                                    name="wednesday"
-                                                    onChange={this.handleUserChange.bind(this, i)}/>
+                                                    <div className="input-field schedule">
+                                                        <select className="browser-default" name="wednesday" value={schedules.wednesday} onChange={this.handleUserChange.bind(this, i)}>
+                                                        <option value=""></option>
+                                                        <option value="8am-5pm">8am-5pm</option>
+                                                        <option value="9am-6pm">9am-6pm</option>
+                                                        <option value="10am-7pm">10am-7pm</option>
+                                                        <option value="11am-8pm">11am-8pm</option>
+                                                        <option value="12pm-9pm">12pm-9pm</option>
+                                                        <option value="1pm-10pm">1pm-10pm</option>
+                                                        <option value="2pm-11pm">2pm-11pm</option>
+                                                        <option value="3pm-12am">3pm-12am</option>
+                                                    </select>
+                                                    </div>
                                                 </td>
                                                 <td>
-                                                    <input
-                                                    type="text"
-                                                    value={schedules.thursday}
-                                                    name="thursday"
-                                                    onChange={this.handleUserChange.bind(this, i)}/>
+                                                    <div className="input-field schedule">
+                                                        <select className="browser-default" name="thursday" value={schedules.thursday} onChange={this.handleUserChange.bind(this, i)}>
+                                                        <option value=""></option>
+                                                        <option value="8am-5pm">8am-5pm</option>
+                                                        <option value="9am-6pm">9am-6pm</option>
+                                                        <option value="10am-7pm">10am-7pm</option>
+                                                        <option value="11am-8pm">11am-8pm</option>
+                                                        <option value="12pm-9pm">12pm-9pm</option>
+                                                        <option value="1pm-10pm">1pm-10pm</option>
+                                                        <option value="2pm-11pm">2pm-11pm</option>
+                                                        <option value="3pm-12am">3pm-12am</option>
+                                                    </select>
+                                                    </div>
                                                 </td>
                                                 <td>
-                                                    <input
-                                                    type="text"
-                                                    value={schedules.friday}
-                                                    name="friday"
-                                                    onChange={this.handleUserChange.bind(this, i)}/>
+                                                    <div className="input-field schedule">
+                                                        <select className="browser-default" name="friday" value={schedules.friday} onChange={this.handleUserChange.bind(this, i)}>
+                                                        <option value=""></option>
+                                                        <option value="8am-5pm">8am-5pm</option>
+                                                        <option value="9am-6pm">9am-6pm</option>
+                                                        <option value="10am-7pm">10am-7pm</option>
+                                                        <option value="11am-8pm">11am-8pm</option>
+                                                        <option value="12pm-9pm">12pm-9pm</option>
+                                                        <option value="1pm-10pm">1pm-10pm</option>
+                                                        <option value="2pm-11pm">2pm-11pm</option>
+                                                        <option value="3pm-12am">3pm-12am</option>
+                                                    </select>
+                                                    </div>
                                                 </td>
                                                 <td>
-                                                    <input
-                                                    type="text"
-                                                    value={schedules.saturday}
-                                                    name="saturday"
-                                                    onChange={this.handleUserChange.bind(this, i)}/>
+                                                    <div className="input-field schedule">
+                                                        <select className="browser-default" name="saturday" value={schedules.saturday} onChange={this.handleUserChange.bind(this, i)}>
+                                                        <option value=""></option>
+                                                        <option value="8am-5pm">8am-5pm</option>
+                                                        <option value="9am-6pm">9am-6pm</option>
+                                                        <option value="10am-7pm">10am-7pm</option>
+                                                        <option value="11am-8pm">11am-8pm</option>
+                                                        <option value="12pm-9pm">12pm-9pm</option>
+                                                        <option value="1pm-10pm">1pm-10pm</option>
+                                                        <option value="2pm-11pm">2pm-11pm</option>
+                                                        <option value="3pm-12am">3pm-12am</option>
+                                                    </select>
+                                                    </div>
                                                 </td>
                                                 <td>
-                                                    <input
-                                                    type="text"
-                                                    value={schedules.sunday}
-                                                    name="sunday"
-                                                    onChange={this.handleUserChange.bind(this, i)}/>
+                                                    <div className="input-field schedule">
+                                                        <select className="browser-default" name="sunday" value={schedules.sunday} onChange={this.handleUserChange.bind(this, i)}>
+                                                        <option value=""></option>
+                                                        <option value="8am-5pm">8am-5pm</option>
+                                                        <option value="9am-6pm">9am-6pm</option>
+                                                        <option value="10am-7pm">10am-7pm</option>
+                                                        <option value="11am-8pm">11am-8pm</option>
+                                                        <option value="12pm-9pm">12pm-9pm</option>
+                                                        <option value="1pm-10pm">1pm-10pm</option>
+                                                        <option value="2pm-11pm">2pm-11pm</option>
+                                                        <option value="3pm-12am">3pm-12am</option>
+                                                    </select>
+                                                    </div>
                                                 </td>
                                                 <td>
-                                                    <button onClick={this.handleUpdateEmpSchedule} className="btn btn-small waves-effect waves-light green accent-3">Add</button>
+                                                    <button className="addSchedule" onClick={this.handleUpdateEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Add</button>
+                                                </td>
+                                                <td>
+                                                    <button className="clearSchedule" onClick={this.handleClearEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Clear</button>
                                                 </td>
                                             </tr>
                                         );

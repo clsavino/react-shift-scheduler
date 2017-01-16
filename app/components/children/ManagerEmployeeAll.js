@@ -26,9 +26,11 @@ var ManagerEmployeeAll = React.createClass({
             emp_id: ""
         };
     },
+
     componentDidMount: function() {
         this.getEmployees();
     },
+
     getEmployees: function() {
         helpers.getAllEmployees().then(function(response) {
             if (response !== this.state.allEmployees) {
@@ -37,16 +39,16 @@ var ManagerEmployeeAll = React.createClass({
             }
         }.bind(this));
     },
+
     handleUserChange(event) {
        this.setState({ [event.target.name]: event.target.value});
     },
+
     handleAddForm: function(event) {
         event.preventDefault();
-
-        //Adds entered employee into database
         helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
-            console.log('handleAddForm addEmployee response',response);
             this.state.emp_id = response.data._id;
+
             helpers.addEmpSchedule(this.state.emp_id, this.state.firstName, this.state.lastName, this.state.monday, this.state.tuesday, this.state.wednesday, this.state.thursday, this.state.friday, this.state.saturday, this.state.sunday).then(function(response) {
                 this.clearStates();
             }.bind(this));
@@ -56,13 +58,11 @@ var ManagerEmployeeAll = React.createClass({
         this.clearForm();
         this.getEmployees();
     },
+
     handleUpdateForm: function(event) {
         event.preventDefault();
         helpers.updateEmployee(this.state.selectedEmployee, this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
-            //this.clearStates();
         }.bind(this));
-
-        console.log('handleUpdateForm this.state.emp_id',this.state.emp_id)
 
         helpers.updateEmpName(this.state.emp_id, this.state.firstName, this.state.lastName).then(function(response) {
             this.clearStates();
@@ -71,10 +71,10 @@ var ManagerEmployeeAll = React.createClass({
         this.clearForm();
         this.getEmployees();
    },
+
     handleRemoveForm: function(event) {
         event.preventDefault();
         helpers.removeEmployee(this.state.selectedEmployee).then(function(response) {
-            //this.clearStates();
         }.bind(this));
         helpers.removeEmpSchedule(this.state.emp_id).then(function(response) {
             this.clearStates();
@@ -83,6 +83,7 @@ var ManagerEmployeeAll = React.createClass({
         this.clearForm();
         this.getEmployees();
     },
+
     clickEmployee: function(event) {
         this.setState({selectedEmployee: event.target.id}, function() {
             for (var i = 0; i < this.state.allEmployees.length; i++) {
@@ -105,11 +106,13 @@ var ManagerEmployeeAll = React.createClass({
             }
         });
     },
+
     newEmployee: function() {
         this.clearForm();
         this.clearStates();
         this.activeButtons();
     },
+
     clearForm: function() {
         var elements = document.getElementsByTagName("input");
         for (var i=0; i < elements.length; i++) {
@@ -120,9 +123,11 @@ var ManagerEmployeeAll = React.createClass({
         };
         this.getEmployees();
     },
+
     clearStates: function() {
         this.setState({ firstName: "", lastName: "", addressOne: "", addressTwo: "", city: "", state: "", zip: "", email: "", phone: "", phoneType: "", selectedEmployee: ""});
     },
+
     activeButtons: function() {
         // don't allow updating or removing on empty form
         if (this.state.selectedEmployee == "") {
@@ -135,6 +140,7 @@ var ManagerEmployeeAll = React.createClass({
             document.getElementById("removeEmployee").className = "btn btn-large waves-effect waves-light red accent-3";
         }
     },
+
     render: function() {
         return (
             <div className="row">
