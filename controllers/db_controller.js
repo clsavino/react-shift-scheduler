@@ -36,14 +36,7 @@
     EmployeeSchedule.create({
       emp_id: req.body.emp_id,
       firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      monday: req.body.monday,
-      tuesday: req.body.tuesday,
-      wednesday: req.body.wednesday,
-      thursday: req.body.thursday,
-      friday: req.body.friday,
-      saturday: req.body.saturday,
-      sunday: req.body.sunday
+      lastName: req.body.lastName
     }, function(err) {
       if (err) {
         console.log(err);
@@ -157,4 +150,28 @@
      })
   });
 
-  module.exports = router;
+//Getting announcements from the database
+    // router.get("/getAnnouncements", function(req, res) {
+    //   announcements.find({ "active": 1 }).exec(function(err, doc) {
+    //     if (err) {
+    //       console.log(err);
+    //     }
+    //     else {
+    //       res.send(doc);
+    //     }
+    //   });
+    // });
+
+//Put announcements to database
+    // router.post("/addAnnouncements", function(req, res) {
+    //   announcements.find({ }).exec(function(err, doc) {
+    //     if (err) {
+    //       console.log(err);
+    //     }
+    //     else {
+    //       res.send(doc);
+    //     }
+    //   });
+    // });
+
+module.exports = router;

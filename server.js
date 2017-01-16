@@ -31,7 +31,7 @@
   app.use(passport.session());
   passport.use(new LocalStrategy(User.authenticate()));
   passport.serializeUser(function(user,done) {
-    done(null, user.id); 
+    done(null, user.id);
   });
 
   passport.deserializeUser(function(id,done) {
@@ -59,9 +59,9 @@
 //GOOGLE AUTH
   app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-  app.get('/auth/google/callback', 
-    passport.authenticate('google', { 
-      failureRedirect: '/' 
+  app.get('/auth/google/callback',
+    passport.authenticate('google', {
+      failureRedirect: '/'
     }),
     function(req, res) {
       res.redirect('/employee');
@@ -75,7 +75,7 @@
     function(accessToken, refreshToken, profile, done) {
       User.findOne({ "username" : profile.displayName, "email" :profile.emails[0].value }, function (err, user) {
         console.log("Current user already stored = " + user)
-        if(err) 
+        if(err)
           return done(err);
         if(user) {
           return done(null, user);
@@ -94,7 +94,7 @@
                  throw err;
               return done(null, newUser);
             });
-        } 
+        }
       });
     }
   ));
@@ -115,12 +115,12 @@
     clientSecret: configAuth.linkedInAuth.clientSecret,
     callbackURL: configAuth.linkedInAuth.callbackURL,
     state: true
-  }, 
+  },
     function(accessToken, refreshToken, profile, done) {
     console.log(profile.photos[0].value)
       User.findOne({ "username": profile.name.givenName, "email": profile.emailAddress }, function (err, user) {
         console.log("Current user already stored = " + user)
-        if(err) 
+        if(err)
           return done(err);
         if(user) {
           return done(null, user);
@@ -141,7 +141,7 @@
                 throw err;
               return done(null, newUser);
             });
-        } 
+        }
       });
 
   }));

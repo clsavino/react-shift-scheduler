@@ -15,13 +15,6 @@ var ManagerEmployeeAll = React.createClass({
             phone: "",
             phoneType: "",
             allEmployees: [],
-            monday:"",
-            tuesday: "",
-            wednesday: "",
-            thursday: "",
-            friday: "",
-            saturday: "",
-            sunday: "",
             selectedEmployee: "",
             emp_id: ""
         };
@@ -48,8 +41,8 @@ var ManagerEmployeeAll = React.createClass({
         event.preventDefault();
         helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
             this.state.emp_id = response.data._id;
-
-            helpers.addEmpSchedule(this.state.emp_id, this.state.firstName, this.state.lastName, this.state.monday, this.state.tuesday, this.state.wednesday, this.state.thursday, this.state.friday, this.state.saturday, this.state.sunday).then(function(response) {
+            
+            helpers.addEmpSchedule(this.state.emp_id, this.state.firstName, this.state.lastName).then(function(response) {
                 this.clearStates();
             }.bind(this));
 

@@ -13,5 +13,3 @@
   db.once("open", function() {
     console.log("Mongoose connection successful.");
   });
-
-
