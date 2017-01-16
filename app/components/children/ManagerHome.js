@@ -15,13 +15,10 @@ var ManagerHome = React.createClass({
         saturday:"",
         sunday:"",
         empSchedules: [],
-        changed:[]
       };
     },
 
-  // The moment the page renders, get the employees schedules
   componentDidMount: function() {
-
     helpers.getEmpSchedules().then(function(response) {
       console.log('response from helpers.getEmpSchedules - response.data',response.data);
       if (response !== this.state.empSchedules) {
@@ -30,20 +27,7 @@ var ManagerHome = React.createClass({
       }
     }.bind(this));
   },
-    /*
-    handleUserChange(event) {
-       this.setState({ [event.target.name]: event.target.value});
-    },
 
-    handleUpdateEmpSchedule: function(event) {
-        event.preventDefault();
-        helpers.updateEmpSchedule(this.state.firstName,this.state.lastName, this.state.monday, this.state.tuesday, this.state.wednesday, this.state.thursday, this.state.friday, this.state.saturday, this.state.sunday).then(function(response) {
-
-            console.log("helpers.updateEmpSchedule Returned!")
-            console.log('helpers.updateEmpSchedule - response',response);
-        }.bind(this));
-    },
-    */
     render: function() {
         return (
             <div className="row">

@@ -16,7 +16,6 @@ var helper = {
   },
 
   getEmpSchedules:function() {
-    //console.log('helpers.getEmpSchedules Running!');
     return axios.get('/getEmpSchedules')
     .then(function(response){
         console.log('getEmpSchedules response',response);
@@ -25,7 +24,6 @@ var helper = {
   },
 
   addEmpSchedule:function(emp_id,firstName,lastName,monday,tuesday,wednesday,thursday,friday,saturday,sunday) {
-    //console.log('helper.addEmpSchedule Running!');
     return axios.post('/addEmpSchedule', {
       emp_id: emp_id,
       firstName: firstName,
@@ -46,7 +44,6 @@ var helper = {
   },
 */
   updateEmpSchedule: function(empSchedule) {
-    //console.log( 'helpers.updateEmpSchedule running!');
     return axios.put('/updateSchedule/' + empSchedule._id, {
       employeeSchedule: empSchedule
     });

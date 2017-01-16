@@ -3,7 +3,6 @@
   var db = require("../db/db.js");
   var path = require("path");
 
-//Require Employee Schema from Database
   var employee = require("../models/Employee");
   var EmployeeSchedule = require("../models/employeeSchedule");
 
