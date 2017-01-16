@@ -11,7 +11,7 @@ var helper = {
   },
 
   getEmployee: function(id) {
-  return axios.get("/getEmployee/" + id);
+    return axios.get("/getEmployee/" + id);
   },
 
   getEmpSchedules:function() {
@@ -21,18 +21,11 @@ var helper = {
     })
   },
 
-  addEmpSchedule:function(emp_id,firstName,lastName,monday,tuesday,wednesday,thursday,friday,saturday,sunday) {
+  addEmpSchedule:function(emp_id, firstName, lastName) {
     return axios.post('/addEmpSchedule', {
       emp_id: emp_id,
       firstName: firstName,
-      lastName: lastName,
-      monday: monday,
-      tuesday: tuesday,
-      wednesday: wednesday,
-      thursday: thursday,
-      friday: friday,
-      saturday: saturday,
-      sunday: sunday
+      lastName: lastName
     });
   },
 
@@ -71,7 +64,7 @@ var helper = {
        });
   },
 
-  updateEmpName: function(emp_id,firstName,lastName)  {
+  updateEmpName: function(emp_id, firstName, lastName)  {
     return axios.put("/updateEmpName/" + emp_id, {
         firstName: firstName,
         lastName: lastName
@@ -79,13 +72,20 @@ var helper = {
   },
 
   removeEmployee: function(id) {
-       return axios.put("/removeEmployee/" + id);
+    return axios.put("/removeEmployee/" + id);
   },
 
   removeEmpSchedule: function(emp_id) {
-       return axios.put("/removeEmpSchedule/" + emp_id);
+    return axios.put("/removeEmpSchedule/" + emp_id);
   },
 
+  // getAnnouncements: function() {
+  //   return axios.get("/announcements");
+  // },
+  //
+  // addAnnouncements: function(title, content) {
+  //   return axios.post("/announcements");
+  // }
 };
 
 module.exports = helper;

@@ -31,7 +31,7 @@ var Manager = React.createClass({
                         <ul className="right hide-on-med-and-down">
                             <li><a className="black-text" href="/manager/employeeAll">Employee Management<i className="material-icons right">group</i></a></li>
                             <li><a className="black-text" href="/manager/schedulesCreate">Schedules<i className="material-icons right">access_time</i></a></li>
-                            <li><a className="dropdown-button black-text" href="#" data-activates="dropdown1" data-beloworigin="true" data-hover="true">{this.state.username}<img id="picture" className="circle circle-small" src={this.state.picture}/></a></li>
+                            <li><a className="dropdown-button black-text" href="#" data-activates="dropdown1" data-beloworigin="true" data-hover="true">{this.state.username}<img className="circle circle-small" src={this.state.picture}/></a></li>
                         </ul>
                         <ul id="slide-out" className="side-nav">
                             <li>

@@ -3,34 +3,41 @@ var Schema = mongoose.Schema;
 
 var EmployeeScheduleSchema = new Schema({
   emp_id: {
-    type: String,
+    type: String
   },
   firstName: {
-    type: String,
+    type: String
   },
   lastName: {
-    type: String,
+    type: String
   },
   monday: {
     type: String,
+    default: ""
   },
   tuesday: {
     type: String,
+    default: ""
   },
   wednesday: {
     type: String,
+    default: ""
   },
   thursday: {
     type: String,
+    default: ""
   },
   friday: {
     type: String,
+    default: ""
   },
   saturday:{
     type: String,
+    default: ""
   },
   sunday: {
     type: String,
+    default: ""
   },
   active: {
     type: Number,
