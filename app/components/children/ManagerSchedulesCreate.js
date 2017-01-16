@@ -14,6 +14,7 @@ var ManagerSchedulesCreate = React.createClass({
         friday:"",
         saturday:"",
         sunday:"",
+        selectedEmpID:"",
         selectedEmpSchedule:"",
         empSchedules: [],
       };
@@ -28,8 +29,9 @@ var ManagerSchedulesCreate = React.createClass({
     },
 
     handleUserChange: function(index, event) {
-        let updatedEmpSchedules = this.state.empSchedules.map((empSchedule, i) => {
-            if(index === i){
+        let updatedEmpSchedules = this.state.empSchedules.map((empSchedule, j) => {
+            if(index === j){
+                console.log('handleUserChange index',index)
                 empSchedule[event.target.name] = event.target.value;
                 this.state.selectedEmpSchedule = empSchedule;
             }
@@ -48,21 +50,36 @@ var ManagerSchedulesCreate = React.createClass({
     },
 
     clearStates: function(cb) {
-        this.setState({ firstName: "", lastName: "", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "", saturday: "", sunday: ""}, function() {
-            console.log("in clearStates this.state.firstName",this.state.firstName);
+        this.setState({ firstName: "", lastName: "", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "", saturday: "", sunday: "", emp_id: "", selectedEmpSchedule: ""}, function() {
+            console.log("\nin clearStates this.state.firstName",this.state.firstName);
+            console.log('this.state.selectedEmpSchedule',this.state.selectedEmpSchedule);
         });
     },
 
-    handleClearEmpSchedule: function(index,event) {
+    handleClearEmpSchedule: function(i,event) {
+        // i is the index of the selected employee
         event.preventDefault();
-        this.clearStates();
-        let updatedEmpSchedules = this.state.empSchedules.map((empSchedule, i) => {
-            if(index === i){
-                empSchedule[event.target.name] = event.target.value;
+        /*
+        var elements = document.getElementsByTagName("select");
+        console.log('elements.length',elements.length);
+        for (var i=0; i < elements.length; i++) {
+            elements[i].value = "";
+        };
+        */
+        let updatedEmpSchedules = this.state.empSchedules.map((empSchedule, j) => {
+            if(i === j){
+                empSchedule.monday = "";
+                empSchedule.tuesday = "";
+                empSchedule.wednesday = "";
+                empSchedule.thursday = "";
+                empSchedule.friday = "";
+                empSchedule.saturday = "";
+                empSchedule.sunday = "";
                 this.state.selectedEmpSchedule = empSchedule;
             }
             return empSchedule;
         });
+
         this.setState({ empSchedules: updatedEmpSchedules});
     },
 
@@ -91,7 +108,7 @@ var ManagerSchedulesCreate = React.createClass({
                                     {this.state.empSchedules.map(function(schedules, i) {
                                         return (
                                             <tr key={i}>
-                                                <td className="fullName">
+                                                <td className="fullName" id={this.state.empSchedules[i]._id}>
                                                 {schedules.firstName} {schedules.lastName}
                                                 </td>
                                                 <td className="">
@@ -200,10 +217,10 @@ var ManagerSchedulesCreate = React.createClass({
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <button onClick={this.handleUpdateEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Add</button>
+                                                    <button id="addSchedule" onClick={this.handleUpdateEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Add</button>
                                                 </td>
                                                 <td>
-                                                    <button onClick={this.handleClearEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Clear</button>
+                                                    <button id="clearSchedule" onClick={this.handleClearEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Clear</button>
                                                 </td>
                                             </tr>
                                         );
