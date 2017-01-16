@@ -14,7 +14,7 @@ var ManagerSchedulesCreate = React.createClass({
         friday:"",
         saturday:"",
         sunday:"",
-        selectedEmpID:"",
+        selectedEmpId:"",
         selectedEmpSchedule:"",
         empSchedules: [],
       };
@@ -33,7 +33,10 @@ var ManagerSchedulesCreate = React.createClass({
             if(index === j){
                 console.log('handleUserChange index',index)
                 empSchedule[event.target.name] = event.target.value;
-                this.state.selectedEmpSchedule = empSchedule;
+                this.setState({selectedEmpSchedule: empSchedule});
+                this.setState({ selectedEmpId: empSchedule._id }, function() {
+                    console.log('selectedEmpId',this.state.selectedEmpId)
+                })
             }
             return empSchedule;
         });
@@ -41,31 +44,25 @@ var ManagerSchedulesCreate = React.createClass({
     },
 
     handleUpdateEmpSchedule: function(event) {
-        //event.preventDefault();
-        helpers.updateEmpSchedule(this.state.selectedEmpSchedule).then(function(response) {
-            var empName = this.state.selectedEmpSchedule.firstName + " " + this.state.selectedEmpSchedule.lastName + "'s ";
-            Materialize.toast(empName + "schedule updated", 3000);
-            this.clearStates();
-        }.bind(this));
+        if (this.state.selectedEmpSchedule !== "") {
+            helpers.updateEmpSchedule(this.state.selectedEmpSchedule).then(function(response) {
+                var empName = this.state.selectedEmpSchedule.firstName + " " + this.state.selectedEmpSchedule.lastName + "'s ";
+                Materialize.toast(empName + "schedule updated", 2000);
+                this.clearStates();
+            }.bind(this));
+        }
     },
 
-    clearStates: function(cb) {
-        this.setState({ firstName: "", lastName: "", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "", saturday: "", sunday: "", emp_id: "", selectedEmpSchedule: ""}, function() {
-            console.log("\nin clearStates this.state.firstName",this.state.firstName);
+    clearStates: function() {
+        this.setState({ firstName: "", lastName: "", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "", saturday: "", sunday: "", emp_id: "", selectedEmpSchedule: "", selectedEmpId: ""}, function() {
+            console.log("\nin clearStates this.state.selectedEmpId",this.state.selectedEmpId);
             console.log('this.state.selectedEmpSchedule',this.state.selectedEmpSchedule);
         });
     },
 
     handleClearEmpSchedule: function(i,event) {
-        // i is the index of the selected employee
+        // i is the index of the currently selected employee
         event.preventDefault();
-        /*
-        var elements = document.getElementsByTagName("select");
-        console.log('elements.length',elements.length);
-        for (var i=0; i < elements.length; i++) {
-            elements[i].value = "";
-        };
-        */
         let updatedEmpSchedules = this.state.empSchedules.map((empSchedule, j) => {
             if(i === j){
                 empSchedule.monday = "";
@@ -217,10 +214,10 @@ var ManagerSchedulesCreate = React.createClass({
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <button id="addSchedule" onClick={this.handleUpdateEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Add</button>
+                                                    <button className="addSchedule" onClick={this.handleUpdateEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Add</button>
                                                 </td>
                                                 <td>
-                                                    <button id="clearSchedule" onClick={this.handleClearEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Clear</button>
+                                                    <button className="clearSchedule" onClick={this.handleClearEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Clear</button>
                                                 </td>
                                             </tr>
                                         );
