@@ -152,7 +152,8 @@
     User.register(new User({
       username: req.body.username,
       email: req.body.email,
-      userType: req.body.userType
+      userType: req.body.userType,
+      picture: "https://raw.githubusercontent.com/clsavino/react-shift-scheduler/master/public/assets/images/logo.png"
     }),
 
     req.body.password, function(err, user) {
