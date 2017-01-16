@@ -6,6 +6,10 @@
 	border-bottom: 3px solid #1e88e5;
 }
 
+#picture {
+	height: 50px;
+	margin-top: 8px;
+}
 #logo {
 	height: 24px;
 	width: 24px;
