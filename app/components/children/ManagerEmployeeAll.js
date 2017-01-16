@@ -47,7 +47,6 @@ var ManagerEmployeeAll = React.createClass({
     handleAddForm: function(event) {
         event.preventDefault();
         helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
-            console.log('handleAddForm addEmployee response',response);
             this.state.emp_id = response.data._id;
 
             helpers.addEmpSchedule(this.state.emp_id, this.state.firstName, this.state.lastName, this.state.monday, this.state.tuesday, this.state.wednesday, this.state.thursday, this.state.friday, this.state.saturday, this.state.sunday).then(function(response) {
@@ -64,8 +63,6 @@ var ManagerEmployeeAll = React.createClass({
         event.preventDefault();
         helpers.updateEmployee(this.state.selectedEmployee, this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
         }.bind(this));
-
-        console.log('handleUpdateForm this.state.emp_id',this.state.emp_id)
 
         helpers.updateEmpName(this.state.emp_id, this.state.firstName, this.state.lastName).then(function(response) {
             this.clearStates();

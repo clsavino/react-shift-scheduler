@@ -31,12 +31,10 @@ var ManagerSchedulesCreate = React.createClass({
     handleUserChange: function(index, event) {
         let updatedEmpSchedules = this.state.empSchedules.map((empSchedule, j) => {
             if(index === j){
-                console.log('handleUserChange index',index)
+                //index is the index of the currently selected employee
                 empSchedule[event.target.name] = event.target.value;
                 this.setState({selectedEmpSchedule: empSchedule});
-                this.setState({ selectedEmpId: empSchedule._id }, function() {
-                    console.log('selectedEmpId',this.state.selectedEmpId)
-                })
+                this.setState({ selectedEmpId: empSchedule._id });
             }
             return empSchedule;
         });
@@ -51,13 +49,6 @@ var ManagerSchedulesCreate = React.createClass({
                 this.clearStates();
             }.bind(this));
         }
-    },
-
-    clearStates: function() {
-        this.setState({ firstName: "", lastName: "", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "", saturday: "", sunday: "", emp_id: "", selectedEmpSchedule: "", selectedEmpId: ""}, function() {
-            console.log("\nin clearStates this.state.selectedEmpId",this.state.selectedEmpId);
-            console.log('this.state.selectedEmpSchedule',this.state.selectedEmpSchedule);
-        });
     },
 
     handleClearEmpSchedule: function(i,event) {
@@ -76,8 +67,11 @@ var ManagerSchedulesCreate = React.createClass({
             }
             return empSchedule;
         });
-
         this.setState({ empSchedules: updatedEmpSchedules});
+    },
+
+    clearStates: function() {
+        this.setState({ firstName: "", lastName: "", monday: "", tuesday: "", wednesday: "", thursday: "", friday: "", saturday: "", sunday: "", emp_id: "", selectedEmpSchedule: "", selectedEmpId: ""});
     },
 
     render: function() {

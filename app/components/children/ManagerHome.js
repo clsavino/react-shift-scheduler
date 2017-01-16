@@ -20,10 +20,8 @@ var ManagerHome = React.createClass({
 
   componentDidMount: function() {
     helpers.getEmpSchedules().then(function(response) {
-      console.log('response from helpers.getEmpSchedules - response.data',response.data);
       if (response !== this.state.empSchedules) {
         this.setState({ empSchedules: response.data });
-        console.log('in componentDidMount- empSchedules',this.state.empSchedules);
       }
     }.bind(this));
   },

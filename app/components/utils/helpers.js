@@ -11,14 +11,12 @@ var helper = {
   },
 
   getEmployee: function(id) {
-    console.log(id);
   return axios.get("/getEmployee/" + id);
   },
 
   getEmpSchedules:function() {
     return axios.get('/getEmpSchedules')
     .then(function(response){
-        console.log('getEmpSchedules response',response);
         return response;
     })
   },
@@ -39,7 +37,7 @@ var helper = {
   },
 /*
   addEmpSchedule:function(emp) {
-    //console.log('helper.addEmpSchedule Running!');
+    //console.log('helper.addEmpSchedule with object Running!');
     return axios.post('/addEmpSchedule',emp);
   },
 */
@@ -50,7 +48,6 @@ var helper = {
   },
 
   addEmployee: function(firstName, lastName, addressOne, addressTwo, city, state, zip, email, phone, phoneType) {
-    console.log("helpers.addEmployee Running")
     return axios.post("/addEmployee", {
         firstName: firstName,
         lastName: lastName,
@@ -80,9 +77,6 @@ var helper = {
   },
 
   updateEmpName: function(emp_id,firstName,lastName)  {
-    console.log('updateEmpName in helpers emp_id',emp_id);
-    console.log('firstName',firstName)
-    console.log('lastName',lastName)
     return axios.put("/updateEmpName/" + emp_id, {
         firstName: firstName,
         lastName: lastName
