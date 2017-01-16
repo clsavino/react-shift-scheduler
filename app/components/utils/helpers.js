@@ -35,12 +35,7 @@ var helper = {
       sunday: sunday
     });
   },
-/*
-  addEmpSchedule:function(emp) {
-    //console.log('helper.addEmpSchedule with object Running!');
-    return axios.post('/addEmpSchedule',emp);
-  },
-*/
+
   updateEmpSchedule: function(empSchedule) {
     return axios.put('/updateSchedule/' + empSchedule._id, {
       employeeSchedule: empSchedule
