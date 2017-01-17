@@ -39,6 +39,10 @@
 	font-size: 175px;
 }
 
+#announcementBuilder {
+	padding: 10px;
+}
+
 .circle-small {
 	height: 30px;
 	margin-left: 15px;

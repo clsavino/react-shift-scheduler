@@ -14,6 +14,7 @@
 // Require Employee Schema from Database
   var employee = require("./models/Employee");
   var EmployeeSchedule = require("./models/employeeSchedule");
+  var announcements = require("./models/announcements");
 
 //Initialize Express
   var app = express();
