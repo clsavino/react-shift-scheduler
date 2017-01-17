@@ -47,7 +47,7 @@
   app.use(bodyParser.text());
   app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
-
+//Landing
   app.get("/", autoRedirect, function(req, res){
      res.sendFile(path.resolve(__dirname, "public", "index.html"));
 
@@ -143,7 +143,6 @@
             });
         }
       });
-
   }));
 
 //LOCAL AUTH
@@ -174,7 +173,8 @@
       reRoute(req,res);
   });
 
-    function isLoggedIn(req,res,next){
+//Functions for Auth
+  function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){
       return next();
     }
