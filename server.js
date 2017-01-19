@@ -1,4 +1,5 @@
   var express = require("express");
+  var dotenv = require("dotenv").config;
   var bodyParser = require("body-parser");
   var logger = require("morgan");
   var passport = require("passport");
