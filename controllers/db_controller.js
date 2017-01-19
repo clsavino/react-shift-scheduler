@@ -5,6 +5,7 @@
 
   var employee = require("../models/Employee");
   var EmployeeSchedule = require("../models/employeeSchedule");
+  var announcements = require("../models/announcements")
 
 //Getting Employees from the database
   router.get("/getAllEmployees", function(req, res) {
@@ -151,27 +152,30 @@
   });
 
 //Getting announcements from the database
-    // router.get("/getAnnouncements", function(req, res) {
-    //   announcements.find({ "active": 1 }).exec(function(err, doc) {
-    //     if (err) {
-    //       console.log(err);
-    //     }
-    //     else {
-    //       res.send(doc);
-    //     }
-    //   });
-    // });
+    router.get("/getAnnouncements", function(req, res) {
+      announcements.find({ "active": 1 }).exec(function(err, doc) {
+        if (err) {
+          console.log(err);
+        }
+        else {
+          res.send(doc);
+        }
+      });
+    });
 
 //Put announcements to database
-    // router.post("/addAnnouncements", function(req, res) {
-    //   announcements.find({ }).exec(function(err, doc) {
-    //     if (err) {
-    //       console.log(err);
-    //     }
-    //     else {
-    //       res.send(doc);
-    //     }
-    //   });
-    // });
+    router.post("/addAnnouncements", function(req, res) {
+      announcements.create({
+        title: req.body.title,
+        content: req.body.content
+      }, function(err, doc) {
+        if (err) {
+          console.log(err);
+        }
+        else {
+          res.send(doc);
+        }
+      });
+    });
 
 module.exports = router;

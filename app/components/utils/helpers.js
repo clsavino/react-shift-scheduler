@@ -79,13 +79,15 @@ var helper = {
     return axios.put("/removeEmpSchedule/" + emp_id);
   },
 
-  // getAnnouncements: function() {
-  //   return axios.get("/announcements");
-  // },
-  //
-  // addAnnouncements: function(title, content) {
-  //   return axios.post("/announcements");
-  // }
+  getAnnouncements: function() {
+    return axios.get("/getAnnouncements");
+  },
+
+  addAnnouncements: function(title, content) {
+    return axios.post("/addAnnouncements", {
+        title: title,
+        content: content });
+  }
 };
 
 module.exports = helper;

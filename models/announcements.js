@@ -8,10 +8,10 @@ var AnnouncementSchema = new Schema({
   content: {
     type: String
   },
-  datetime: {
-    type: Date,
-    default: Date.now,
-  },
+  // datetime: {
+  //   type: Date,
+  //   default: Date.now,
+  // },
   active: {
       type: Number,
       default: 1
