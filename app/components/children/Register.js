@@ -1,4 +1,5 @@
 var React = require("react");
+var helpers = require("../utils/helpers");
 
 class Register extends React.Component {
   constructor(props){
@@ -7,7 +8,8 @@ class Register extends React.Component {
       username: "",
       password: "",
       email:"",
-      passwordConfirmation:""
+      passwordConfirmation:"",
+      error: ""
     }
 
     this.handleUserChange = this.handleUserChange.bind(this);
@@ -18,8 +20,20 @@ class Register extends React.Component {
      this.setState({ [event.target.name]: event.target.value});
   }
 
+  componentDidMount() {
+    helpers.errorMessage().then(function(response) {
+      console.log(response)
+        // if (response !== this.state.error) {
+        //     this.setState({ error: response.data.error});
+        //   }
+    }.bind(this));
+  }
+
   handleLogin() {
-      // event.preventDefault();
+   // helpers.errorMessage().then(function(response) {
+   //      console.log(response)
+   //          this.setState({ error: response.data});
+   //        }.bind(this));     
   }
     render() {
       return (
@@ -30,6 +44,7 @@ class Register extends React.Component {
                         <div className="row grey lighten-5">
                             <div className="col s12 center">
                                 <h4 className="blue-text text-darken-1">Register</h4>
+                                <h4> {this.state.error}</h4>
                             </div>
                         </div>
                         <form action="/register" method="POST" onSubmit={this.handleLogin}>

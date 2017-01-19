@@ -10,6 +10,10 @@ var helper = {
     return axios.get("/user");
   },
 
+  // errorMessage: function() {
+  //   return axios.get("/register");
+  // },
+
   getEmployee: function(id) {
     return axios.get("/getEmployee/" + id);
   },
