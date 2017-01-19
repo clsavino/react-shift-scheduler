@@ -11,11 +11,6 @@
   var User = require("./models/user")
   var configAuth = require('./app/config/auth');
 
-// Require Employee Schema from Database
-  var employee = require("./models/Employee");
-  var EmployeeSchedule = require("./models/employeeSchedule");
-  var announcements = require("./models/announcements");
-
 //Initialize Express
   var app = express();
   var PORT = process.env.PORT || 8080;
