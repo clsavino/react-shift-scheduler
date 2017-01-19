@@ -153,9 +153,11 @@
 
     req.body.password, function(err, user) {
       if(err){
-        console.log(err);
-        return res.render("register");
-      }
+        res.send(err);
+       }
+
+      return res.sendFile(path.resolve(__dirname, "public", "index.html"));
+
       passport.authenticate("local")(req, res, function() {
         res.redirect("/");
       });
@@ -226,7 +228,7 @@
     if (req.user.userType === "employee") {
       res.sendFile(path.resolve(__dirname, "public", "index.html"))
     } else {
-      res.send("Hello Manager, if you would like to access the employee page, please login as employee.")
+      res.redirect("/manager");
     }
   });
 
@@ -234,7 +236,7 @@
     if (req.user.userType === "employee") {
       res.sendFile(path.resolve(__dirname, "public", "index.html"))
     } else {
-      res.send("Hello Manager, if you would like to access the employee page, please login as employee.")
+      res.redirect("/manager");
     }
   });
 
