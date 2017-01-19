@@ -1,4 +1,5 @@
   var express = require("express");
+  var dotenv = require("dotenv").config();
   var bodyParser = require("body-parser");
   var logger = require("morgan");
   var passport = require("passport");
@@ -9,7 +10,6 @@
   var path = require("path");
   var db = require("./db/db.js")
   var User = require("./models/user")
-  var configAuth = require('./app/config/auth');
 
 //Initialize Express
   var app = express();
@@ -63,10 +63,10 @@
       res.redirect('/employee');
     });
 
-  passport.use(new GoogleStrategy({
-    clientID: configAuth.googleAuth.clientID,
-    clientSecret: configAuth.googleAuth.clientSecret,
-    callbackURL: configAuth.googleAuth.callbackURL,
+  if (process.env.GOOGLE_CLIENT_ID) passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK_URL
   },
     function(accessToken, refreshToken, profile, done) {
       User.findOne({ "username" : profile.displayName, "email" :profile.emails[0].value }, function (err, user) {
@@ -107,9 +107,9 @@
   }));
 
   passport.use(new LinkedInStrategy({
-    clientID: configAuth.linkedInAuth.clientID,
-    clientSecret: configAuth.linkedInAuth.clientSecret,
-    callbackURL: configAuth.linkedInAuth.callbackURL,
+    clientID: process.env.LINKEDIN_ID,
+    clientSecret: process.env.LINKEDIN_SECRET,
+    callbackURL: process.env.LINKEDIN_CALLBACK,
     state: true
   },
     function(accessToken, refreshToken, profile, done) {
@@ -153,9 +153,11 @@
 
     req.body.password, function(err, user) {
       if(err){
-        console.log(err);
-        return res.render("register");
-      }
+        res.send(err);
+       }
+
+      return res.sendFile(path.resolve(__dirname, "public", "index.html"));
+
       passport.authenticate("local")(req, res, function() {
         res.redirect("/");
       });
@@ -226,7 +228,7 @@
     if (req.user.userType === "employee") {
       res.sendFile(path.resolve(__dirname, "public", "index.html"))
     } else {
-      res.send("Hello Manager, if you would like to access the employee page, please login as employee.")
+      res.redirect("/manager");
     }
   });
 
@@ -234,7 +236,7 @@
     if (req.user.userType === "employee") {
       res.sendFile(path.resolve(__dirname, "public", "index.html"))
     } else {
-      res.send("Hello Manager, if you would like to access the employee page, please login as employee.")
+      res.redirect("/manager");
     }
   });
 
