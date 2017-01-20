@@ -152,15 +152,16 @@
     }),
 
     req.body.password, function(err, user) {
-      if(err){
+       if(err){
         res.send(err);
-       }
+       } else {
 
-      return res.sendFile(path.resolve(__dirname, "public", "index.html"));
-
+       
+       
       passport.authenticate("local")(req, res, function() {
         res.redirect("/");
       });
+      }
     })
   });
 

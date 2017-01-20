@@ -5,80 +5,86 @@ var AnnouncementsBuild = React.createClass({
     getInitialState: function() {
         return {
             title: "",
-            content: "",
-            datetime: ""
+            content: ""
         };
     },
 
-    componentDidMount: function() {
-        this.getAnnouncements();
-    },
-
-    getAnnouncements: function() {
-        helpers.getAnnouncements().then(function(response) {
-
-        }.bind(this));
-    },
+    // componentDidMount: function() {
+    //     this.getAnnouncements();
+    // },
+    //
+    // getAnnouncements: function() {
+    //     helpers.getAnnouncements().then(function(response) {
+    //
+    //     }.bind(this));
+    // },
 
     handleAnnouncementBuild(event) {
        this.setState({ [event.target.id]: event.target.value});
     },
 
-    addAnnouncements: function() {
-        console.log("title:", this.state.title);
-        console.log("content:", this.state.content);
+    addAnnouncements: function(event) {
+        event.preventDefault(event);
         helpers.addAnnouncements(this.state.title, this.state.content).then(function(response) {
-
+            this.clearStates();
         }.bind(this));
         Materialize.toast('Announcement added', 3000);
-        this.getAnnouncements();
+        this.clearForm();
+    },
+
+    clearForm: function() {
+        var elements = document.getElementsByTagName("input");
+        for (var i=0; i < elements.length; i++) {
+            elements[i].value = "";
+            elements[i].classList.remove("valid");
+        };
+    },
+
+    clearStates: function() {
+        this.setState({ title: "", content: "" });
     },
 
     render: function() {
         return (
-          <div className="section">
-            <div id="announcementBuilder" className="card">
-              <div className="section">
+            <div className="card-panel">
                 <div className="row">
-                  <div className="col s12">
-                    <h5>Announcement Builder</h5>
-                  </div>
+                    <div className="col s12">
+                        <h5>Make an announcement</h5>
+                    </div>
                 </div>
-                <div className="row">
-                  <div id="inputTitle" className="input-field col s12">
-                      <input
-                          id="title"
-                          type="text"
-                          className="validate"
-                          onChange={this.handleAnnouncementBuild}
-                          required />
-                      <label for="title">Title</label>
-                  </div>
-                  <div className="col s2">
-                  </div>
-                </div>
-                <div className="row">
-                  <div id="textareaBody" className="input-field col s12">
-                    <textarea
-                      id="content"
-                      type="text"
-                      className="materialize-textarea announcementForm"
-                      onChange={this.handleAnnouncementBuild}>
-                    </textarea>
-                    <label for="body">Annoucement Body</label>
-                  </div>
-                </div>
-                <div className="row">
-                  {/* <div className="col s4">
-                    <a id="hideButton" className="waves-effect waves-light btn red accent-3" onClick={this.displayBuilder}>Hide Builder</a>
-                  </div> */}
-                  <div className="col s4 offset-s8">
-                    <a id="announcementSubmit" className="waves-effect waves-light btn green accent-3" onClick={this.addAnnouncements}>Submit New Announcement</a>
-                  </div>
-                </div>
-              </div>
+                <form onSubmit={this.addAnnouncements}>
+                    <div className="row">
+                        <div className="input-field col s12">
+                            <input
+                                placeholder="Title"
+                                id="title"
+                                type="text"
+                                className="validate"
+                                value={this.state.title}
+                                onChange={this.handleAnnouncementBuild}
+                                required />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="input-field col s12">
+                            <textarea
+                                placeholder="Announcement"
+                                id="content"
+                                type="text"
+                                className="materialize-textarea"
+                                value={this.state.content}
+                                onChange={this.handleAnnouncementBuild}
+                                required>
+                            </textarea>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col s12">
+                            <button className="btn waves-effect waves-light btn-large green accent-3 loginButtons" type="submit" value="Submit" name="action">Submit<i className="material-icons right">add</i></button>
+                        </div>
+                    </div>
+                </form>
             </div>
-          </div>
         );
     }
 });

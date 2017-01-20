@@ -41,7 +41,7 @@ var ManagerEmployeeAll = React.createClass({
         event.preventDefault();
         helpers.addEmployee(this.state.firstName, this.state.lastName, this.state.addressOne, this.state.addressTwo, this.state.city, this.state.state, this.state.zip, this.state.email, this.state.phone, this.state.phoneType).then(function(response) {
             this.state.emp_id = response.data._id;
-            
+
             helpers.addEmpSchedule(this.state.emp_id, this.state.firstName, this.state.lastName).then(function(response) {
                 this.clearStates();
             }.bind(this));
@@ -164,7 +164,7 @@ var ManagerEmployeeAll = React.createClass({
                 </div>
                 <div className="col m9">
                     <div className="row">
-                        <form className="col m12">
+                        <form className="col m12" onSubmit={this.handleAddForm}>
                             <div className="row">
                                 <div className="input-field col m6 s12">
                                     <input
@@ -222,7 +222,7 @@ var ManagerEmployeeAll = React.createClass({
                                         required />
                                 </div>
                                 <div className="input-field col m3 s6">
-                                    <select className="browser-default" name="state" value={this.state.state} onChange={this.handleUserChange}>
+                                    <select className="browser-default" name="state" value={this.state.state} onChange={this.handleUserChange} required>
                                         <option value="" disabled>State</option>
                                         <option value="AL">AL</option>
                                         <option value="AK">AK</option>
@@ -311,7 +311,7 @@ var ManagerEmployeeAll = React.createClass({
                                         required />
                                 </div>
                                 <div className="input-field col m4 s4">
-                                    <select className="browser-default" name="phoneType" value={this.state.phoneType} onChange={this.handleUserChange}>
+                                    <select className="browser-default" name="phoneType" value={this.state.phoneType} onChange={this.handleUserChange} required>
                                         <option value="" disabled>Phone Type</option>
                                         <option value="mobile">Mobile</option>
                                         <option value="work">Work</option>
@@ -321,19 +321,19 @@ var ManagerEmployeeAll = React.createClass({
                             </div>
                             <div className="row">
                                 <div className="col s4">
-                                    <button id="addEmployee" className="btn btn-large waves-effect waves-light green accent-3" onClick={this.handleAddForm}>Add
+                                    <button id="addEmployee" className="btn btn-large waves-effect waves-light green accent-3" type="submit" value="Submit">Add
                                         <i className="material-icons right">person_add</i>
                                     </button>
                                 </div>
                                 <div className="col s4">
-                                    <button id="updateEmployee" className="btn btn-large waves-effect waves-light blue accent-3" onClick={this.handleUpdateForm}>Update
+                                    <a id="updateEmployee" className="btn btn-large waves-effect waves-light blue accent-3" onClick={this.handleUpdateForm}>Update
                                         <i className="material-icons right">edit</i>
-                                    </button>
+                                    </a>
                                 </div>
                                 <div className="col s4">
-                                    <button id="removeEmployee" className="btn btn-large waves-effect waves-light red accent-3" onClick={this.handleRemoveForm}>Remove
+                                    <a id="removeEmployee" className="btn btn-large waves-effect waves-light red accent-3" onClick={this.handleRemoveForm}>Remove
                                         <i className="material-icons right">person_outline</i>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </form>
