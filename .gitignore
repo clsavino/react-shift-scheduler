@@ -1,4 +1,3 @@
 node_modules
-/public/bundle.js
 app/config/auth.js
 .env
