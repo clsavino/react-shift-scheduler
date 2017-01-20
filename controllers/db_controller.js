@@ -3,7 +3,7 @@
   var db = require("../db/db.js");
   var path = require("path");
 
-  var employee = require("../models/Employee");
+  var employee = require("../models/employee");
   var EmployeeSchedule = require("../models/employeeSchedule");
   var announcements = require("../models/announcements")
 
