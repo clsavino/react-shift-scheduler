@@ -33,7 +33,7 @@ class Register extends React.Component {
    // helpers.errorMessage().then(function(response) {
    //      console.log(response)
    //          this.setState({ error: response.data});
-   //        }.bind(this));     
+   //        }.bind(this));
   }
     render() {
       return (

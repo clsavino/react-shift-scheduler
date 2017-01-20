@@ -42,6 +42,10 @@ var ManagerSchedulesCreate = React.createClass({
     },
 
     handleUpdateEmpSchedule: function(event) {
+        var saveButtonBlue = document.getElementById(event);
+        saveButtonBlue.innerHTML = "Add";
+        saveButtonBlue.className = "btn btn-small waves-effect waves-light green accent-3";
+
         if (this.state.selectedEmpSchedule !== "") {
             helpers.updateEmpSchedule(this.state.selectedEmpSchedule).then(function(response) {
                 var empName = this.state.selectedEmpSchedule.firstName + " " + this.state.selectedEmpSchedule.lastName + "'s ";
@@ -54,8 +58,13 @@ var ManagerSchedulesCreate = React.createClass({
     handleClearEmpSchedule: function(i,event) {
         // i is the index of the currently selected employee
         event.preventDefault();
+
         let updatedEmpSchedules = this.state.empSchedules.map((empSchedule, j) => {
             if(i === j){
+                var saveButton = document.getElementById(i);
+                saveButton.innerHTML = "save";
+                saveButton.className = "btn btn-small waves-effect waves-light blue accent-3";
+
                 empSchedule.monday = "";
                 empSchedule.tuesday = "";
                 empSchedule.wednesday = "";
@@ -208,10 +217,10 @@ var ManagerSchedulesCreate = React.createClass({
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <button className="addSchedule" onClick={this.handleUpdateEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Add</button>
+                                                    <button id={i} className="addSchedule" onClick={this.handleUpdateEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Add</button>
                                                 </td>
                                                 <td>
-                                                    <button className="clearSchedule" onClick={this.handleClearEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Clear</button>
+                                                    <button id={i} className="clearSchedule" onClick={this.handleClearEmpSchedule.bind(this, i)} className="btn btn-small waves-effect waves-light green accent-3">Clear</button>
                                                 </td>
                                             </tr>
                                         );
