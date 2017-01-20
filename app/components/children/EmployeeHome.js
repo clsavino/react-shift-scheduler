@@ -8,7 +8,6 @@ var EmployeeHome = React.createClass({
         return (
             <div>
                 <AnnouncementsView />
-                <div className="divider"></div>
                 <ScheduleView />
             </div>
         );
