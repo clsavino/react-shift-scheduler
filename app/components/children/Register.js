@@ -22,6 +22,11 @@ class Register extends React.Component {
 
   handleLogin() {
 
+   // helpers.errorMessage().then(function(response) {
+   //      console.log(response)
+   //          this.setState({ error: response.data});
+   //        }.bind(this));
+
   }
     render() {
       return (
