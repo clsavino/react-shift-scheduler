@@ -5,20 +5,19 @@ var AnnouncementsBuild = React.createClass({
     getInitialState: function() {
         return {
             title: "",
-            content: "",
-            datetime: ""
+            content: ""
         };
     },
 
-    componentDidMount: function() {
-        this.getAnnouncements();
-    },
-
-    getAnnouncements: function() {
-        helpers.getAnnouncements().then(function(response) {
-
-        }.bind(this));
-    },
+    // componentDidMount: function() {
+    //     this.getAnnouncements();
+    // },
+    //
+    // getAnnouncements: function() {
+    //     helpers.getAnnouncements().then(function(response) {
+    //
+    //     }.bind(this));
+    // },
 
     handleAnnouncementBuild(event) {
        this.setState({ [event.target.id]: event.target.value});
@@ -42,7 +41,7 @@ var AnnouncementsBuild = React.createClass({
     },
 
     clearStates: function() {
-        this.setState({ title: "", content: "", datetime: "" });
+        this.setState({ title: "", content: "" });
     },
 
     render: function() {
