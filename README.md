@@ -1,11 +1,11 @@
-# ![Icon](https://raw.githubusercontent.com/clsavino/react-shift-scheduler/master/public/assets/images/favicon.ico) Schedulr
+# ![Icon](https://raw.githubusercontent.com/clsavino/react-shift-scheduler/master/public/assets/images/logo-small.png) Schedulr
 Schedulr is an employee management and scheduling app that allows…
 * Managers to manage and schedule employees
 * Employees to view work schedules
 
 View app live on [Heroku](https://reactschedulr.herokuapp.com)
 
-##### Run locally
+## Run locally
 Install dependencies
 ```shell
 npm install
