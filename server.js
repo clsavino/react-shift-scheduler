@@ -46,7 +46,6 @@
 //Landing
   app.get("/", autoRedirect, function(req, res){
      res.sendFile(path.resolve(__dirname, "public", "index.html"));
-
   });
 
 //Public files <this needs to stay right below app.get("/")!!!!
@@ -81,9 +80,6 @@
             newUser.email = profile.emails[0].value
             newUser.userType = "employee";
             console.log("Storing new user to DB")
-            console.log(newUser.username)
-            console.log(newUser.email)
-            console.log(newUser.userType)
 
             newUser.save(function(err) {
               if (err)
@@ -127,10 +123,6 @@
             newUser.userType = "employee";
             newUser.picture = profile.photos[0].value;
             console.log("Storing new user to DB")
-            console.log(newUser.username)
-            console.log(newUser.email)
-            console.log(newUser.userType)
-            console.log(newUser.picture)
 
             newUser.save(function(err) {
               if (err)
