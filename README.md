@@ -30,4 +30,4 @@ Open a browser and go to [http://localhost:8080](http://localhost:8080)
 * Nicolás Cáceres [@mr-attack](https://github.com/mr-attack)
 
 ## Tech
-Built with React, Node, Express, MongoDB
+Built with React, Node, Express, MongoDB, Passport.js
