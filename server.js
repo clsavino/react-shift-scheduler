@@ -145,11 +145,10 @@
 
     req.body.password, function(err, user) {
        if(err){
-        res.send(err);
+        res.sendFile(path.resolve(__dirname, "public", "error.html"));
+        console.log(err);
        } else {
 
-       
-       
       passport.authenticate("local")(req, res, function() {
         res.redirect("/");
       });
