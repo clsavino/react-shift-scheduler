@@ -43,5 +43,9 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "webpack": "^1.13.1"
+  },
+  "scripts": {
+    "build": "webpack",
+    "start": "node server"
   }
 }
