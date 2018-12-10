@@ -1,13 +1,13 @@
-# ![Icon](https://raw.githubusercontent.com/clsavino/react-shift-scheduler/master/public/assets/images/logo-small.png) Schedulr
-Schedulr is an employee management and scheduling app that allows…
+# ![Icon](https://raw.githubusercontent.com/clsavino/react-shift-scheduler/master/public/assets/images/logo-small.png) Rostr
+Rostr is an employee management and scheduling app that allows…
 * Managers to manage and schedule employees
 * Employees to view work schedules
 
-View app live on [Heroku](https://reactschedulr.herokuapp.com)
+View app live on [Heroku](https://reactRostr.herokuapp.com)
 
 ## Run locally
 
-Schedulr requires [Node.js](https://nodejs.org/) and [MongoDB](https://docs.mongodb.com/manual/installation/) to run
+Rostr requires [Node.js](https://nodejs.org/) and [MongoDB](https://docs.mongodb.com/manual/installation/) to run
 
 ### Installation
 Once mongo is installed, open a new terminal and run 
